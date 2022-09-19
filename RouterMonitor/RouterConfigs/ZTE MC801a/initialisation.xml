@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <url><![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?multi_data=1&isTest=false&cmd=modem_main_state%2Copms_wan_mode%2Copms_wan_auto_mode%2Cloginfo%2Cnew_version_state%2Ccurrent_upgrade_state%2Cis_mandatory%2Cwifi_dfs_status%2Cbattery_value%2Cppp_dial_conn_fail_counter&_=1663582698446]]></url>
+    </action>
+
+    <results>
+      <htmlparser>var PM = "{hostname}L"; // product model</htmlparser>
+      <htmlparser>var runtime_code_version="{firmware}";</htmlparser>
+
+
+      <htmlparser>var three_c="{model}";</htmlparser>
+      <htmlparser>var adsl_code_version="{dslver}";</htmlparser>
+      <htmlparser>var lan_mac_addr="{lanmac}";</htmlparser>
+      <htmlparser>var wan_mac_addr="{wanmac}";</htmlparser>
+      <htmlparser>var hardware_version="{hardwarever}";</htmlparser>
+      <htmlparser>var serial_number="{serialno}";</htmlparser>
+      <htmlparser>var wlan_mac_addr="{wifimac}";</htmlparser>
+      <htmlparser>var w_ssid="{wifissid}";</htmlparser>
+      <htmlparser>var w_channel="{wifichannel}";</htmlparser>
+      <htmlparser>var primary_dns="{wanpridns}";</htmlparser>
+      <htmlparser>var secondary_dns="{wansecdns}";</htmlparser>
+      <htmlparser>var boot_code_version="{bootloaderver}";</htmlparser>
+      <htmlparser>var wireless_ver='{wirelessver}';</htmlparser>
+    </results>
+
+  </test>
+
+</tests>
+

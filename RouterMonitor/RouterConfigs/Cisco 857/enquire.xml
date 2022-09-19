@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  
+  <test>
+    <action>
+      <command>show version</command>
+      <respcomplete>#</respcomplete>
+    </action>
+    <results>
+      <firmware>, Version {value}, REL</firmware>
+      <sysuptime>uptime is {value}</sysuptime>
+      <bootloaderver>Bootstrap, Version {value},</bootloaderver>
+      <model>Cisco {value} processor</model>
+    </results>
+  </test>
+
+
+  <test>
+    <action>
+      <command>show interface dialer 0</command>
+      <respcomplete>#</respcomplete>
+    </action>
+    <results>
+      <wanip>Internet address is {value}/</wanip>
+      <txpckts>  {value} packets output,</txpckts>
+      <rxpckts>  {value} packets input,</rxpckts>
+    </results>
+  </test>
+
+
+  <test description="">
+    <action>
+      <command>show dsl interface atm 0</command>
+      <respcomplete>#</respcomplete>
+    </action>
+    <results>
+
+      <dslstatus>Modem Status: {value}</dslstatus>
+
+      <dslmode>DSL Mode: {value}</dslmode>
+      <downstreamsnr>Noise Margin: {value} dB</downstreamsnr>
+      <upstreamsnr>Noise Margin: {ignore} dB {value} dB</upstreamsnr>
+
+
+      <downstreampower>Output Power: {value} dBm</downstreampower>
+      <upstreampower>Output Power: {ignore} dBm {value}</upstreampower>
+
+      <downstreamatt>Attenuation: {value} dB</downstreamatt>
+      <upstreamatt>Attenuation: {ignore} dB {value}</upstreamatt>
+
+      <dslver>FW Version: {value}</dslver>
+
+      <downloadintk>Speed (kbps): {value} {ignore} {ignore} {ignore}</downloadintk>
+      <downloadfastk>Speed (kbps): {ignore} {value} {ignore} {ignore}</downloadfastk>
+      <uploadintk>Speed (kbps): {ignore} {ignore} {value} {ignore}</uploadintk>   
+      <uploadfastk>Speed (kbps): {ignore} {ignore} {ignore} {value}</uploadfastk>
+
+      <downFECerrorInt>Reed-Solomon EC: {value} {ignore} {ignore} {ignore}</downFECerrorInt>
+      <downFECerrorFast>Reed-Solomon EC: {ignore} {value} {ignore} {ignore}</downFECerrorFast>
+      <upFECerrorInt>Reed-Solomon EC: {ignore} {value} {value} {ignore}</upFECerrorInt>
+      <upFECerrorFast>Reed-Solomon EC: {ignore} {ignore} {ignore} {value}</upFECerrorFast>
+
+      <downCRCerrorInt>CRC Errors: {value} {ignore} {ignore} {ignore}</downCRCerrorInt>
+      <downCRCerrorFast>CRC Errors: {ignore} {value} {ignore} {ignore}</downCRCerrorFast>
+      <upCRCerrorInt>CRC Errors: {ignore} {ignore} {value} {ignore}</upCRCerrorInt>
+      <upCRCerrorFast>CRC Errors: {ignore} {ignore} {ignore} {value}</upCRCerrorFast> 
+
+      <downHECerrorInt>Header Errors: {value} {ignore} {ignore} {ignore}</downHECerrorInt>
+      <downHECerrorFast>Header Errors: {ignore} {value} {ignore} {ignore}</downHECerrorFast>
+      <upHECerrorInt>Header Errors: {ignore} {ignore} {value} {ignore}</upHECerrorInt>	
+      <upHECerrorFast>Header Errors: {ignore} {ignore} {ignore} {value}</upHECerrorFast> 
+ 
+      <tones>
+        <preamble>DMT Bits Per Bin</preamble>
+        <startline>1</startline>
+        <starttone>0</starttone>
+        <entriesperline>16</entriesperline>
+        <format>SingleHex</format>
+        <lines>16</lines>
+        <startpos>5</startpos>
+        <fieldspacing>2</fieldspacing>
+        <fieldsize>1</fieldsize>
+      </tones>
+    </results>
+  </test>
+
+</tests>
+
+
+
+

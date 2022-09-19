@@ -1,0 +1,9 @@
+Belkin ADSL Model
+
+Definition created by Michael Morgan
+
+
+Tested and confirmed to work with-
+
+
+

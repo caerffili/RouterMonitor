@@ -1,0 +1,13 @@
+<tests>
+
+  <test>
+    <action>
+      <command>sys version</command>
+    </action>
+  </test>
+
+</tests>
+
+
+
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <url>http://{ipaddress}/status.stm</url>
+    </action>
+
+    <results>
+      <htmlparser>var PM = "{hostname}L"; // product model</htmlparser>
+      <htmlparser>var runtime_code_version="{firmware}";</htmlparser>
+ 
+
+      <htmlparser>var three_c="{model}";</htmlparser>
+      <htmlparser>var adsl_code_version="{dslver}";</htmlparser>
+      <htmlparser>var lan_mac_addr="{lanmac}";</htmlparser>
+      <htmlparser>var wan_mac_addr="{wanmac}";</htmlparser>
+      <htmlparser>var hardware_version="{hardwarever}";</htmlparser>
+      <htmlparser>var serial_number="{serialno}";</htmlparser>
+      <htmlparser>var wlan_mac_addr="{wifimac}";</htmlparser>
+      <htmlparser>var w_ssid="{wifissid}";</htmlparser>
+      <htmlparser>var w_channel="{wifichannel}";</htmlparser>
+      <htmlparser>var primary_dns="{wanpridns}";</htmlparser>
+      <htmlparser>var secondary_dns="{wansecdns}";</htmlparser>
+      <htmlparser>var boot_code_version="{bootloaderver}";</htmlparser>
+      <htmlparser>var wireless_ver='{wirelessver}';</htmlparser>
+    </results>
+
+  </test>
+
+</tests>
+

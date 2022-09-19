@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test description="Get versions and MAC address">
+    <action>
+      <command>system info</command>
+      <respcomplete>></respcomplete>
+    </action>
+
+    <results>
+      <model>Name:{value}</model>
+      <lanmac>MAC address:{value}</lanmac>
+      <hardwarever>Hardware ver:{value}</hardwarever>
+      <firmware>Software ver:{value}</firmware>
+    </results>
+  </test>
+
+
+  <test>
+    <action description="Get Wireless info">
+      <command>port wireless show</command>
+      <respcomplete>></respcomplete>
+    </action>
+
+    <results>
+      <wirelessver>version                                            = {value}</wirelessver>
+      <wifimac>MAC                                                = {value}</wifimac>
+      <wifissid>ESSID                                              = {value}</wifissid>
+      <wifichannel>DefaultChannel                                     = {value}</wifichannel>
+    </results>
+  </test>
+
+</tests>
+
+
+

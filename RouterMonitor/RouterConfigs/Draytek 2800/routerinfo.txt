@@ -1,0 +1,9 @@
+Draytek Vigor 2800 ADSL Router
+
+Definition created by Michael Morgan
+
+
+Tested and confirmed to work with-
+
+Draytek Vigor 2800
+

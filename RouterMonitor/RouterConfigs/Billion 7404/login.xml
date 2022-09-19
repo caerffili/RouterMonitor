@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test description="Wait for login and password prompts and response accordingly">
+    <action>
+      <wait>Login:</wait>
+      <command>{username}</command>
+    </action>
+    <action>
+      <wait>Password:</wait>
+      <command>{password}</command>
+      <respcomplete>></respcomplete>
+    </action>
+  </test>
+
+</tests>
+
+
+

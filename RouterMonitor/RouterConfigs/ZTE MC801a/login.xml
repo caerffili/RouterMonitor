@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <authentication>Cookie</authentication>
+      <url><![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?multi_data=1&isTest=false&cmd=modem_main_state%2Copms_wan_mode%2Copms_wan_auto_mode%2Cloginfo%2Cnew_version_state%2Ccurrent_upgrade_state%2Cis_mandatory%2Cwifi_dfs_status%2Cbattery_value%2Cppp_dial_conn_fail_counter&_=1663582698446]]></url>
+    </action>
+  </test>
+
+  <!-- Get challenge -->
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <authentication>Cookie</authentication>
+      <url><![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?isTest=false&cmd=LD]]></url>
+    </action>
+
+    <results>
+      <htmlparser>"LD":"{routerauthchallenge}"</htmlparser>
+    </results>
+  </test>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>post</method>
+      <authentication>Cookie</authentication>
+      <url><![CDATA[http://{ipaddress}/goform/goform_set_cmd_process]]></url>
+      <data><![CDATA[isTest=false&goformId=LOGIN&password={sha256auth}]]></data>
+    </action>
+
+    <results>
+    </results>
+  </test>
+
+</tests>

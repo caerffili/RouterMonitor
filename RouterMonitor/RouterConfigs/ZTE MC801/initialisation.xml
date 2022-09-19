@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test description="Get some basic details from the SMT menu">
+    <action>
+      <command>24</command>
+      <respcomplete>Number:</respcomplete>
+    </action>
+    <action>
+      <command>2</command>
+      <respcomplete>selection:</respcomplete>
+    </action>
+    <action>
+      <command>1</command>
+      <respcomplete>Exit:</respcomplete>
+    </action>
+    <results>
+      <hostname>Name:{value}</hostname>
+      <firmware>F/W Version:{value}</firmware>
+      <dslver>ADSL Chipset Vendor:{value}</dslver>
+    </results>
+  </test>
+
+
+  <test description="Get to the cli menu">
+    <action>
+      <command>{esc}</command>
+      <respcomplete>selection:</respcomplete>
+    </action>
+    <action>
+      <command>{esc}</command>
+      <respcomplete>Number:</respcomplete>
+    </action>
+    <action>
+      <command>8</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <action description="Find somemore information">
+      <command>sys version</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <bootloaderver>bootbase version:{value}</bootloaderver>
+    </results>
+  </test>
+
+</tests>
+
+
+

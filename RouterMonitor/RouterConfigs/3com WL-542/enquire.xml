@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+ 
+  
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <url>http://{ipaddress}/adsl_status_main.stm</url>
+      <data></data>
+    </action>
+
+
+    <results>
+      <htmlparser><![CDATA[<td colspan=3 class=titleCell>Status</td></tr><tr><td width=190 class=textCell>{ignore}</td><td width=190 class=textCell>{ignore}</td><td width=190 class=textCell>Current</td></tr><tr><td width=190 class=textCell>Line Status</td><td width=190 class=textCell>{ignore}</td><td width=190 class=textCell>{dslstatus}</td></tr><tr><td width=190 class=textCell>Link Type</td><td width=190 class=textCell>{ignore}</td><td width=190 class=textCell>{dslfastint}</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[var wan_ip="{wanip}";]]></htmlparser>
+      
+      <htmlparser><![CDATA[Up Stream</td><td width=380 class=textCell colspan=2>{uploadintk}(Kbps.)</td><tr><td width=190 class=textCell>Down Stream</td><td width=380 class=textCell colspan=2>{downloadintk} (Kbps.)]]></htmlparser>
+
+      <htmlparser><![CDATA[<tr><td width=190 class=textCell>Noise Margin</td><td width=190 class=textCell>{upstreamsnr} dB</td><td width=190 class=textCell>{downstreamsnr} dB</td></tr><tr><td width=190 class=textCell>Attenuation</td><td width=190 class=textCell>{upstreamatt} dB</td><td width=190 class=textCell>{downstreamatt} dB</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[Fast Path FEC Correction</td><td width=190 class=textCell>{downfecrrorfast}</td><td width=190 class=textCell>{upfecerrorfast}</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[Interleaved Path FEC Correction</td><td width=190 class=textCell>{downfecerrorint}</td><td width=190 class=textCell>{upfecerrorint}</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[Fast Path CRC Error</td><td width=190 class=textCell>{downcrcerrorfast}</td><td width=190 class=textCell>{upcrcerrorfast}</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[Interleaved Path CRC Error</td><td width=190 class=textCell>{downcrcerrorint}</td><td width=190 class=textCell>{upcrcerrorint}</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[Fast Path HEC Error</td><td width=190 class=textCell>{downhecerrorfast}</td><td width=190 class=textCell>{uphecerrorfast}</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[Interleaved Path HEC Error</td><td width=190 class=textCell>{downcrcerrorint}</td><td width=190 class=textCell>{upcrcerrorint}</td></tr>]]></htmlparser>
+
+      <htmlparser><![CDATA[Statistics</td></tr><tr><td width=190 class=textCell>Received Cells</td><td width=380 class=textCell colspan=2>{rxpckts}</td></tr><tr><td width=190 class=textCell>Transmitted Cells</td><td width=380 class=textCell colspan=2>{txpckts}</td>]]></htmlparser>
+
+    </results>
+  </test>
+
+</tests>
+
+
+
+
+
+
+

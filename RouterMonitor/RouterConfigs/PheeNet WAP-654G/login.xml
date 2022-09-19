@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+  
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <authentication>Basic</authentication>
+      <url>http://{ipaddress}</url>
+    </action>
+  </test>
+
+</tests>
+
+
+

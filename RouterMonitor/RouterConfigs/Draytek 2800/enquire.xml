@@ -1,0 +1,101 @@
+<tests>
+
+  
+  <test>
+    <action>
+      <command>sys iface</command>
+      <respcomplete>></respcomplete>
+    </action>
+
+    <results>
+      <preamble>PPP</preamble>
+      <wanip>IP Address: {value} Netmask</wanip>
+    </results>
+  </test>
+
+
+  <test>
+    <action>
+      <command>show adsl</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <dslver>Version= {value}</dslver>
+      <dslmode>OperationalMode= {value}</dslmode>
+      <dslstatus>State= {value}</dslstatus>
+
+      <txpckts>PhyTXCellCount= {value}</txpckts>
+      <rxpckts>PhyRXCellCount= {value}</rxpckts>
+
+      <downstreamsnr>LocalSNRMargin= {value} dB</downstreamsnr>
+      <downstreamatt>LocalLineAttn= {value} dB</downstreamatt>
+      <upstreampower>LocalTxPower= {value} dB</upstreampower>
+
+      <downloadfast>LocalFastChannelRxRate= {value}</downloadfast>
+      <uploadfast>LocalFastChannelTxRate= {value}</uploadfast>
+
+      <downFECerrorFast>LocalFastChannelFEC= {value}</downFECerrorFast>
+      <downCRCerrorFast>LocalFastChannelCRC= {value}</downCRCerrorFast>
+      <downHECerrorFast>LocalFastChannelHEC= {value}</downHECerrorFast>
+	
+      <downloadint>LocalInterleavedChannelRxRate= {value}</downloadint>
+      <uploadint>LocalInterleavedChannelTxRate= {value}</uploadint>
+
+      <downFECerrorInt>LocalInterleavedChannelFEC= {value}</downFECerrorInt>
+      <downCRCerrorInt>LocalInterleavedChannelCRC= {value}</downCRCerrorInt>
+      <downHECerrorInt>LocalInterleavedChannelHEC= {value}</downHECerrorInt>
+
+      <upstreamatt>RemoteLineAttn= {value} dB</upstreamatt>
+      <upstreamsnr>RemoteSNRMargin= {value} dB</upstreamsnr>
+      <downstreampower></downstreampower>
+
+      <upFECerrorFast>RemoteFastChannelFEC= {value}</upFECerrorFast>
+      <upCRCerrorFast>RemoteFastChannelCRC= {value}</upCRCerrorFast>
+      <upHECerrorFast>RemoteFastChannelHEC= {value}</upHECerrorFast>
+
+      <upFECerrorInt>RemoteInterleavedChannelFEC= {value}</upFECerrorInt>
+      <upCRCerrorInt>RemoteInterleavedChannelCRC= {value}</upCRCerrorInt>
+      <upHECerrorInt>RemoteInterleavedChannelHEC= {value}</upHECerrorInt>
+
+    </results>
+  </test>
+
+
+  <test>
+    <action>
+      <command>show dns</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <wanpridns> Primary DNS:{value}</wanpridns>
+      <wansecdns> Secondary DNS:{value}</wansecdns>
+    </results>
+  </test>
+
+
+  <test>
+    <action>
+      <command>adsl showbins</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <tones>
+        <preamble>--- ---</preamble>
+        <startline>1</startline>
+        <starttone>0</starttone>
+        <entriesperline>4</entriesperline>
+        <format>Uncompressed</format>
+        <lines>128</lines>
+        <startpos>15</startpos>
+        <fieldspacing>20</fieldspacing>
+        <fieldsize>2</fieldsize>
+      </tones>
+    </results>
+  </test>
+
+
+</tests>
+
+
+
+

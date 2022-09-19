@@ -1,0 +1,14 @@
+<tests>
+
+  <test>
+    <action>
+      <wait>Password:</wait>
+      <command>{password}</command>
+      <respcomplete>></respcomplete>
+    </action>
+  </test>
+
+</tests>
+
+
+

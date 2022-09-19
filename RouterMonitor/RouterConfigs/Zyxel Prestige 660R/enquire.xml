@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+
+  <test description="Get the WAN IP address">
+    <action>
+      <command>ip ifconfig</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <preamble>wanif0</preamble>
+      <wanip>inet{value}, netmask</wanip>
+    </results>
+  </test>
+
+
+  <test description="Get the up time">
+    <action>
+      <command>sys version</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <sysuptime>up time: {value} (</sysuptime>
+    </results>
+  </test>
+
+
+  <test description="Get the TX/RX stats">
+    <action>
+      <command>wan hwsar disp</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <txpcktshex>inPkts        = 0x{value},</txpcktshex>
+      <rxpcktshex>outPkts       = 0x{value},</rxpcktshex>
+    </results>
+  </test>
+
+
+  <test description="Get the bit rates">
+    <action>
+      <command>wan adsl chandata</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <dslmode>DSL standard: {value}</dslmode>
+      <downloadk>near-end bit rate: {value} kbps</downloadk>
+      <uploadk>far-end bit rate: {value} kbps</uploadk>
+      <downloadintk>near-end interleaved channel bit rate: {value} kbps</downloadintk>
+      <uploadintk>far-end interleaved channel bit rate: {value} kbps</uploadintk>
+      <downloadfastk>near-end fast channel bit rate: {value} kbps</downloadfastk>
+      <uploadfastk>far-end fast channel bit rate: {value} kbps</uploadfastk>
+    </results>
+  </test>
+
+
+  <test description="Get the adsl status">
+    <action>
+      <command>wan adsl status</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <dslstatus>current modem status: {value}</dslstatus>
+    </results>
+  </test>
+
+
+  <test description="Get near line stats and tones">
+    <action>
+      <command>wan adsl linedata near</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <downstreamsnr>noise margin downstream:{value} db</downstreamsnr>
+      <upstreampower>output power upstream: {value} db</upstreampower>
+      <downstreamatt>attenuation downstream: {value} db</downstreamatt>
+
+      <tones>
+        <preamble>tone  32- 63:</preamble>
+        <startline>0</startline>
+        <starttone>32</starttone>
+        <entriesperline>16</entriesperline>
+        <format>Compressed</format>
+        <lines>15</lines>
+        <startpos>14</startpos>
+        <fieldspacing>3</fieldspacing>
+        <fieldsize>2</fieldsize>
+      </tones>
+    </results>
+  </test>
+
+
+  <test description="Get far line stats and tones">
+    <action>
+      <command>wan adsl linedata far</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <upstreamsnr>noise margin upstream: {value} db</upstreamsnr>
+      <downstreampower>output power downstream: {value} db</downstreampower>
+      <upstreamatt>attenuation upstream: {value} db</upstreamatt>
+
+      <tones>
+        <preamble>tone   0- 31:</preamble>
+        <startline>0</startline>
+        <starttone>0</starttone>
+        <entriesperline>16</entriesperline>
+        <format>Compressed</format>
+        <lines>1</lines>
+        <startpos>14</startpos>
+        <fieldspacing>3</fieldspacing>
+        <fieldsize>2</fieldsize>
+      </tones>
+    </results>
+  </test>
+
+
+  <test description="Get line error stats">
+    <action>
+      <command>wan adsl perfdata</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <downFECerrorFast>near-end FEC error fast:{value}</downFECerrorFast>
+      <downFECerrorInt>near-end FEC error interleaved:{value}</downFECerrorInt>
+      <downCRCerrorFast>near-end CRC error fast:{value}</downCRCerrorFast>
+      <downCRCerrorInt>near-end CRC error interleaved:{value}</downCRCerrorInt>
+      <downHECerrorFast>near-end HEC error fast:{value}</downHECerrorFast>
+      <downHECerrorInt>near-end HEC error interleaved:{value}</downHECerrorInt>
+      <upFECerrorFast>far-end FEC error fast:{value}</upFECerrorFast>
+      <upFECerrorInt>far-end FEC error interleaved:{value}</upFECerrorInt>
+      <upCRCerrorFast>far-end CRC error fast:{value}</upCRCerrorFast>
+      <upCRCerrorInt>far-end CRC error interleaved:{value}</upCRCerrorInt>
+      <upHECerrorFast>far-end HEC error fast:{value}</upHECerrorFast>
+      <upHECerrorInt>far-end HEC error interleaved:{value}</upHECerrorInt>
+    </results>
+  </test>
+
+</tests>
+
+
+
+

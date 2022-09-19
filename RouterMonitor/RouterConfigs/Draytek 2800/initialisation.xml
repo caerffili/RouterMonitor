@@ -1,0 +1,35 @@
+<tests>
+
+  <test>
+    <action>
+      <command>sys version</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <model>Router Model: {value} Version</model>
+      <firmware>Version: {value}</firmware>
+      <dspver>ADSL Firmware Version: {value}</dspver>
+      <hardwarever>Revision: {value}</hardwarever>
+      <hostname>Name: {value}</hostname>
+    </results>
+  </test>
+
+
+  <test>
+    <action>
+      <command>sys iface</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <lanmac>MAC: {value}</lanmac>
+      <preamble>PPP</preamble>
+      <wanip>IP Address: {value} Netmask</wanip>
+      <wanmac>MAC: {value}</wanmac>
+    </results>
+  </test>
+
+
+</tests>
+
+
+

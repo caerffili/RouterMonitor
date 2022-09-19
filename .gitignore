@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Reboot/bin/Debug
+/Reboot/obj
+/RouterMonitor/bin
+/TelnetEngine/bin
+/TelnetEngine/obj
+/RouterMonitor/obj

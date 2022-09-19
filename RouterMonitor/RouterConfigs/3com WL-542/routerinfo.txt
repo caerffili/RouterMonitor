@@ -1,0 +1,9 @@
+ZyXEL Prestige 660 ADSL Modem
+
+Definition created by Michael Morgan
+
+
+Tested and confirmed to work with-
+
+Prestige 660R-61C
+

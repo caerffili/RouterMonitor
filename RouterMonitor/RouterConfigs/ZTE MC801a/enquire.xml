@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <authentication>Cookie</authentication>
+      <url><![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?multi_data=1&isTest=false&cmd=modem_main_state%2Copms_wan_mode%2Copms_wan_auto_mode%2Cloginfo%2Cnew_version_state%2Ccurrent_upgrade_state%2Cis_mandatory%2Cwifi_dfs_status%2Cbattery_value%2Cppp_dial_conn_fail_counter&_=1663582698446]]></url>
+    </action>
+    <results>
+      <htmlparser>"modem_main_state":"{dslstatus}"</htmlparser>
+    </results>
+  </test>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <authentication>Cookie</authentication>
+      <url>
+        <![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?isTest=false&cmd=network_type%2Crssi%2Crscp%2Clte_rsrp%2CZ5g_snr%2CZ5g_rsrp%2CZCELLINFO_band%2CZ5g_dlEarfcn%2Clte_ca_pcell_arfcn%2Clte_ca_pcell_band%2Clte_ca_scell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_info%2Clte_ca_scell_bandwidth%2Cwan_lte_ca%2Clte_pci%2CZ5g_CELL_ID%2CZ5g_SINR%2Ccell_id%2Cwan_lte_ca%2Clte_ca_pcell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_band%2Clte_ca_scell_bandwidth%2Clte_ca_pcell_arfcn%2Clte_ca_scell_arfcn%2Clte_multi_ca_scell_info%2Cwan_active_band%2Cnr5g_pci%2Cnr5g_action_band%2Cnr5g_cell_id%2Clte_snr%2Cecio%2Cwan_active_channel%2Cnr5g_action_channel&multi_data=1&_=1663582955736]]></url>
+    </action>
+    <results>
+      <htmlparser>"lte_rsrp":"{downstreampower}"</htmlparser>
+      <htmlparser>"lte_snr":"{downstreamsnr}"</htmlparser>
+    </results>
+  </test>
+
+</tests>
+
+
+
+

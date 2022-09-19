@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test description="Reboot">
+    <action>
+      <command>ip ifconfig</command>
+    </action>
+  </test>
+
+</tests>
+
+
+
+

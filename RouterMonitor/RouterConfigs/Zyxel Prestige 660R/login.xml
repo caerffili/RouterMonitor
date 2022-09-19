@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests>
+
+  <test description="Login">
+    <action description="Wait for password prompt and send password">
+      <wait>Password:</wait>
+      <command>{password}</command>
+      <respcomplete>Number:</respcomplete>
+    </action>
+    <results>
+      <model>Prestige {value} Main Menu</model>
+    </results>
+  </test>
+
+</tests>
+
+
+

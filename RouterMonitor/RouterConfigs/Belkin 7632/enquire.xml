@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  
+  <test description="Get WAN ip address">
+    <action>
+      <command>ip list interfaces</command>
+      <respcomplete>></respcomplete>
+    </action>
+
+    <results>
+      <wanip>ipwan        [|] {value} [|]</wanip>
+    </results>
+  </test>
+
+
+  <test description="Get dsl line stats">
+    <action>
+      <command>port a1 show</command>
+      <respcomplete>></respcomplete>
+    </action>
+    <results>
+      <dslver>Version                                            = {value}</dslver>
+      <dspver>DspFirmwareVersion                                 = {value}</dspver>
+      <dsluptime>Linkuptime                                         = {value}</dsluptime>
+      <dslmode>OperationalMode                                    = {value}</dslmode>
+      <dslstatus>State                                              = {value}</dslstatus>
+
+      <downstreamsnr>LocalSNRMargin                                     = {value} dB</downstreamsnr>
+      <downstreamatt>LocalLineAttn                                      = {value} dB</downstreamatt>
+      <upstreampower>LocalTxPower                                       = {value} dB</upstreampower>
+
+      <downloadfast>LocalFastChannelRxRate                             = {value}</downloadfast>
+      <uploadfast>LocalFastChannelTxRate                             = {value}</uploadfast>
+
+      <downFECerrorFast>LocalFastChannelFEC                                = {value}</downFECerrorFast>
+      <downCRCerrorFast>LocalFastChannelCRC                                = {value}</downCRCerrorFast>
+      <downHECerrorFast>LocalFastChannelHEC                                = {value}</downHECerrorFast>
+
+      <downloadint>LocalInterleavedChannelRxRate                      = {value}</downloadint>
+      <uploadint>LocalInterleavedChannelTxRate                      = {value}</uploadint>
+
+      <downFECerrorInt>LocalInterleavedChannelFEC                         = {value}</downFECerrorInt>
+      <downCRCerrorInt>LocalInterleavedChannelCRC                         = {value}</downCRCerrorInt>
+      <downHECerrorInt>LocalInterleavedChannelHEC                         = {value}</downHECerrorInt>
+
+      <downstreampower>RemoteTxPower                                      = {value} dB</downstreampower>
+      <upstreamatt>RemoteLineAttn                                     = {value} dB</upstreamatt>
+      <upstreamsnr>RemoteSNRMargin                                    = {value} dB</upstreamsnr>
+
+      <upFECerrorFast>far-end FEC error fast:{value}</upFECerrorFast>
+      <upCRCerrorFast>far-end CRC error fast:{value}</upCRCerrorFast>
+      <upHECerrorFast>far-end HEC error fast:{value}</upHECerrorFast>
+
+      <upFECerrorInt>far-end FEC error interleaved:{value}</upFECerrorInt>
+      <upCRCerrorInt>far-end CRC error interleaved:{value}</upCRCerrorInt>
+      <upHECerrorInt>far-end HEC error interleaved:{value}</upHECerrorInt>
+    </results>
+  </test>
+
+
+  <test description="Get DNS Server details">
+    <action>
+      <command>dnsclient list servers</command>
+      <respcomplete>></respcomplete>
+    </action>
+
+    <results>
+      <wanpridns>1 [|] {value}</wanpridns>
+      <wansecdns>2 [|] {value}</wansecdns>
+    </results>
+  </test>
+
+
+  <test description="Get pppoa packet count">
+    <action>
+      <command>pppoa show transport PppoeUp</command>
+      <respcomplete>></respcomplete>
+    </action>
+
+    <results>
+      <txpckts>sent {value}</txpckts>
+      <rxpckts>received {value}</rxpckts>
+    </results>
+  </test>
+
+</tests>
+
+
+
+

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test description="Reboot">
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <url>http://{ipaddress}/system_r.stm</url>
+    </action>
+  </test>
+
+</tests>
+
+
+
+

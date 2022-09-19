@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RouterMonitor", "RouterMonitor\RouterMonitor.csproj", "{44FBD66C-04CF-49D7-983A-22DB734D5A90}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{19CD25DA-C5C1-452F-BC09-06EF28E94716}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reboot", "Reboot\Reboot.csproj", "{9813FCA1-4373-4050-8446-FE598675BEC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelnetEngine", "TelnetEngine\TelnetEngine.csproj", "{FEA6833A-FE6A-4D11-ABF7-934EC84475C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44FBD66C-04CF-49D7-983A-22DB734D5A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44FBD66C-04CF-49D7-983A-22DB734D5A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44FBD66C-04CF-49D7-983A-22DB734D5A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44FBD66C-04CF-49D7-983A-22DB734D5A90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19CD25DA-C5C1-452F-BC09-06EF28E94716}.Debug|Any CPU.ActiveCfg = Debug
+		{19CD25DA-C5C1-452F-BC09-06EF28E94716}.Release|Any CPU.ActiveCfg = Release
+		{9813FCA1-4373-4050-8446-FE598675BEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9813FCA1-4373-4050-8446-FE598675BEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9813FCA1-4373-4050-8446-FE598675BEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9813FCA1-4373-4050-8446-FE598675BEC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA6833A-FE6A-4D11-ABF7-934EC84475C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA6833A-FE6A-4D11-ABF7-934EC84475C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA6833A-FE6A-4D11-ABF7-934EC84475C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA6833A-FE6A-4D11-ABF7-934EC84475C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {914D8279-3D58-4C2F-BE25-745AF86E5D4A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+  
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>post</method>
+      <url>http://{ipaddress}/cgi-bin/login.exe</url>
+      <data>pws={password}</data>
+    </action>
+  </test>
+
+</tests>
+
+
+
