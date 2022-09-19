@@ -32,39 +32,39 @@ namespace RouterMonitor
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Connect = new System.Windows.Forms.Button();
             this.Downstream = new System.Windows.Forms.GroupBox();
-            this.RxPckts = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.DownstreamFECs = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.DownstreamHeaderErrors = new System.Windows.Forms.Label();
-            this.DownstreamCRCErrors = new System.Windows.Forms.Label();
-            this.label = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.DownstreamAttenuation = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.DownstreamRate = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.DownstreamPower = new System.Windows.Forms.Label();
-            this.DownstreamSNR = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.text2_8 = new System.Windows.Forms.Label();
+            this.label2_8 = new System.Windows.Forms.Label();
+            this.text2_7 = new System.Windows.Forms.Label();
+            this.label2_7 = new System.Windows.Forms.Label();
+            this.text2_6 = new System.Windows.Forms.Label();
+            this.text2_5 = new System.Windows.Forms.Label();
+            this.label2_5 = new System.Windows.Forms.Label();
+            this.label2_6 = new System.Windows.Forms.Label();
+            this.text2_4 = new System.Windows.Forms.Label();
+            this.label2_4 = new System.Windows.Forms.Label();
+            this.text2_1 = new System.Windows.Forms.Label();
+            this.label2_3 = new System.Windows.Forms.Label();
+            this.label2_2 = new System.Windows.Forms.Label();
+            this.text2_3 = new System.Windows.Forms.Label();
+            this.text2_2 = new System.Windows.Forms.Label();
+            this.label2_1 = new System.Windows.Forms.Label();
             this.Upstream = new System.Windows.Forms.GroupBox();
-            this.TxPckts = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.UpstreamFECs = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.UpstreamHeaderErrors = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.UpstreamCRCErrors = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.UpstreamAttenuation = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.UpstreamPower = new System.Windows.Forms.Label();
-            this.UpstreamRate = new System.Windows.Forms.Label();
-            this.UpstreamSNR = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.text3_8 = new System.Windows.Forms.Label();
+            this.label3_8 = new System.Windows.Forms.Label();
+            this.text3_7 = new System.Windows.Forms.Label();
+            this.label3_7 = new System.Windows.Forms.Label();
+            this.text3_6 = new System.Windows.Forms.Label();
+            this.label3_6 = new System.Windows.Forms.Label();
+            this.text3_5 = new System.Windows.Forms.Label();
+            this.label3_5 = new System.Windows.Forms.Label();
+            this.text3_4 = new System.Windows.Forms.Label();
+            this.label3_4 = new System.Windows.Forms.Label();
+            this.text3_3 = new System.Windows.Forms.Label();
+            this.text3_1 = new System.Windows.Forms.Label();
+            this.text3_2 = new System.Windows.Forms.Label();
+            this.label3_3 = new System.Windows.Forms.Label();
+            this.label3_2 = new System.Windows.Forms.Label();
+            this.label3_1 = new System.Windows.Forms.Label();
             this.Status = new System.Windows.Forms.Label();
             this.Disconnect = new System.Windows.Forms.Button();
             this.Pause = new System.Windows.Forms.Button();
@@ -125,22 +125,22 @@ namespace RouterMonitor
             // 
             // Downstream
             // 
-            this.Downstream.Controls.Add(this.RxPckts);
-            this.Downstream.Controls.Add(this.label12);
-            this.Downstream.Controls.Add(this.DownstreamFECs);
-            this.Downstream.Controls.Add(this.label10);
-            this.Downstream.Controls.Add(this.DownstreamHeaderErrors);
-            this.Downstream.Controls.Add(this.DownstreamCRCErrors);
-            this.Downstream.Controls.Add(this.label);
-            this.Downstream.Controls.Add(this.label9);
-            this.Downstream.Controls.Add(this.DownstreamAttenuation);
-            this.Downstream.Controls.Add(this.label7);
-            this.Downstream.Controls.Add(this.DownstreamRate);
-            this.Downstream.Controls.Add(this.label3);
-            this.Downstream.Controls.Add(this.label2);
-            this.Downstream.Controls.Add(this.DownstreamPower);
-            this.Downstream.Controls.Add(this.DownstreamSNR);
-            this.Downstream.Controls.Add(this.label1);
+            this.Downstream.Controls.Add(this.text2_8);
+            this.Downstream.Controls.Add(this.label2_8);
+            this.Downstream.Controls.Add(this.text2_7);
+            this.Downstream.Controls.Add(this.label2_7);
+            this.Downstream.Controls.Add(this.text2_6);
+            this.Downstream.Controls.Add(this.text2_5);
+            this.Downstream.Controls.Add(this.label2_5);
+            this.Downstream.Controls.Add(this.label2_6);
+            this.Downstream.Controls.Add(this.text2_4);
+            this.Downstream.Controls.Add(this.label2_4);
+            this.Downstream.Controls.Add(this.text2_1);
+            this.Downstream.Controls.Add(this.label2_3);
+            this.Downstream.Controls.Add(this.label2_2);
+            this.Downstream.Controls.Add(this.text2_3);
+            this.Downstream.Controls.Add(this.text2_2);
+            this.Downstream.Controls.Add(this.label2_1);
             this.Downstream.Location = new System.Drawing.Point(12, 164);
             this.Downstream.Name = "Downstream";
             this.Downstream.Size = new System.Drawing.Size(190, 204);
@@ -148,302 +148,303 @@ namespace RouterMonitor
             this.Downstream.TabStop = false;
             this.Downstream.Text = "Downstream";
             // 
-            // RxPckts
+            // text2_8
             // 
-            this.RxPckts.Location = new System.Drawing.Point(99, 180);
-            this.RxPckts.Name = "RxPckts";
-            this.RxPckts.Size = new System.Drawing.Size(85, 13);
-            this.RxPckts.TabIndex = 24;
-            this.RxPckts.Text = "0";
+            this.text2_8.Location = new System.Drawing.Point(99, 180);
+            this.text2_8.Name = "text2_8";
+            this.text2_8.Size = new System.Drawing.Size(85, 13);
+            this.text2_8.TabIndex = 24;
+            this.text2_8.Text = "0";
             // 
-            // label12
+            // label2_8
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(17, 180);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(62, 13);
-            this.label12.TabIndex = 23;
-            this.label12.Text = "Rx Packets";
+            this.label2_8.AutoSize = true;
+            this.label2_8.Location = new System.Drawing.Point(17, 180);
+            this.label2_8.Name = "label2_8";
+            this.label2_8.Size = new System.Drawing.Size(62, 13);
+            this.label2_8.TabIndex = 23;
+            this.label2_8.Text = "Rx Packets";
             // 
-            // DownstreamFECs
+            // text2_7
             // 
-            this.DownstreamFECs.Location = new System.Drawing.Point(99, 158);
-            this.DownstreamFECs.Name = "DownstreamFECs";
-            this.DownstreamFECs.Size = new System.Drawing.Size(85, 13);
-            this.DownstreamFECs.TabIndex = 22;
-            this.DownstreamFECs.Text = "0";
+            this.text2_7.Location = new System.Drawing.Point(99, 158);
+            this.text2_7.Name = "text2_7";
+            this.text2_7.Size = new System.Drawing.Size(85, 13);
+            this.text2_7.TabIndex = 22;
+            this.text2_7.Text = "0";
             // 
-            // label10
+            // label2_7
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 158);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(76, 13);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "FE Corrections";
+            this.label2_7.AutoSize = true;
+            this.label2_7.Location = new System.Drawing.Point(16, 158);
+            this.label2_7.Name = "label2_7";
+            this.label2_7.Size = new System.Drawing.Size(76, 13);
+            this.label2_7.TabIndex = 21;
+            this.label2_7.Text = "FE Corrections";
             // 
-            // DownstreamHeaderErrors
+            // text2_6
             // 
-            this.DownstreamHeaderErrors.Location = new System.Drawing.Point(99, 136);
-            this.DownstreamHeaderErrors.Name = "DownstreamHeaderErrors";
-            this.DownstreamHeaderErrors.Size = new System.Drawing.Size(85, 13);
-            this.DownstreamHeaderErrors.TabIndex = 20;
-            this.DownstreamHeaderErrors.Text = "0";
+            this.text2_6.Location = new System.Drawing.Point(99, 136);
+            this.text2_6.Name = "text2_6";
+            this.text2_6.Size = new System.Drawing.Size(85, 13);
+            this.text2_6.TabIndex = 20;
+            this.text2_6.Text = "0";
             // 
-            // DownstreamCRCErrors
+            // text2_5
             // 
-            this.DownstreamCRCErrors.Location = new System.Drawing.Point(99, 114);
-            this.DownstreamCRCErrors.Name = "DownstreamCRCErrors";
-            this.DownstreamCRCErrors.Size = new System.Drawing.Size(85, 13);
-            this.DownstreamCRCErrors.TabIndex = 19;
-            this.DownstreamCRCErrors.Text = "0";
+            this.text2_5.Location = new System.Drawing.Point(99, 114);
+            this.text2_5.Name = "text2_5";
+            this.text2_5.Size = new System.Drawing.Size(85, 13);
+            this.text2_5.TabIndex = 19;
+            this.text2_5.Text = "0";
             // 
-            // label
+            // label2_5
             // 
-            this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(16, 114);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(59, 13);
-            this.label.TabIndex = 18;
-            this.label.Text = "CRC Errors";
+            this.label2_5.AutoSize = true;
+            this.label2_5.Location = new System.Drawing.Point(16, 114);
+            this.label2_5.Name = "label2_5";
+            this.label2_5.Size = new System.Drawing.Size(59, 13);
+            this.label2_5.TabIndex = 18;
+            this.label2_5.Text = "CRC Errors";
             // 
-            // label9
+            // label2_6
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 136);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Header Errors";
+            this.label2_6.AutoSize = true;
+            this.label2_6.Location = new System.Drawing.Point(16, 136);
+            this.label2_6.Name = "label2_6";
+            this.label2_6.Size = new System.Drawing.Size(72, 13);
+            this.label2_6.TabIndex = 17;
+            this.label2_6.Text = "Header Errors";
             // 
-            // DownstreamAttenuation
+            // text2_4
             // 
-            this.DownstreamAttenuation.Location = new System.Drawing.Point(99, 92);
-            this.DownstreamAttenuation.Name = "DownstreamAttenuation";
-            this.DownstreamAttenuation.Size = new System.Drawing.Size(85, 13);
-            this.DownstreamAttenuation.TabIndex = 16;
-            this.DownstreamAttenuation.Text = "0 db";
+            this.text2_4.Location = new System.Drawing.Point(99, 92);
+            this.text2_4.Name = "text2_4";
+            this.text2_4.Size = new System.Drawing.Size(85, 13);
+            this.text2_4.TabIndex = 16;
+            this.text2_4.Text = "0 db";
             // 
-            // label7
+            // label2_4
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 92);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(61, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Attenuation";
+            this.label2_4.AutoSize = true;
+            this.label2_4.Location = new System.Drawing.Point(16, 92);
+            this.label2_4.Name = "label2_4";
+            this.label2_4.Size = new System.Drawing.Size(61, 13);
+            this.label2_4.TabIndex = 15;
+            this.label2_4.Text = "Attenuation";
             // 
-            // DownstreamRate
+            // text2_1
             // 
-            this.DownstreamRate.Location = new System.Drawing.Point(99, 26);
-            this.DownstreamRate.Name = "DownstreamRate";
-            this.DownstreamRate.Size = new System.Drawing.Size(85, 13);
-            this.DownstreamRate.TabIndex = 14;
-            this.DownstreamRate.Text = "0 kbps";
+            this.text2_1.Location = new System.Drawing.Point(99, 26);
+            this.text2_1.Name = "text2_1";
+            this.text2_1.Size = new System.Drawing.Size(85, 13);
+            this.text2_1.TabIndex = 14;
+            this.text2_1.Text = "0 kbps";
             // 
-            // label3
+            // label2_3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(37, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Power";
+            this.label2_3.AutoSize = true;
+            this.label2_3.Location = new System.Drawing.Point(16, 70);
+            this.label2_3.Name = "label2_3";
+            this.label2_3.Size = new System.Drawing.Size(37, 13);
+            this.label2_3.TabIndex = 3;
+            this.label2_3.Text = "Power";
             // 
-            // label2
+            // label2_2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "SNR";
+            this.label2_2.AutoSize = true;
+            this.label2_2.Location = new System.Drawing.Point(16, 48);
+            this.label2_2.Name = "label2_2";
+            this.label2_2.Size = new System.Drawing.Size(30, 13);
+            this.label2_2.TabIndex = 2;
+            this.label2_2.Text = "SNR";
             // 
-            // DownstreamPower
+            // text2_3
             // 
-            this.DownstreamPower.Location = new System.Drawing.Point(99, 70);
-            this.DownstreamPower.Name = "DownstreamPower";
-            this.DownstreamPower.Size = new System.Drawing.Size(85, 13);
-            this.DownstreamPower.TabIndex = 10;
-            this.DownstreamPower.Text = "0 db";
+            this.text2_3.Location = new System.Drawing.Point(99, 70);
+            this.text2_3.Name = "text2_3";
+            this.text2_3.Size = new System.Drawing.Size(85, 13);
+            this.text2_3.TabIndex = 10;
+            this.text2_3.Text = "0 db";
             // 
-            // DownstreamSNR
+            // text2_2
             // 
-            this.DownstreamSNR.Location = new System.Drawing.Point(99, 48);
-            this.DownstreamSNR.Name = "DownstreamSNR";
-            this.DownstreamSNR.Size = new System.Drawing.Size(85, 13);
-            this.DownstreamSNR.TabIndex = 9;
-            this.DownstreamSNR.Text = "0 db";
+            this.text2_2.Location = new System.Drawing.Point(99, 48);
+            this.text2_2.Name = "text2_2";
+            this.text2_2.Size = new System.Drawing.Size(85, 13);
+            this.text2_2.TabIndex = 9;
+            this.text2_2.Text = "0 db";
             // 
-            // label1
+            // label2_1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Sync Rate";
+            this.label2_1.AutoSize = true;
+            this.label2_1.Location = new System.Drawing.Point(16, 26);
+            this.label2_1.Name = "label2_1";
+            this.label2_1.Size = new System.Drawing.Size(57, 13);
+            this.label2_1.TabIndex = 1;
+            this.label2_1.Text = "Sync Rate";
             // 
             // Upstream
             // 
-            this.Upstream.Controls.Add(this.TxPckts);
-            this.Upstream.Controls.Add(this.label14);
-            this.Upstream.Controls.Add(this.UpstreamFECs);
-            this.Upstream.Controls.Add(this.label13);
-            this.Upstream.Controls.Add(this.UpstreamHeaderErrors);
-            this.Upstream.Controls.Add(this.label15);
-            this.Upstream.Controls.Add(this.UpstreamCRCErrors);
-            this.Upstream.Controls.Add(this.label11);
-            this.Upstream.Controls.Add(this.UpstreamAttenuation);
-            this.Upstream.Controls.Add(this.label8);
-            this.Upstream.Controls.Add(this.UpstreamPower);
-            this.Upstream.Controls.Add(this.UpstreamRate);
-            this.Upstream.Controls.Add(this.UpstreamSNR);
-            this.Upstream.Controls.Add(this.label4);
-            this.Upstream.Controls.Add(this.label5);
-            this.Upstream.Controls.Add(this.label6);
+            this.Upstream.Controls.Add(this.text3_8);
+            this.Upstream.Controls.Add(this.label3_8);
+            this.Upstream.Controls.Add(this.text3_7);
+            this.Upstream.Controls.Add(this.label3_7);
+            this.Upstream.Controls.Add(this.text3_6);
+            this.Upstream.Controls.Add(this.label3_6);
+            this.Upstream.Controls.Add(this.text3_5);
+            this.Upstream.Controls.Add(this.label3_5);
+            this.Upstream.Controls.Add(this.text3_4);
+            this.Upstream.Controls.Add(this.label3_4);
+            this.Upstream.Controls.Add(this.text3_3);
+            this.Upstream.Controls.Add(this.text3_1);
+            this.Upstream.Controls.Add(this.text3_2);
+            this.Upstream.Controls.Add(this.label3_3);
+            this.Upstream.Controls.Add(this.label3_2);
+            this.Upstream.Controls.Add(this.label3_1);
             this.Upstream.Location = new System.Drawing.Point(216, 165);
             this.Upstream.Name = "Upstream";
             this.Upstream.Size = new System.Drawing.Size(189, 204);
             this.Upstream.TabIndex = 7;
             this.Upstream.TabStop = false;
             this.Upstream.Text = "Upstream";
+            this.Upstream.Enter += new System.EventHandler(this.Upstream_Enter);
             // 
-            // TxPckts
+            // text3_8
             // 
-            this.TxPckts.Location = new System.Drawing.Point(98, 180);
-            this.TxPckts.Name = "TxPckts";
-            this.TxPckts.Size = new System.Drawing.Size(85, 13);
-            this.TxPckts.TabIndex = 25;
-            this.TxPckts.Text = "0";
+            this.text3_8.Location = new System.Drawing.Point(98, 180);
+            this.text3_8.Name = "text3_8";
+            this.text3_8.Size = new System.Drawing.Size(85, 13);
+            this.text3_8.TabIndex = 25;
+            this.text3_8.Text = "0";
             // 
-            // label14
+            // label3_8
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(16, 180);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(61, 13);
-            this.label14.TabIndex = 25;
-            this.label14.Text = "Tx Packets";
+            this.label3_8.AutoSize = true;
+            this.label3_8.Location = new System.Drawing.Point(16, 180);
+            this.label3_8.Name = "label3_8";
+            this.label3_8.Size = new System.Drawing.Size(61, 13);
+            this.label3_8.TabIndex = 25;
+            this.label3_8.Text = "Tx Packets";
             // 
-            // UpstreamFECs
+            // text3_7
             // 
-            this.UpstreamFECs.Location = new System.Drawing.Point(98, 158);
-            this.UpstreamFECs.Name = "UpstreamFECs";
-            this.UpstreamFECs.Size = new System.Drawing.Size(85, 13);
-            this.UpstreamFECs.TabIndex = 24;
-            this.UpstreamFECs.Text = "0";
+            this.text3_7.Location = new System.Drawing.Point(98, 158);
+            this.text3_7.Name = "text3_7";
+            this.text3_7.Size = new System.Drawing.Size(85, 13);
+            this.text3_7.TabIndex = 24;
+            this.text3_7.Text = "0";
             // 
-            // label13
+            // label3_7
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(16, 158);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(76, 13);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "FE Corrections";
+            this.label3_7.AutoSize = true;
+            this.label3_7.Location = new System.Drawing.Point(16, 158);
+            this.label3_7.Name = "label3_7";
+            this.label3_7.Size = new System.Drawing.Size(76, 13);
+            this.label3_7.TabIndex = 23;
+            this.label3_7.Text = "FE Corrections";
             // 
-            // UpstreamHeaderErrors
+            // text3_6
             // 
-            this.UpstreamHeaderErrors.Location = new System.Drawing.Point(98, 136);
-            this.UpstreamHeaderErrors.Name = "UpstreamHeaderErrors";
-            this.UpstreamHeaderErrors.Size = new System.Drawing.Size(85, 13);
-            this.UpstreamHeaderErrors.TabIndex = 21;
-            this.UpstreamHeaderErrors.Text = "0";
+            this.text3_6.Location = new System.Drawing.Point(98, 136);
+            this.text3_6.Name = "text3_6";
+            this.text3_6.Size = new System.Drawing.Size(85, 13);
+            this.text3_6.TabIndex = 21;
+            this.text3_6.Text = "0";
             // 
-            // label15
+            // label3_6
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(16, 136);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(72, 13);
-            this.label15.TabIndex = 20;
-            this.label15.Text = "Header Errors";
+            this.label3_6.AutoSize = true;
+            this.label3_6.Location = new System.Drawing.Point(16, 136);
+            this.label3_6.Name = "label3_6";
+            this.label3_6.Size = new System.Drawing.Size(72, 13);
+            this.label3_6.TabIndex = 20;
+            this.label3_6.Text = "Header Errors";
             // 
-            // UpstreamCRCErrors
+            // text3_5
             // 
-            this.UpstreamCRCErrors.Location = new System.Drawing.Point(98, 114);
-            this.UpstreamCRCErrors.Name = "UpstreamCRCErrors";
-            this.UpstreamCRCErrors.Size = new System.Drawing.Size(85, 13);
-            this.UpstreamCRCErrors.TabIndex = 19;
-            this.UpstreamCRCErrors.Text = "0";
+            this.text3_5.Location = new System.Drawing.Point(98, 114);
+            this.text3_5.Name = "text3_5";
+            this.text3_5.Size = new System.Drawing.Size(85, 13);
+            this.text3_5.TabIndex = 19;
+            this.text3_5.Text = "0";
             // 
-            // label11
+            // label3_5
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(16, 114);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(59, 13);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "CRC Errors";
+            this.label3_5.AutoSize = true;
+            this.label3_5.Location = new System.Drawing.Point(16, 114);
+            this.label3_5.Name = "label3_5";
+            this.label3_5.Size = new System.Drawing.Size(59, 13);
+            this.label3_5.TabIndex = 18;
+            this.label3_5.Text = "CRC Errors";
             // 
-            // UpstreamAttenuation
+            // text3_4
             // 
-            this.UpstreamAttenuation.Location = new System.Drawing.Point(98, 92);
-            this.UpstreamAttenuation.Name = "UpstreamAttenuation";
-            this.UpstreamAttenuation.Size = new System.Drawing.Size(85, 13);
-            this.UpstreamAttenuation.TabIndex = 17;
-            this.UpstreamAttenuation.Text = "0 db";
+            this.text3_4.Location = new System.Drawing.Point(98, 92);
+            this.text3_4.Name = "text3_4";
+            this.text3_4.Size = new System.Drawing.Size(85, 13);
+            this.text3_4.TabIndex = 17;
+            this.text3_4.Text = "0 db";
             // 
-            // label8
+            // label3_4
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 92);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(61, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Attenuation";
+            this.label3_4.AutoSize = true;
+            this.label3_4.Location = new System.Drawing.Point(16, 92);
+            this.label3_4.Name = "label3_4";
+            this.label3_4.Size = new System.Drawing.Size(61, 13);
+            this.label3_4.TabIndex = 16;
+            this.label3_4.Text = "Attenuation";
             // 
-            // UpstreamPower
+            // text3_3
             // 
-            this.UpstreamPower.Location = new System.Drawing.Point(98, 70);
-            this.UpstreamPower.Name = "UpstreamPower";
-            this.UpstreamPower.Size = new System.Drawing.Size(85, 13);
-            this.UpstreamPower.TabIndex = 12;
-            this.UpstreamPower.Text = "0 db";
+            this.text3_3.Location = new System.Drawing.Point(98, 70);
+            this.text3_3.Name = "text3_3";
+            this.text3_3.Size = new System.Drawing.Size(85, 13);
+            this.text3_3.TabIndex = 12;
+            this.text3_3.Text = "0 db";
             // 
-            // UpstreamRate
+            // text3_1
             // 
-            this.UpstreamRate.Location = new System.Drawing.Point(98, 26);
-            this.UpstreamRate.Name = "UpstreamRate";
-            this.UpstreamRate.Size = new System.Drawing.Size(85, 13);
-            this.UpstreamRate.TabIndex = 13;
-            this.UpstreamRate.Text = "0 kbps";
+            this.text3_1.Location = new System.Drawing.Point(98, 26);
+            this.text3_1.Name = "text3_1";
+            this.text3_1.Size = new System.Drawing.Size(85, 13);
+            this.text3_1.TabIndex = 13;
+            this.text3_1.Text = "0 kbps";
             // 
-            // UpstreamSNR
+            // text3_2
             // 
-            this.UpstreamSNR.Location = new System.Drawing.Point(98, 48);
-            this.UpstreamSNR.Name = "UpstreamSNR";
-            this.UpstreamSNR.Size = new System.Drawing.Size(85, 13);
-            this.UpstreamSNR.TabIndex = 11;
-            this.UpstreamSNR.Text = "0 db";
+            this.text3_2.Location = new System.Drawing.Point(98, 48);
+            this.text3_2.Name = "text3_2";
+            this.text3_2.Size = new System.Drawing.Size(85, 13);
+            this.text3_2.TabIndex = 11;
+            this.text3_2.Text = "0 db";
             // 
-            // label4
+            // label3_3
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 70);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Power";
+            this.label3_3.AutoSize = true;
+            this.label3_3.Location = new System.Drawing.Point(16, 70);
+            this.label3_3.Name = "label3_3";
+            this.label3_3.Size = new System.Drawing.Size(37, 13);
+            this.label3_3.TabIndex = 3;
+            this.label3_3.Text = "Power";
             // 
-            // label5
+            // label3_2
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "SNR";
+            this.label3_2.AutoSize = true;
+            this.label3_2.Location = new System.Drawing.Point(16, 48);
+            this.label3_2.Name = "label3_2";
+            this.label3_2.Size = new System.Drawing.Size(30, 13);
+            this.label3_2.TabIndex = 2;
+            this.label3_2.Text = "SNR";
             // 
-            // label6
+            // label3_1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 26);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Sync Rate";
+            this.label3_1.AutoSize = true;
+            this.label3_1.Location = new System.Drawing.Point(16, 26);
+            this.label3_1.Name = "label3_1";
+            this.label3_1.Size = new System.Drawing.Size(57, 13);
+            this.label3_1.TabIndex = 1;
+            this.label3_1.Text = "Sync Rate";
             // 
             // Status
             // 
@@ -886,20 +887,20 @@ namespace RouterMonitor
         private System.Windows.Forms.Button Connect;
         //private System.Windows.Forms.Timer PollingTimer;
         private System.Windows.Forms.GroupBox Downstream;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2_3;
+        private System.Windows.Forms.Label label2_2;
+        private System.Windows.Forms.Label label2_1;
         private System.Windows.Forms.GroupBox Upstream;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label3_3;
+        private System.Windows.Forms.Label label3_2;
+        private System.Windows.Forms.Label label3_1;
         private System.Windows.Forms.Label Status;
-        private System.Windows.Forms.Label DownstreamRate;
-        private System.Windows.Forms.Label DownstreamSNR;
-        private System.Windows.Forms.Label DownstreamPower;
-        private System.Windows.Forms.Label UpstreamSNR;
-        private System.Windows.Forms.Label UpstreamPower;
-        private System.Windows.Forms.Label UpstreamRate;
+        private System.Windows.Forms.Label text2_1;
+        private System.Windows.Forms.Label text2_2;
+        private System.Windows.Forms.Label text2_3;
+        private System.Windows.Forms.Label text3_2;
+        private System.Windows.Forms.Label text3_3;
+        private System.Windows.Forms.Label text3_1;
         private System.Windows.Forms.Button Disconnect;
         private System.Windows.Forms.Button Pause;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -907,22 +908,22 @@ namespace RouterMonitor
         private System.Windows.Forms.Button Tones;
         private System.Windows.Forms.Label DSLMode;
         private System.Windows.Forms.Label DSLStatus;
-        private System.Windows.Forms.Label DownstreamAttenuation;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label UpstreamAttenuation;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label DownstreamHeaderErrors;
-        private System.Windows.Forms.Label DownstreamCRCErrors;
-        private System.Windows.Forms.Label label;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label UpstreamHeaderErrors;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label UpstreamCRCErrors;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label DownstreamFECs;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label UpstreamFECs;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label text2_4;
+        private System.Windows.Forms.Label label2_4;
+        private System.Windows.Forms.Label text3_4;
+        private System.Windows.Forms.Label label3_4;
+        private System.Windows.Forms.Label text2_6;
+        private System.Windows.Forms.Label text2_5;
+        private System.Windows.Forms.Label label2_5;
+        private System.Windows.Forms.Label label2_6;
+        private System.Windows.Forms.Label text3_6;
+        private System.Windows.Forms.Label label3_6;
+        private System.Windows.Forms.Label text3_5;
+        private System.Windows.Forms.Label label3_5;
+        private System.Windows.Forms.Label text2_7;
+        private System.Windows.Forms.Label label2_7;
+        private System.Windows.Forms.Label text3_7;
+        private System.Windows.Forms.Label label3_7;
         private System.Windows.Forms.Label WanIP;
         private System.Windows.Forms.Button Telnet;
         private System.Windows.Forms.Button Config;
@@ -947,10 +948,10 @@ namespace RouterMonitor
         private System.Windows.Forms.Label WanMAC;
         private System.Windows.Forms.Button SpeedTest;
         private System.Windows.Forms.Button AdditionalInfoButton;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label RxPckts;
-        private System.Windows.Forms.Label TxPckts;
+        private System.Windows.Forms.Label label2_8;
+        private System.Windows.Forms.Label label3_8;
+        private System.Windows.Forms.Label text2_8;
+        private System.Windows.Forms.Label text3_8;
         private System.Windows.Forms.Label DSLFastInt;
         private System.Windows.Forms.Label DSPVer;
         private System.Windows.Forms.Label DSLUpTime;

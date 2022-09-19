@@ -20,6 +20,7 @@ namespace RouterMonitor
         public string RouterIPAddress;       // IPAddress of the router
         public bool RouterRaiseTelnet;
         public bool RouterTelnetAllowed;
+        public string ModemType;
         public string RouterModel;
         public string RouterUsername;
         public string RouterPassword;
@@ -298,6 +299,7 @@ namespace RouterMonitor
             IniParams.RouterModel = ini.GetIniFileString("Router", "RouterModel", "");
             IniParams.RouterRaiseTelnet = ini.GetIniFileBool("Router", "RaiseTelnet", true);
             IniParams.RouterTelnetAllowed = ini.GetIniFileBool("Router", "TelnetAllowed", true);
+            IniParams.ModemType = ini.GetIniFileString("Router", "ModemType", "ADSL");
             IniParams.RouterIPAddress = ini.GetIniFileString("Router", "IP", "192.168.1.1");
             IniParams.RouterUsername = ini.GetIniFileString("Router", "RouterUsername", "");
 
@@ -330,12 +332,57 @@ namespace RouterMonitor
             PingStatus[0].Host = ini.GetIniFileString("Pings", "PingHost1", "");
             PingStatus[1].Host = ini.GetIniFileString("Pings", "PingHost2", "");
             PingStatus[0].Status = PingStatusEnum.NoIP;
-            PingStatus[1].Status = PingStatusEnum.NoIP; 
+            PingStatus[1].Status = PingStatusEnum.NoIP;
+
+            UpdateControls();
         }
         #endregion
 
 
         #region UpdateScreenControls
+        void UpdateControls()
+        {
+            if (IniParams.ModemType == "ADSL")
+            {
+                label2_1.Text = "Sync Rate";
+                label2_2.Text = "SNR";
+                label2_3.Text = "Power";
+                label2_4.Text = "Attenuation";
+                label2_5.Text = "CRC Errors";
+                label2_6.Text = "Header Errors";
+                label2_7.Text = "FE Corrections";
+                label2_8.Text = "Rx Packets";
+                label3_1.Text = "Sync Rate";
+                label3_2.Text = "SNR";
+                label3_3.Text = "Power";
+                label3_4.Text = "Attenuation";
+                label3_5.Text = "CRC Errors";
+                label3_6.Text = "Header Errors";
+                label3_7.Text = "FE Corrections";
+                label3_8.Text = "Tx Packets";
+            }
+
+            if (IniParams.ModemType == "5G")
+            {
+                label2_1.Text = "4G Frequency";
+                label2_2.Text = "Primary Band";
+                label2_3.Text = "Secondary Band";
+                label2_4.Text = "4G Signal";
+                label2_5.Text = "4G SINR";
+                label2_6.Text = "4G PCI";
+                label2_7.Text = "4G Cell ID";
+                label2_8.Text = "";
+                label3_1.Text = "5G Frequency";
+                label3_2.Text = "5G Band";
+                label3_3.Text = "5G Sig";
+                label3_4.Text = "5G SINR";
+                label3_5.Text = "5G PCI";
+                label3_6.Text = "5G Cell ID";
+                label3_7.Text = "";
+                label3_8.Text = "";
+            }
+        }
+
         void UpdateStatus(string value)
         {
             if (InvokeRequired)
@@ -364,25 +411,25 @@ namespace RouterMonitor
 
             // Display the results on screen
             // -----------------------------
-            DownstreamRate.Text = valDownstreamRate[0].ToString() + " kbps";
-            UpstreamRate.Text = valUpstreamRate[0].ToString() + " kbps";
+            text2_1.Text = valDownstreamRate[0].ToString() + " kbps";
+            text3_1.Text = valUpstreamRate[0].ToString() + " kbps";
 
-            DownstreamSNR.Text = valDownstreamSNR[0].ToString() + " db";
-            UpstreamSNR.Text = valUpstreamSNR[0].ToString() + " db";
+            text2_2.Text = valDownstreamSNR[0].ToString() + " db";
+            text3_2.Text = valUpstreamSNR[0].ToString() + " db";
 
-            DownstreamPower.Text = valDownstreamPower[0].ToString() + " db";
-            UpstreamPower.Text = valUpstreamPower[0].ToString() + " db";
+            text2_3.Text = valDownstreamPower[0].ToString() + " db";
+            text3_3.Text = valUpstreamPower[0].ToString() + " db";
 
-            DownstreamAttenuation.Text = valDownstreamAttenuation[0].ToString() + " db";
-            UpstreamAttenuation.Text = valUpstreamAttenuation[0].ToString() + " db";
+            text2_4.Text = valDownstreamAttenuation[0].ToString() + " db";
+            text3_4.Text = valUpstreamAttenuation[0].ToString() + " db";
 
-            DownstreamCRCErrors.Text = valDownstreamCRCErrors[0].ToString();
-            DownstreamHeaderErrors.Text = valDownstreamHeaderErrors[0].ToString();
-            DownstreamFECs.Text = valDownstreamFECs[0].ToString();
+            text2_5.Text = valDownstreamCRCErrors[0].ToString();
+            text2_6.Text = valDownstreamHeaderErrors[0].ToString();
+            text2_7.Text = valDownstreamFECs[0].ToString();
 
-            UpstreamCRCErrors.Text = valUpstreamCRCErrors[0].ToString();
-            UpstreamHeaderErrors.Text = valUpstreamHeaderErrors[0].ToString();
-            UpstreamFECs.Text = valUpstreamFECs[0].ToString();
+            text3_5.Text = valUpstreamCRCErrors[0].ToString();
+            text3_6.Text = valUpstreamHeaderErrors[0].ToString();
+            text3_7.Text = valUpstreamFECs[0].ToString();
 
             DSLMode.Text = "DSL Mode : " + rc.RouterStats.dslmode;
             if (rc.RouterStats.dslstatus != null) DSLStatus.Text = "DSL Status : " + textInfo.ToTitleCase(rc.RouterStats.dslstatus);
@@ -407,8 +454,8 @@ namespace RouterMonitor
             WanMAC.Text = "WAN MAC : " + rc.RouterStats.WanMAC;
 
             DSLUpTime.Text = "DSL Up time : " + rc.RouterStats.DSLUpTime;
-            RxPckts.Text = rc.RouterStats.RxPckts.ToString();
-            TxPckts.Text = rc.RouterStats.TxPckts.ToString();
+            text2_8.Text = rc.RouterStats.RxPckts.ToString();
+            text3_8.Text = rc.RouterStats.TxPckts.ToString();
 
             Ping1.Text = PingStatus[0].Results;
             Ping2.Text = PingStatus[1].Results;
@@ -515,6 +562,7 @@ namespace RouterMonitor
             rc.RouterModel = IniParams.RouterModel;
             rc.RouterUsername = IniParams.RouterUsername;
             rc.RouterPassword = IniParams.RouterPassword;
+            rc.ModemType = IniParams.ModemType;
             rc.ipaddress = IniParams.RouterIPAddress;
             rc.Debug = Showtelnetdisplay.Checked;
             rc.Clear();
@@ -1285,7 +1333,12 @@ namespace RouterMonitor
                 }
             }
         }
+
         #endregion
 
+        private void Upstream_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

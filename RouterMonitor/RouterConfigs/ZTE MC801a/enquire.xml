@@ -14,20 +14,150 @@
     </results>
   </test>
 
+
   <test>
     <action>
       <commandtype>html</commandtype>
       <method>get</method>
       <authentication>Cookie</authentication>
       <url>
-        <![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?isTest=false&cmd=network_type%2Crssi%2Crscp%2Clte_rsrp%2CZ5g_snr%2CZ5g_rsrp%2CZCELLINFO_band%2CZ5g_dlEarfcn%2Clte_ca_pcell_arfcn%2Clte_ca_pcell_band%2Clte_ca_scell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_info%2Clte_ca_scell_bandwidth%2Cwan_lte_ca%2Clte_pci%2CZ5g_CELL_ID%2CZ5g_SINR%2Ccell_id%2Cwan_lte_ca%2Clte_ca_pcell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_band%2Clte_ca_scell_bandwidth%2Clte_ca_pcell_arfcn%2Clte_ca_scell_arfcn%2Clte_multi_ca_scell_info%2Cwan_active_band%2Cnr5g_pci%2Cnr5g_action_band%2Cnr5g_cell_id%2Clte_snr%2Cecio%2Cwan_active_channel%2Cnr5g_action_channel&multi_data=1&_=1663582955736]]></url>
+        <![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?multi_data=1&isTest=false&sms_received_flag_flag=0&sts_received_flag_flag=0&cmd=modem_main_state%2Copms_wan_mode%2Copms_wan_auto_mode%2Cloginfo%2Cnew_version_state%2Ccurrent_upgrade_state%2Cis_mandatory%2Cwifi_dfs_status%2Cbattery_value%2Cppp_dial_conn_fail_counter%2Csignalbar%2Cnetwork_type%2Cpin_status%2Cnetwork_provider%2Copms_wan_auto_mode%2Cdhcp_wan_status%2Cwifi_lbd_enable%2Cppp_status%2CEX_SSID1%2Csta_ip_status%2CEX_wifi_profile%2Cm_ssid_enable%2CRadioOff%2Cwifi_onoff_state%2Cwifi_chip1_ssid1_ssid%2Cwifi_chip2_ssid1_ssid%2Cwifi_chip1_ssid1_access_sta_num%2Cwifi_chip2_ssid1_access_sta_num%2Csimcard_roam%2Clan_ipaddr%2Cstation_mac%2Cwifi_access_sta_num%2Cbattery_charging%2Cbattery_vol_percent%2Cbattery_pers%2Cspn_name_data%2Cspn_b1_flag%2Cspn_b2_flag%2Crealtime_tx_bytes%2Crealtime_rx_bytes%2Crealtime_time%2Crealtime_tx_thrpt%2Crealtime_rx_thrpt%2Cmonthly_rx_bytes%2Cmonthly_tx_bytes%2Cmonthly_time%2Cdate_month%2Cdata_volume_limit_switch%2Cdata_volume_limit_size%2Cdata_volume_alert_percent%2Cdata_volume_limit_unit%2Croam_setting_option%2Cupg_roam_switch%2Cssid%2Cwifi_enable%2Cwifi_5g_enable%2Ccheck_web_conflict%2Cdial_mode%2Cppp_dial_conn_fail_counter%2Cwan_lte_ca%2Cprivacy_read_flag%2Cis_night_mode%2Cpppoe_status%2Cdhcp_wan_status%2Cstatic_wan_status%2Cvpn_conn_status%2Crmcc%2Crmnc%2Cwan_connect_status%2Csms_received_flag%2Csts_received_flag%2Csms_unread_num%2Cwifi_chip1_ssid2_access_sta_num%2Cwifi_chip2_ssid2_access_sta_num&_=1663601967579]]></url>
     </action>
     <results>
+      <htmlparser>"modem_main_state":"{dslstatus}"</htmlparser>
+      <htmlparser>"opms_wan_mode":"PPP"</htmlparser>
+      <htmlparser>"opms_wan_auto_mode":"AUTO_LTE_GATEWAY"</htmlparser>
+      <htmlparser>"loginfo":"ok"</htmlparser>
+      <htmlparser>"new_version_state":"version_idle"</htmlparser>
+      <htmlparser>"current_upgrade_state":"fota_idle"</htmlparser>
+      <htmlparser>"is_mandatory":""</htmlparser>
+      <htmlparser>"wifi_dfs_status":"0"</htmlparser>
+      <htmlparser>"battery_value":"100"</htmlparser>
+      <htmlparser>"ppp_dial_conn_fail_counter":"0"</htmlparser>
+      <htmlparser>"signalbar":"5"</htmlparser>
+      <htmlparser>"network_type":"ENDC"</htmlparser>
+      <htmlparser>"pin_status":"0"</htmlparser>
+      <htmlparser>"network_provider":"3"</htmlparser>
+      <htmlparser>"opms_wan_auto_mode":"AUTO_LTE_GATEWAY"</htmlparser>
+      <htmlparser>"dhcp_wan_status":"0"</htmlparser>
+      <htmlparser>"wifi_lbd_enable":"1"</htmlparser>
+      <htmlparser>"ppp_status":"ppp_connected"</htmlparser>
+      <htmlparser>"EX_SSID1":""</htmlparser>
+      <htmlparser>"sta_ip_status":"disconnect"</htmlparser>
+      <htmlparser>"EX_wifi_profile":""</htmlparser>
+      <htmlparser>"m_ssid_enable":""</htmlparser>
+      <htmlparser>"RadioOff":"0"</htmlparser>
+      <htmlparser>"wifi_onoff_state":"0"</htmlparser>
+      <htmlparser>"wifi_chip1_ssid1_ssid":"Three_D388AD"</htmlparser>
+      <htmlparser>"wifi_chip2_ssid1_ssid":"Three_D388AD"</htmlparser>
+      <htmlparser>"wifi_chip1_ssid1_access_sta_num":"0"</htmlparser>
+      <htmlparser>"wifi_chip2_ssid1_access_sta_num":"0"</htmlparser>
+      <htmlparser>"simcard_roam":"Home"</htmlparser>
+      <htmlparser>"lan_ipaddr":"192.168.0.1"</htmlparser>
+      <htmlparser>"station_mac":""</htmlparser>
+      <htmlparser>"wifi_access_sta_num":"0"</htmlparser>
+      <htmlparser>"battery_charging":"0"</htmlparser>
+      <htmlparser>"battery_vol_percent":"100"</htmlparser>
+      <htmlparser>"battery_pers":"4"</htmlparser>
+      <htmlparser>"spn_name_data":""</htmlparser>
+      <htmlparser>"spn_b1_flag":"0"</htmlparser>
+      <htmlparser>"spn_b2_flag":"0"</htmlparser>
+      <htmlparser>"realtime_tx_bytes":"185515836"</htmlparser>
+      <htmlparser>"realtime_rx_bytes":"1176941350"</htmlparser>
+      <htmlparser>"realtime_time":"87231"</htmlparser>
+      <htmlparser>"realtime_tx_thrpt":"0"</htmlparser>
+      <htmlparser>"realtime_rx_thrpt":"0"</htmlparser>
+      <htmlparser>"monthly_rx_bytes":"1973687125"</htmlparser>
+      <htmlparser>"monthly_tx_bytes":"254611596"</htmlparser>
+      <htmlparser>"monthly_time":"90691"</htmlparser>
+      <htmlparser>"date_month":"20221001"</htmlparser>
+      <htmlparser>"data_volume_limit_switch":"0"</htmlparser>
+      <htmlparser>"data_volume_limit_size":""</htmlparser>
+      <htmlparser>"data_volume_alert_percent":""</htmlparser>
+      <htmlparser>"data_volume_limit_unit":""</htmlparser>
+      <htmlparser>"roam_setting_option":"off"</htmlparser>
+      <htmlparser>"upg_roam_switch":"0"</htmlparser>
+      <htmlparser>"ssid":""</htmlparser>
+      <htmlparser>"wifi_enable":""</htmlparser>
+      <htmlparser>"wifi_5g_enable":"0"</htmlparser>
+      <htmlparser>"check_web_conflict":"ok"</htmlparser>
+      <htmlparser>"dial_mode":"auto_dial"</htmlparser>
+      <htmlparser>"ppp_dial_conn_fail_counter":"0"</htmlparser>
+      <htmlparser>"wan_lte_ca":"ca_deactivated"</htmlparser>
+      <htmlparser>"privacy_read_flag":"1"</htmlparser>
+      <htmlparser>"is_night_mode":"0"</htmlparser>
+      <htmlparser>"pppoe_status":"ppp_disconnected"</htmlparser>
+      <htmlparser>"dhcp_wan_status":"0"</htmlparser>
+      <htmlparser>"static_wan_status":""</htmlparser>
+      <htmlparser>"vpn_conn_status":"disconnected"</htmlparser>
+      <htmlparser>"rmcc":"234","rmnc":"20"</htmlparser>
+      <htmlparser>"wan_connect_status":"pdp_connected"</htmlparser>
+      <htmlparser>"sms_received_flag":""</htmlparser>
+      <htmlparser>"sts_received_flag":""</htmlparser>
+      <htmlparser>"sms_unread_num":"0"</htmlparser>
+      <htmlparser>"sms_dev_unread_num":"0"</htmlparser>
+      <htmlparser>"sms_sim_unread_num":"0"</htmlparser>
+      <htmlparser>"wifi_chip1_ssid2_access_sta_num":"0"</htmlparser>
+      <htmlparser>"wifi_chip2_ssid2_access_sta_num":"0"</htmlparser>
+
+    </results>
+  </test>
+  
+  
+  
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <authentication>Cookie</authentication>
+      <url>
+        <![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?isTest=false&cmd=network_type%2Crssi%2Crscp%2Clte_rsrp%2CZ5g_snr%2CZ5g_rsrp%2CZCELLINFO_band%2CZ5g_dlEarfcn%2Clte_ca_pcell_arfcn%2Clte_ca_pcell_band%2Clte_ca_scell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_info%2Clte_ca_scell_bandwidth%2Cwan_lte_ca%2Clte_pci%2CZ5g_CELL_ID%2CZ5g_SINR%2Ccell_id%2Cwan_lte_ca%2Clte_ca_pcell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_band%2Clte_ca_scell_bandwidth%2Clte_ca_pcell_arfcn%2Clte_ca_scell_arfcn%2Clte_multi_ca_scell_info%2Cwan_active_band%2Cnr5g_pci%2Cnr5g_action_band%2Cnr5g_cell_id%2Clte_snr%2Cecio%2Cwan_active_channel%2Cnr5g_action_channel&multi_data=1&_=1663582955736]]>
+      </url>
+    </action>
+    <results>
+      <htmlparser>"cell_id":"74947"</htmlparser>
+      <!--htmlparser>"ecio":""</htmlparser-->
+      <!--htmlparser>"lte_ca_pcell_arfcn":""</htmlparser-->
+      <htmlparser>"lte_ca_pcell_band":"1"</htmlparser>
+      <htmlparser>"lte_ca_pcell_bandwidth":"10.0"</htmlparser>
+      <htmlparser>"lte_ca_scell_band":"3"</htmlparser>
+      <htmlparser>"lte_ca_scell_bandwidth":"15.0"</htmlparser>
+      <!--htmlparser>"lte_ca_scell_info":""</htmlparser-->
+      <!--htmlparser>"lte_ca_scell_arfcn":""  </htmlparser-->
+      <htmlparser>"lte_multi_ca_scell_info":"1,256,1,3,1392,15.0"</htmlparser>
       <htmlparser>"lte_rsrp":"{downstreampower}"</htmlparser>
+      <htmlparser>"lte_pci":"5"   </htmlparser>
       <htmlparser>"lte_snr":"{downstreamsnr}"</htmlparser>
+      <htmlparser>"network_type":"ENDC"</htmlparser>
+      <htmlparser>"nr5g_action_band":"n78"</htmlparser>
+      <htmlparser>"nr5g_action_channel":"640548"</htmlparser>
+      <!--htmlparser>"nr5g_cell_id":""</htmlparser-->
+      <htmlparser>"nr5g_pci":"d4"</htmlparser>
+      <!--htmlparser>"rscp":""</htmlparser-->
+      <!--htmlparser>"rssi":""</htmlparser-->
+      <htmlparser>"wan_active_band":"LTE BAND 1"</htmlparser>
+      <htmlparser>"wan_active_channel":"99"</htmlparser>
+      <htmlparser>"wan_lte_ca":"ca_deactivated"</htmlparser>
+      <htmlparser>"Z5g_rsrp":"-77"</htmlparser>
+      <!--htmlparser>"Z5g_CELL_ID":""</htmlparser-->
+      <!--htmlparser>"Z5g_dlEarfcn":""</htmlparser-->
+      <htmlparser>"Z5g_SINR":"27.0"</htmlparser>
+      <!--htmlparser>"Z5g_snr":""</htmlparser-->
+      <!--htmlparser>"ZCELLINFO_band":""</htmlparser-->
     </results>
   </test>
 
+
+  <!-- 
+ 
+
+/goform/goform_get_cmd_process?multi_data=1&isTest=false&sms_received_flag_flag=0&sts_received_flag_flag=0&cmd=modem_main_state%2Copms_wan_mode%2Copms_wan_auto_mode%2Cloginfo%2Cnew_version_state%2Ccurrent_upgrade_state%2Cis_mandatory%2Cwifi_dfs_status%2Cbattery_value%2Cppp_dial_conn_fail_counter%2Csignalbar%2Cnetwork_type%2Cpin_status%2Cnetwork_provider%2Copms_wan_auto_mode%2Cdhcp_wan_status%2Cwifi_lbd_enable%2Cppp_status%2CEX_SSID1%2Csta_ip_status%2CEX_wifi_profile%2Cm_ssid_enable%2CRadioOff%2Cwifi_onoff_state%2Cwifi_chip1_ssid1_ssid%2Cwifi_chip2_ssid1_ssid%2Cwifi_chip1_ssid1_access_sta_num%2Cwifi_chip2_ssid1_access_sta_num%2Csimcard_roam%2Clan_ipaddr%2Cstation_mac%2Cwifi_access_sta_num%2Cbattery_charging%2Cbattery_vol_percent%2Cbattery_pers%2Cspn_name_data%2Cspn_b1_flag%2Cspn_b2_flag%2Crealtime_tx_bytes%2Crealtime_rx_bytes%2Crealtime_time%2Crealtime_tx_thrpt%2Crealtime_rx_thrpt%2Cmonthly_rx_bytes%2Cmonthly_tx_bytes%2Cmonthly_time%2Cdate_month%2Cdata_volume_limit_switch%2Cdata_volume_limit_size%2Cdata_volume_alert_percent%2Cdata_volume_limit_unit%2Croam_setting_option%2Cupg_roam_switch%2Cssid%2Cwifi_enable%2Cwifi_5g_enable%2Ccheck_web_conflict%2Cdial_mode%2Cppp_dial_conn_fail_counter%2Cwan_lte_ca%2Cprivacy_read_flag%2Cis_night_mode%2Cpppoe_status%2Cdhcp_wan_status%2Cstatic_wan_status%2Cvpn_conn_status%2Crmcc%2Crmnc%2Cwan_connect_status%2Csms_received_flag%2Csts_received_flag%2Csms_unread_num%2Cwifi_chip1_ssid2_access_sta_num%2Cwifi_chip2_ssid2_access_sta_num&_=1663601967579 HTTP/1.1
+{"modem_main_state":"modem_init_complete","opms_wan_mode":"PPP","opms_wan_auto_mode":"AUTO_LTE_GATEWAY","loginfo":"ok","new_version_state":"version_idle","current_upgrade_state":"fota_idle","is_mandatory":"","wifi_dfs_status":"0","battery_value":"100","ppp_dial_conn_fail_counter":"0","signalbar":"5","network_type":"ENDC","pin_status":"0","network_provider":"3","opms_wan_auto_mode":"AUTO_LTE_GATEWAY","dhcp_wan_status":"0","wifi_lbd_enable":"1","ppp_status":"ppp_connected","EX_SSID1":"","sta_ip_status":"disconnect","EX_wifi_profile":"","m_ssid_enable":"","RadioOff":"0","wifi_onoff_state":"0","wifi_chip1_ssid1_ssid":"Three_D388AD","wifi_chip2_ssid1_ssid":"Three_D388AD","wifi_chip1_ssid1_access_sta_num":"0","wifi_chip2_ssid1_access_sta_num":"0","simcard_roam":"Home","lan_ipaddr":"192.168.0.1","station_mac":"","wifi_access_sta_num":"0","battery_charging":"0","battery_vol_percent":"100","battery_pers":"4","spn_name_data":"","spn_b1_flag":"0","spn_b2_flag":"0","realtime_tx_bytes":"185515836","realtime_rx_bytes":"1176941350","realtime_time":"87231","realtime_tx_thrpt":"0","realtime_rx_thrpt":"0","monthly_rx_bytes":"1973687125","monthly_tx_bytes":"254611596","monthly_time":"90691","date_month":"20221001","data_volume_limit_switch":"0","data_volume_limit_size":"","data_volume_alert_percent":"","data_volume_limit_unit":"","roam_setting_option":"off","upg_roam_switch":"0","ssid":"","wifi_enable":"","wifi_5g_enable":"0","check_web_conflict":"ok","dial_mode":"auto_dial","ppp_dial_conn_fail_counter":"0","wan_lte_ca":"ca_deactivated","privacy_read_flag":"1","is_night_mode":"0","pppoe_status":"ppp_disconnected","dhcp_wan_status":"0","static_wan_status":"","vpn_conn_status":"disconnected","rmcc":"234","rmnc":"20","wan_connect_status":"pdp_connected","sms_received_flag":"","sts_received_flag":"","sms_unread_num":"0","sms_dev_unread_num":"0","sms_sim_unread_num":"0","wifi_chip1_ssid2_access_sta_num":"0","wifi_chip2_ssid2_access_sta_num":"0"}
+
+
+/goform/goform_get_cmd_process?isTest=false&cmd=network_type%2Crssi%2Crscp%2Clte_rsrp%2CZ5g_snr%2CZ5g_rsrp%2CZCELLINFO_band%2CZ5g_dlEarfcn%2Clte_ca_pcell_arfcn%2Clte_ca_pcell_band%2Clte_ca_scell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_info%2Clte_ca_scell_bandwidth%2Cwan_lte_ca%2Clte_pci%2CZ5g_CELL_ID%2CZ5g_SINR%2Ccell_id%2Cwan_lte_ca%2Clte_ca_pcell_band%2Clte_ca_pcell_bandwidth%2Clte_ca_scell_band%2Clte_ca_scell_bandwidth%2Clte_ca_pcell_arfcn%2Clte_ca_scell_arfcn%2Clte_multi_ca_scell_info%2Cwan_active_band%2Cnr5g_pci%2Cnr5g_action_band%2Cnr5g_cell_id%2Clte_snr%2Cecio%2Cwan_active_channel%2Cnr5g_action_channel&multi_data=1&_=1663582955736]]></url>
+{"network_type":"ENDC","rssi":"","rscp":"","lte_rsrp":"-93","Z5g_snr":"","Z5g_rsrp":"-77","ZCELLINFO_band":"","Z5g_dlEarfcn":"","lte_ca_pcell_arfcn":"","lte_ca_pcell_band":"1","lte_ca_scell_band":"3","lte_ca_pcell_bandwidth":"10.0","lte_ca_scell_info":"","lte_ca_scell_bandwidth":"15.0","wan_lte_ca":"ca_deactivated","lte_pci":"5","Z5g_CELL_ID":"","Z5g_SINR":"27.0","cell_id":"74947","wan_lte_ca":"ca_deactivated","lte_ca_pcell_band":"1","lte_ca_pcell_bandwidth":"10.0","lte_ca_scell_band":"3","lte_ca_scell_bandwidth":"15.0","lte_ca_pcell_arfcn":"","lte_ca_scell_arfcn":"","lte_multi_ca_scell_info":"1,256,1,3,1392,15.0","wan_active_band":"LTE BAND 1","nr5g_pci":"d4","nr5g_action_band":"n78","nr5g_cell_id":"","lte_snr":"17.0","ecio":"","wan_active_channel":"99","nr5g_action_channel":"640548"}
+-->
 </tests>
 
 

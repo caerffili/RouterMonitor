@@ -81,6 +81,8 @@ namespace RouterMonitor
             this.label16 = new System.Windows.Forms.Label();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
+            this.ModemType = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.Router.SuspendLayout();
             this.Email.SuspendLayout();
@@ -162,6 +164,8 @@ namespace RouterMonitor
             // 
             // Router
             // 
+            this.Router.Controls.Add(this.label18);
+            this.Router.Controls.Add(this.ModemType);
             this.Router.Controls.Add(this.RouterTelnetAllowed);
             this.Router.Controls.Add(this.RouterRaiseTelnet);
             this.Router.Controls.Add(this.label14);
@@ -619,6 +623,23 @@ namespace RouterMonitor
             this.Cancel.Text = "Cancel";
             this.Cancel.UseVisualStyleBackColor = true;
             // 
+            // ModemType
+            // 
+            this.ModemType.Location = new System.Drawing.Point(119, 45);
+            this.ModemType.Name = "ModemType";
+            this.ModemType.Size = new System.Drawing.Size(100, 23);
+            this.ModemType.TabIndex = 14;
+            this.ModemType.Text = "ModemType";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(82, 44);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(31, 13);
+            this.label18.TabIndex = 15;
+            this.label18.Text = "Type";
+            // 
             // Configuration
             // 
             this.AcceptButton = this.OK;
@@ -704,5 +725,7 @@ namespace RouterMonitor
         private System.Windows.Forms.TextBox PingHost1;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label ModemType;
+        private System.Windows.Forms.Label label18;
     }
 }

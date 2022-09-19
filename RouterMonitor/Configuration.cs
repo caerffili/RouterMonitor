@@ -83,6 +83,7 @@ namespace RouterMonitor
             ini.WriteIniFileString("Router", "RouterModel", RouterModel.Text);
             ini.WriteIniFileBool("Router", "RaiseTelnet", RouterRaiseTelnet.Checked);
             ini.WriteIniFileBool("Router", "TelnetAllowed", RouterTelnetAllowed.Checked);
+            ini.WriteIniFileString("Router", "ModemType", ModemType.Text);
             ini.WriteIniFileString("Router", "IP", RouterIP.Text);
             ini.WriteIniFileString("Router", "RouterUsername", RouterUsername.Text);
             ini.WriteIniFileString("Router", "Password", Encrypt(RouterPassword.Text));
@@ -194,7 +195,7 @@ namespace RouterMonitor
 
             RouterRaiseTelnet.Checked = ini.GetIniFileBool("Router", "RaiseTelnet", true);
             RouterTelnetAllowed.Checked = ini.GetIniFileBool("Router", "TelnetAllowed", true);
-
+            ModemType.Text = ini.GetIniFileString("Router", "ModemType", "ADSL");
         }
 
         public string Decrypt(string enctext)

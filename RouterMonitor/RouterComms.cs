@@ -86,6 +86,7 @@ namespace RouterMonitor
         public string RouterModel;
         public string RouterUsername;
         public string RouterPassword;
+        public string ModemType;
         public string RouterAuthChallenge;
         public string ipaddress;
         public bool Debug;
