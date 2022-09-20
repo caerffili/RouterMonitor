@@ -11,76 +11,11 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.Linq;
 
-public struct RouterStatsStruct
-{
-    public string BootLoaderVer;
-    public string WirelessVer;
-    public string DSLVer;
-    public string HardwareVer;
-    public string DSPVer;
-    public string SerialNo;
-    public string PPPMode;
-    public string WanPriDns;
-    public string WanSecDns;
-    public string WanMAC;
-    public string LanMAC;
-   // public string ConnectionMode;
-    public string SysUpTime;
-    public string DSLUpTime;
-
-    public string WifiChannel;
-    public string WifiSSID;
-    public string WifiMAC;
-
-    public int TxPckts;
-    public int RxPckts;
-
-    public string Model;
-    public string Hostname;
-    public string Firmware;
-
-    public int Upload;
-    public int Download;
-    public int UploadFast;
-    public int DownloadFast;
-    public int UploadInt;
-    public int DownloadInt;
-
-    public decimal downstreamsnr;
-    public decimal upstreamsnr;
-    public decimal downstreampower;
-    public decimal upstreampower;
-    public decimal downstreamatt;
-    public decimal upstreamatt;
-    public string dslmode; // G.dmt etc
-    public string dslstatus; // Up, down, showtime etc.
-    public string dslfastint; // Fast or interleaved
-
-    public int downFECerrorFast;
-    public int downFECerrorInt;
-    public int downCRCerrorFast;
-    public int downCRCerrorInt;
-    public int downHECerrorFast;
-    public int downHECerrorInt;
-    public int upFECerrorFast;
-    public int upFECerrorInt;
-    public int upCRCerrorFast;
-    public int upCRCerrorInt;
-    public int upHECerrorFast;
-    public int upHECerrorInt;
-    public string wanip;
-
-    //public string[] Ping;
-
-    public bool receivedtones;
-}
-
 namespace RouterMonitor
 {
     public class RouterComms
     {
-
-        public RouterStatsStruct RouterStats = new RouterStatsStruct();
+        public RouterStatsClass RouterStats;
 
         public string RouterConfigPath;
         public string RouterModel;
@@ -97,11 +32,12 @@ namespace RouterMonitor
         public TelnetEngine.Telnet tn;
         public HTMLEngine hn;
 
-        public RouterComms()
+        public RouterComms(int HistoryQty)
         {
             tn = new TelnetEngine.Telnet();
             hn = new HTMLEngine();
-         }
+            RouterStats = new RouterStatsClass(HistoryQty);
+        }
 
 
         ~RouterComms()
@@ -322,44 +258,44 @@ namespace RouterMonitor
                             case "wifimac": RouterStats.WifiMAC = RegExString(CommandType, newvalue); break;
 
                             // Download rates
-                            case "download": RouterStats.Download = RegExInt(CommandType, newvalue) / 1000; break;
-                            case "downloadk": RouterStats.Download = RegExInt(CommandType, newvalue); break;
-                            case "upload": RouterStats.Upload = RegExInt(CommandType, newvalue) / 1000; break;
-                            case "uploadk": RouterStats.Upload = RegExInt(CommandType, newvalue); break;
-                            case "downloadint": RouterStats.DownloadInt = RegExInt(CommandType, newvalue) / 1000; break;
-                            case "downloadintk": RouterStats.DownloadInt = RegExInt(CommandType, newvalue); break;
-                            case "uploadint": RouterStats.UploadInt = RegExInt(CommandType, newvalue) / 1000; break;
-                            case "uploadintk": RouterStats.UploadInt = RegExInt(CommandType, newvalue); break;
-                            case "downloadfast": RouterStats.DownloadFast = RegExInt(CommandType, newvalue) / 1000; break;
-                            case "downloadfastk": RouterStats.DownloadFast = RegExInt(CommandType, newvalue); break;
-                            case "uploadfast": RouterStats.UploadFast = RegExInt(CommandType, newvalue) / 1000; break;
-                            case "uploadfastk": RouterStats.UploadFast = RegExInt(CommandType, newvalue); break;
+                            case "download": RouterStats.Download[0] = RegExInt(CommandType, newvalue) / 1000; break;
+                            case "downloadk": RouterStats.Download[0] = RegExInt(CommandType, newvalue); break;
+                            case "upload": RouterStats.Upload[0] = RegExInt(CommandType, newvalue) / 1000; break;
+                            case "uploadk": RouterStats.Upload[0] = RegExInt(CommandType, newvalue); break;
+                            case "downloadint": RouterStats.DownloadInt[0] = RegExInt(CommandType, newvalue) / 1000; break;
+                            case "downloadintk": RouterStats.DownloadInt[0] = RegExInt(CommandType, newvalue); break;
+                            case "uploadint": RouterStats.UploadInt[0] = RegExInt(CommandType, newvalue) / 1000; break;
+                            case "uploadintk": RouterStats.UploadInt[0] = RegExInt(CommandType, newvalue); break;
+                            case "downloadfast": RouterStats.DownloadFast[0] = RegExInt(CommandType, newvalue) / 1000; break;
+                            case "downloadfastk": RouterStats.DownloadFast[0] = RegExInt(CommandType, newvalue); break;
+                            case "uploadfast": RouterStats.UploadFast[0] = RegExInt(CommandType, newvalue) / 1000; break;
+                            case "uploadfastk": RouterStats.UploadFast[0] = RegExInt(CommandType, newvalue); break;
 
                             // Signal to noise ratio
-                            case "downstreamsnr": RouterStats.downstreamsnr = RegExDecimal(CommandType, newvalue); break;
-                            case "upstreamsnr": RouterStats.upstreamsnr = RegExDecimal(CommandType, newvalue); break;
+                            case "downstreamsnr": RouterStats.downstreamsnr[0] = RegExDecimal(CommandType, newvalue); break;
+                            case "upstreamsnr": RouterStats.upstreamsnr[0] = RegExDecimal(CommandType, newvalue); break;
 
                             // Power
-                            case "downstreampower": RouterStats.downstreampower = RegExDecimal(CommandType, newvalue); break;
-                            case "upstreampower": RouterStats.upstreampower = RegExDecimal(CommandType, newvalue); break;
+                            case "downstreampower": RouterStats.downstreampower[0] = RegExDecimal(CommandType, newvalue); break;
+                            case "upstreampower": RouterStats.upstreampower[0] = RegExDecimal(CommandType, newvalue); break;
 
                             // Attenuation
-                            case "downstreamatt": RouterStats.downstreamatt = RegExDecimal(CommandType, newvalue); break;
-                            case "upstreamatt": RouterStats.upstreamatt = RegExDecimal(CommandType, newvalue); break;
+                            case "downstreamatt": RouterStats.downstreamatt[0] = RegExDecimal(CommandType, newvalue); break;
+                            case "upstreamatt": RouterStats.upstreamatt[0] = RegExDecimal(CommandType, newvalue); break;
 
                             // Errors
-                            case "downfecrrorfast": RouterStats.downFECerrorFast = RegExInt(CommandType, newvalue); break;
-                            case "downfecerrorint": RouterStats.downFECerrorInt = RegExInt(CommandType, newvalue); break;
-                            case "downcrcerrorfast": RouterStats.downCRCerrorFast = RegExInt(CommandType, newvalue); break;
-                            case "downcrcerrorint": RouterStats.downCRCerrorInt = RegExInt(CommandType, newvalue); break;
-                            case "downhecerrorfast": RouterStats.downHECerrorFast = RegExInt(CommandType, newvalue); break;
-                            case "downhecerrorint": RouterStats.downHECerrorInt = RegExInt(CommandType, newvalue); break;
-                            case "upfecerrorfast": RouterStats.upFECerrorFast = RegExInt(CommandType, newvalue); break;
-                            case "upfecerrorint": RouterStats.upFECerrorInt = RegExInt(CommandType, newvalue); break;
-                            case "upcrcCerrorfast": RouterStats.upCRCerrorFast = RegExInt(CommandType, newvalue); break;
-                            case "upcrcerrorint": RouterStats.upCRCerrorInt = RegExInt(CommandType, newvalue); break;
-                            case "uphecerrorfast": RouterStats.upHECerrorFast = RegExInt(CommandType, newvalue); break;
-                            case "uphecerrorint": RouterStats.upHECerrorInt = RegExInt(CommandType, newvalue); break;
+                            case "downfecrrorfast": RouterStats.downFECerrorFast[0] = RegExInt(CommandType, newvalue); break;
+                            case "downfecerrorint": RouterStats.downFECerrorInt[0] = RegExInt(CommandType, newvalue); break;
+                            case "downcrcerrorfast": RouterStats.downCRCerrorFast[0] = RegExInt(CommandType, newvalue); break;
+                            case "downcrcerrorint": RouterStats.downCRCerrorInt[0] = RegExInt(CommandType, newvalue); break;
+                            case "downhecerrorfast": RouterStats.downHECerrorFast[0] = RegExInt(CommandType, newvalue); break;
+                            case "downhecerrorint": RouterStats.downHECerrorInt[0] = RegExInt(CommandType, newvalue); break;
+                            case "upfecerrorfast": RouterStats.upFECerrorFast[0] = RegExInt(CommandType, newvalue); break;
+                            case "upfecerrorint": RouterStats.upFECerrorInt[0] = RegExInt(CommandType, newvalue); break;
+                            case "upcrcCerrorfast": RouterStats.upCRCerrorFast[0] = RegExInt(CommandType, newvalue); break;
+                            case "upcrcerrorint": RouterStats.upCRCerrorInt[0] = RegExInt(CommandType, newvalue); break;
+                            case "uphecerrorfast": RouterStats.upHECerrorFast[0] = RegExInt(CommandType, newvalue); break;
+                            case "uphecerrorint": RouterStats.upHECerrorInt[0] = RegExInt(CommandType, newvalue); break;
                         }
 
 
@@ -766,40 +702,40 @@ namespace RouterMonitor
                     case "wifimac": RouterStats.WifiMAC = value; break;
                  
                     // Download rates
-                    case "downloadint": RouterStats.DownloadInt = Convert.ToInt32(value) / 1000; break;
-                    case "downloadintk": RouterStats.DownloadInt = Convert.ToInt32(value); break;
-                    case "uploadint": RouterStats.UploadInt = Convert.ToInt32(value) / 1000; break;
-                    case "uploadintk": RouterStats.UploadInt = Convert.ToInt32(value); break;
-                    case "downloadfast": RouterStats.DownloadFast = Convert.ToInt32(value) / 1000; break;
-                    case "downloadfastk": RouterStats.DownloadFast = Convert.ToInt32(value); break;
-                    case "uploadfast": RouterStats.UploadFast = Convert.ToInt32(value) / 1000; break;
-                    case "uploadfastk": RouterStats.UploadFast = Convert.ToInt32(value); break;
+                    case "downloadint": RouterStats.DownloadInt[0] = Convert.ToInt32(value) / 1000; break;
+                    case "downloadintk": RouterStats.DownloadInt[0] = Convert.ToInt32(value); break;
+                    case "uploadint": RouterStats.UploadInt[0] = Convert.ToInt32(value) / 1000; break;
+                    case "uploadintk": RouterStats.UploadInt[0] = Convert.ToInt32(value); break;
+                    case "downloadfast": RouterStats.DownloadFast[0] = Convert.ToInt32(value) / 1000; break;
+                    case "downloadfastk": RouterStats.DownloadFast[0] = Convert.ToInt32(value); break;
+                    case "uploadfast": RouterStats.UploadFast[0] = Convert.ToInt32(value) / 1000; break;
+                    case "uploadfastk": RouterStats.UploadFast[0] = Convert.ToInt32(value); break;
     
                     // Signal to noise ratio
-                    case "downstreamsnr": RouterStats.downstreamsnr = Convert.ToDecimal(value); break;
-                    case "upstreamsnr": RouterStats.upstreamsnr = Convert.ToDecimal(value); break;
+                    case "downstreamsnr": RouterStats.downstreamsnr[0] = Convert.ToDecimal(value); break;
+                    case "upstreamsnr": RouterStats.upstreamsnr[0] = Convert.ToDecimal(value); break;
     
                     // Power
-                    case "downstreampower": RouterStats.downstreampower = Convert.ToDecimal(value); break;
-                    case "upstreampower": RouterStats.upstreampower = Convert.ToDecimal(value); break;
+                    case "downstreampower": RouterStats.downstreampower[0] = Convert.ToDecimal(value); break;
+                    case "upstreampower": RouterStats.upstreampower[0] = Convert.ToDecimal(value); break;
 
                     // Attenuation
-                    case "downstreamatt": RouterStats.downstreamatt = Convert.ToInt32(value); break;
-                    case "upstreamatt": RouterStats.upstreamatt = Convert.ToInt32(value); break;
+                    case "downstreamatt": RouterStats.downstreamatt[0] = Convert.ToInt32(value); break;
+                    case "upstreamatt": RouterStats.upstreamatt[0] = Convert.ToInt32(value); break;
 
                     // Errors
-                    case "downfecrrorfast": RouterStats.downFECerrorFast = Convert.ToInt32(value); break;
-                    case "downfecerrorint": RouterStats.downFECerrorInt = Convert.ToInt32(value); break;
-                    case "downcrcerrorfast": RouterStats.downCRCerrorFast = Convert.ToInt32(value); break;
-                    case "downcrcerrorint": RouterStats.downCRCerrorInt = Convert.ToInt32(value); break;
-                    case "downhecerrorfast": RouterStats.downHECerrorFast = Convert.ToInt32(value); break;
-                    case "downhecerrorint": RouterStats.downHECerrorInt = Convert.ToInt32(value); break;
-                    case "upfecerrorfast": RouterStats.upFECerrorFast = Convert.ToInt32(value); break;
-                    case "upfecerrorint": RouterStats.upFECerrorInt = Convert.ToInt32(value); break;
-                    case "upcrcerrorfast": RouterStats.upCRCerrorFast = Convert.ToInt32(value); break;
-                    case "upcrcerrorint": RouterStats.upCRCerrorInt = Convert.ToInt32(value); break;
-                    case "uphecerrorfast": RouterStats.upHECerrorFast = Convert.ToInt32(value); break;
-                    case "uphecerrorint": RouterStats.upHECerrorInt = Convert.ToInt32(value); break;
+                    case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
+                    case "downfecerrorint": RouterStats.downFECerrorInt[0] = Convert.ToInt32(value); break;
+                    case "downcrcerrorfast": RouterStats.downCRCerrorFast[0] = Convert.ToInt32(value); break;
+                    case "downcrcerrorint": RouterStats.downCRCerrorInt[0] = Convert.ToInt32(value); break;
+                    case "downhecerrorfast": RouterStats.downHECerrorFast[0] = Convert.ToInt32(value); break;
+                    case "downhecerrorint": RouterStats.downHECerrorInt[0] = Convert.ToInt32(value); break;
+                    case "upfecerrorfast": RouterStats.upFECerrorFast[0] = Convert.ToInt32(value); break;
+                    case "upfecerrorint": RouterStats.upFECerrorInt[0] = Convert.ToInt32(value); break;
+                    case "upcrcerrorfast": RouterStats.upCRCerrorFast[0] = Convert.ToInt32(value); break;
+                    case "upcrcerrorint": RouterStats.upCRCerrorInt[0] = Convert.ToInt32(value); break;
+                    case "uphecerrorfast": RouterStats.upHECerrorFast[0] = Convert.ToInt32(value); break;
+                    case "uphecerrorint": RouterStats.upHECerrorInt[0] = Convert.ToInt32(value); break;
                 }
             }
         }
@@ -809,80 +745,7 @@ namespace RouterMonitor
 
 
 
-        public void Clear()
-        {
-            // Basic router details
-            RouterStats.Model = "";
-            RouterStats.Hostname = "";
-            RouterStats.SerialNo = "";
-            RouterStats.SysUpTime = "";
-            RouterStats.DSLUpTime = "";
 
-            // Versions
-            RouterStats.Firmware = "";
-            RouterStats.BootLoaderVer = "";
-            RouterStats.WirelessVer = "";
-            RouterStats.DSLVer = "";
-            RouterStats.HardwareVer = "";
-            RouterStats.DSPVer = "";
-
-            // WAN Stuff
-            RouterStats.dslmode = "";
-            RouterStats.dslstatus = "";
-            RouterStats.dslfastint = "";
-          //  RouterStats.ConnectionMode = "";
-            RouterStats.PPPMode = "";
-            RouterStats.WanPriDns = "";
-            RouterStats.WanSecDns = "";
-            RouterStats.wanip = "";
-            RouterStats.TxPckts = 0;
-            RouterStats.RxPckts = 0;
-
-            // MAC Addresses
-            RouterStats.WanMAC = "";
-            RouterStats.LanMAC = "";
-
-            // WiFi Stuff
-            RouterStats.WifiChannel = "";
-            RouterStats.WifiSSID = "";
-            RouterStats.WifiMAC = "";
-
-            // Download rates
-            RouterStats.Download = 0;
-            RouterStats.Upload = 0;
-            RouterStats.DownloadInt = 0;
-            RouterStats.UploadInt = 0;
-            RouterStats.DownloadFast = 0;
-            RouterStats.UploadFast = 0;
-
-            // Signal to noise ratio
-            RouterStats.downstreamsnr = 0;
-            RouterStats.upstreamsnr = 0;
-
-            // Power
-            RouterStats.downstreampower = 0;
-            RouterStats.upstreampower = 0;
-
-            // Attenuation
-            RouterStats.downstreamatt = 0;
-            RouterStats.upstreamatt = 0;
-
-            // Errors
-            RouterStats.downFECerrorFast = 0;
-            RouterStats.downFECerrorInt = 0;
-            RouterStats.downCRCerrorFast = 0;
-            RouterStats.downCRCerrorInt = 0;
-            RouterStats.downHECerrorFast = 0;
-            RouterStats.downHECerrorInt = 0;
-            RouterStats.upFECerrorFast = 0;
-            RouterStats.upFECerrorInt = 0;
-            RouterStats.upCRCerrorFast = 0;
-            RouterStats.upCRCerrorInt = 0;
-            RouterStats.upHECerrorFast = 0;
-            RouterStats.upHECerrorInt = 0;
-
-            RouterStats.receivedtones = false;
-        }
 
     } // class
 } // namespace

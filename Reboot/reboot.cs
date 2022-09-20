@@ -69,7 +69,7 @@ namespace Reboot
             rc.RouterPassword = Password;
             rc.ipaddress = IPAddress;
             rc.Debug = false;
-            rc.Clear();
+            rc.RouterStats.Clear();
 
             if (Telnet)
             {

@@ -103,44 +103,23 @@ namespace RouterMonitor
         #endregion
 
 
-        #region ResultsArrays
-        // History results storage for SNR and attenuation
-        DateTime[] TimeRecorded;
-        int[] valDownstreamRate;
-        decimal[] valDownstreamSNR;
-        decimal[] valDownstreamAttenuation;
-        decimal[] valDownstreamPower;
-        int[] valDownstreamCRCErrors;
-        int[] valDownstreamHeaderErrors;
-        int[] valDownstreamFECs;
-
-        int[] valUpstreamRate;
-        decimal[] valUpstreamSNR;
-        decimal[] valUpstreamAttenuation;
-        decimal[] valUpstreamPower;
-        int[] valUpstreamCRCErrors;
-        int[] valUpstreamHeaderErrors;
-        int[] valUpstreamFECs;
-        #endregion
-
-
         #region LastEmailedValues
         // Last values emailed
         int LastXmitvalDownstreamRate;
         decimal LastXmitvalDownstreamSNR;
         decimal LastXmitvalDownstreamAttenuation;
         decimal LastXmitvalDownstreamPower;
-        int LastXmitvalDownstreamCRCErrors;
-        int LastXmitvalDownstreamHeaderErrors;
-        int LastXmitvalDownstreamFECs;
+        int LastXmitdownCRCerrors;
+        int LastXmitdownHECerrors;
+        int LastXmitdownFECerrors;
 
         int LastXmitvalUpstreamRate;
         decimal LastXmitvalUpstreamSNR;
         decimal LastXmitvalUpstreamAttenuation;
         decimal LastXmitvalUpstreamPower;
-        int LastXmitvalUpstreamCRCErrors;
-        int LastXmitvalUpstreamHeaderErrors;
-        int LastXmitvalUpstreamFECs;
+        int LastXmitupCRCerrors;
+        int LastXmitupHECerrors;
+        int LastXmitupFECerrors;
         #endregion
 
 
@@ -211,31 +190,9 @@ namespace RouterMonitor
 
 
             // Create and setup the routercomms object
-            rc = new RouterComms();
+            rc = new RouterComms(HistoryQty);
             rc.tn.ControlBox = false;       // Disable the control box icons
             rc.tn.disablekeypress = true;   // Disable key presses
-
-
-            // Declare array for SNR and Attenuation storage
-            TimeRecorded = new DateTime[HistoryQty];
-            valDownstreamRate = new int[HistoryQty];
-            valDownstreamSNR = new decimal[HistoryQty];
-            valDownstreamAttenuation = new decimal[HistoryQty];
-            valDownstreamPower = new decimal[HistoryQty];
-            valDownstreamCRCErrors = new int[HistoryQty];
-            valDownstreamHeaderErrors = new int[HistoryQty];
-            valDownstreamFECs = new int[HistoryQty];
-
-            valUpstreamRate = new int[HistoryQty];
-            valUpstreamSNR = new decimal[HistoryQty];
-            valUpstreamAttenuation = new decimal[HistoryQty];
-            valUpstreamPower = new decimal[HistoryQty];
-            valUpstreamCRCErrors = new int[HistoryQty];
-            valUpstreamHeaderErrors = new int[HistoryQty];
-            valUpstreamFECs = new int[HistoryQty];
-
-            TimeRecorded = new DateTime[HistoryQty];
-
 
             // Set buttons status
             Connect.Enabled = true;
@@ -411,25 +368,25 @@ namespace RouterMonitor
 
             // Display the results on screen
             // -----------------------------
-            text2_1.Text = valDownstreamRate[0].ToString() + " kbps";
-            text3_1.Text = valUpstreamRate[0].ToString() + " kbps";
+            text2_1.Text = rc.RouterStats.Download[0].ToString() + " kbps";
+            text3_1.Text = rc.RouterStats.Upload[0].ToString() + " kbps";
 
-            text2_2.Text = valDownstreamSNR[0].ToString() + " db";
-            text3_2.Text = valUpstreamSNR[0].ToString() + " db";
+            text2_2.Text = rc.RouterStats.downstreamsnr[0].ToString() + " db";
+            text3_2.Text = rc.RouterStats.upstreamsnr[0].ToString() + " db";
 
-            text2_3.Text = valDownstreamPower[0].ToString() + " db";
-            text3_3.Text = valUpstreamPower[0].ToString() + " db";
+            text2_3.Text = rc.RouterStats.downstreampower[0].ToString() + " db";
+            text3_3.Text = rc.RouterStats.upstreampower[0].ToString() + " db";
 
-            text2_4.Text = valDownstreamAttenuation[0].ToString() + " db";
-            text3_4.Text = valUpstreamAttenuation[0].ToString() + " db";
+            text2_4.Text = rc.RouterStats.downstreamatt[0].ToString() + " db";
+            text3_4.Text = rc.RouterStats.upstreamatt[0].ToString() + " db";
 
-            text2_5.Text = valDownstreamCRCErrors[0].ToString();
-            text2_6.Text = valDownstreamHeaderErrors[0].ToString();
-            text2_7.Text = valDownstreamFECs[0].ToString();
+            text2_5.Text = rc.RouterStats.downCRCerrors[0].ToString();
+            text2_6.Text = rc.RouterStats.downHECerrors[0].ToString();
+            text2_7.Text = rc.RouterStats.downFECerrors[0].ToString();
 
-            text3_5.Text = valUpstreamCRCErrors[0].ToString();
-            text3_6.Text = valUpstreamHeaderErrors[0].ToString();
-            text3_7.Text = valUpstreamFECs[0].ToString();
+            text3_5.Text = rc.RouterStats.upCRCerrors[0].ToString();
+            text3_6.Text = rc.RouterStats.upHECerrors[0].ToString();
+            text3_7.Text = rc.RouterStats.upFECerrors[0].ToString();
 
             DSLMode.Text = "DSL Mode : " + rc.RouterStats.dslmode;
             if (rc.RouterStats.dslstatus != null) DSLStatus.Text = "DSL Status : " + textInfo.ToTitleCase(rc.RouterStats.dslstatus);
@@ -466,13 +423,13 @@ namespace RouterMonitor
             {
                 DSLFastInt.Text = "DSL Conn : " + rc.RouterStats.dslfastint;
             } else {
-                if (rc.RouterStats.DownloadInt > rc.RouterStats.DownloadFast)
+                if (rc.RouterStats.DownloadInt[0] > rc.RouterStats.DownloadFast[0])
                 {
                     DSLFastInt.Text = "DSL Conn : Interleaved";
                 } 
                 else 
                 {
-                    if (rc.RouterStats.DownloadInt < rc.RouterStats.DownloadFast)
+                    if (rc.RouterStats.DownloadInt[0] < rc.RouterStats.DownloadFast[0])
                     {
                         DSLFastInt.Text = "DSL Conn : Fast";
                     }
@@ -507,41 +464,24 @@ namespace RouterMonitor
         #region ClearDownStorage
         void ClearDownStorage()
         {
-            for (int i = 0; i < HistoryQty; i++)
-            {
-                valDownstreamRate[i] = 0;
-                valDownstreamSNR[i] = 0;
-                valDownstreamAttenuation[i] = 0;
-                valDownstreamPower[i] = 0;
-                valDownstreamCRCErrors[i] = 0;
-                valDownstreamHeaderErrors[i] = 0;
-                valDownstreamFECs[i] = 0;
-
-                valUpstreamRate[i] = 0; 
-                valUpstreamSNR[i] = 0;
-                valUpstreamAttenuation[i] = 0;
-                valUpstreamPower[i] = 0;
-                valUpstreamCRCErrors[i] = 0;
-                valUpstreamHeaderErrors[i] = 0;
-                valUpstreamFECs[i] = 0;
-            }
+            rc.RouterStats.Clear();
 
             // Initialise last emailed values          
             LastXmitvalDownstreamRate = -1;
             LastXmitvalDownstreamSNR = -1;
             LastXmitvalDownstreamAttenuation = -1;
             LastXmitvalDownstreamPower = -1;
-            LastXmitvalDownstreamCRCErrors = -1;
-            LastXmitvalDownstreamHeaderErrors = -1;
-            LastXmitvalDownstreamFECs = -1;
+            LastXmitdownCRCerrors = -1;
+            LastXmitdownHECerrors = -1;
+            LastXmitdownFECerrors = -1;
 
             LastXmitvalUpstreamRate = -1;
             LastXmitvalUpstreamSNR = -1;
             LastXmitvalUpstreamAttenuation = -1;
             LastXmitvalUpstreamPower = -1;
-            LastXmitvalUpstreamCRCErrors = -1;
-            LastXmitvalUpstreamHeaderErrors = -1;
-            LastXmitvalUpstreamFECs = -1;
+            LastXmitupCRCerrors = -1;
+            LastXmitupHECerrors = -1;
+            LastXmitupFECerrors = -1;
 
             LastLoggedvalDownstreamRate = -1;
             LastLoggedvalDownstreamSNR = -1;
@@ -565,7 +505,6 @@ namespace RouterMonitor
             rc.ModemType = IniParams.ModemType;
             rc.ipaddress = IniParams.RouterIPAddress;
             rc.Debug = Showtelnetdisplay.Checked;
-            rc.Clear();
 
             Connect.Enabled = false;
 
@@ -870,55 +809,14 @@ namespace RouterMonitor
 
             UpdateStatus("Polling...");
 
+            rc.RouterStats.RollHistory();
+
             MessageCount++;
 
             // Get information from the router
             rc.Poll();
 
-
-            // Move the stats history
-            for (int i = HistoryQty - 2; i >= 0; i--)
-            {
-                valDownstreamRate[i + 1] = valDownstreamRate[i];
-                valDownstreamSNR[i + 1] = valDownstreamSNR[i];
-                valDownstreamAttenuation[i + 1] = valDownstreamAttenuation[i];
-                valDownstreamPower[i + 1] = valDownstreamPower[i];
-                valDownstreamCRCErrors[i + 1] = valDownstreamCRCErrors[i];
-                valDownstreamHeaderErrors[i + 1] = valDownstreamHeaderErrors[i];
-                valDownstreamFECs[i + 1] = valDownstreamFECs[i];
-
-                valUpstreamRate[i + 1] = valUpstreamRate[i];
-                valUpstreamSNR[i + 1] = valUpstreamSNR[i];
-                valUpstreamAttenuation[i + 1] = valUpstreamAttenuation[i];
-                valUpstreamPower[i + 1] = valUpstreamPower[i];
-                valUpstreamCRCErrors[i + 1] = valUpstreamCRCErrors[i];
-                valUpstreamHeaderErrors[i + 1] = valUpstreamHeaderErrors[i];
-                valUpstreamFECs[i + 1] = valUpstreamFECs[i];
-
-                TimeRecorded[i + 1] = TimeRecorded[i];
-            }
-
-
-
-            // Copy the results to the local data vars
-            valDownstreamRate[0] = Max(Max(rc.RouterStats.DownloadInt, rc.RouterStats.DownloadFast), rc.RouterStats.Download);
-            valDownstreamSNR[0] = rc.RouterStats.downstreamsnr;
-            valDownstreamPower[0] = rc.RouterStats.downstreampower;
-            valDownstreamAttenuation[0] = rc.RouterStats.downstreamatt;
-            valDownstreamCRCErrors[0] = Max(rc.RouterStats.downCRCerrorInt, rc.RouterStats.downCRCerrorFast);
-            valDownstreamHeaderErrors[0] = Max(rc.RouterStats.downHECerrorInt, rc.RouterStats.downHECerrorFast);
-            valDownstreamFECs[0] = Max(rc.RouterStats.downFECerrorInt, rc.RouterStats.downFECerrorFast);
-
-            valUpstreamRate[0] = Max(Max(rc.RouterStats.UploadInt, rc.RouterStats.UploadFast), rc.RouterStats.Upload);
-            valUpstreamSNR[0] = rc.RouterStats.upstreamsnr;
-            valUpstreamPower[0] = rc.RouterStats.upstreampower;
-            valUpstreamAttenuation[0] = rc.RouterStats.upstreamatt;
-            valUpstreamCRCErrors[0] = Max(rc.RouterStats.upCRCerrorInt, rc.RouterStats.upCRCerrorFast);
-            valUpstreamHeaderErrors[0] = Max(rc.RouterStats.upHECerrorInt, rc.RouterStats.upHECerrorFast);
-            valUpstreamFECs[0] = Max(rc.RouterStats.upFECerrorInt, rc.RouterStats.upFECerrorFast);
-
-            TimeRecorded[0] = DateTime.Now;
-
+            rc.RouterStats.Summarise();
 
             UpdateRouterStatus();
 
@@ -962,14 +860,14 @@ namespace RouterMonitor
                 // First time around. Log initial values
                 Log = true;
             } else {
-                if ((valDownstreamRate[0] != LastLoggedvalDownstreamRate) ||
-                    (valDownstreamSNR[0] != LastLoggedvalDownstreamSNR) ||
-                    (valUpstreamRate[0] != LastLoggedvalUpstreamRate) ||
-                    (valUpstreamSNR[0] != LastLoggedvalUpstreamSNR)) {
+                if ((rc.RouterStats.Download[0] != LastLoggedvalDownstreamRate) ||
+                    (rc.RouterStats.downstreamsnr[0] != LastLoggedvalDownstreamSNR) ||
+                    (rc.RouterStats.Upload[0] != LastLoggedvalUpstreamRate) ||
+                    (rc.RouterStats.upstreamsnr[0] != LastLoggedvalUpstreamSNR)) {
                     // The current stats are different from the last logged values.
                     Log = true;
                     // There is attribute chance the last set have allready been logged
-                    if (TimeRecorded[1] != LastLoggedTimeRecorded)
+                    if (rc.RouterStats.TimeRecorded[1] != LastLoggedTimeRecorded)
                     {
 
                         Changed = true;
@@ -1001,19 +899,19 @@ namespace RouterMonitor
                     // vlaues have changes then log the last value
                     if ((IniParams.LogChangesOnly) && (Changed))
                     {
-                        sw.WriteLine(/*"A" + test.ToString() + " " + */TimeRecorded[1].ToString() + "," +
-                            valDownstreamRate[1].ToString() + "," +
-                            valDownstreamSNR[1].ToString() + "," +
-                            valUpstreamRate[1].ToString() + "," +
-                            valUpstreamSNR[1].ToString());
+                        sw.WriteLine(/*"A" + test.ToString() + " " + */rc.RouterStats.TimeRecorded[1].ToString() + "," +
+                            rc.RouterStats.Download[1].ToString() + "," +
+                            rc.RouterStats.downstreamsnr[1].ToString() + "," +
+                            rc.RouterStats.Upload[1].ToString() + "," +
+                            rc.RouterStats.upstreamsnr[1].ToString());
                     }
 
                     // Write the current details               
-                    sw.WriteLine(/*"C" +test.ToString() + " " + */TimeRecorded[0].ToString() + "," +
-                        valDownstreamRate[0].ToString() + "," +
-                        valDownstreamSNR[0].ToString() + "," +
-                        valUpstreamRate[0].ToString() + "," +
-                        valUpstreamSNR[0].ToString());
+                    sw.WriteLine(/*"C" +test.ToString() + " " + */rc.RouterStats.TimeRecorded[0].ToString() + "," +
+                        rc.RouterStats.Download[0].ToString() + "," +
+                        rc.RouterStats.downstreamsnr[0].ToString() + "," +
+                        rc.RouterStats.Upload[0].ToString() + "," +
+                        rc.RouterStats.upstreamsnr[0].ToString());
 
                     sw.Close();
 
@@ -1025,11 +923,11 @@ namespace RouterMonitor
                 }
 
                 // Log this entry
-                LastLoggedTimeRecorded = TimeRecorded[0];
-                LastLoggedvalDownstreamRate = valDownstreamRate[0];
-                LastLoggedvalDownstreamSNR = valDownstreamSNR[0];
-                LastLoggedvalUpstreamRate = valUpstreamRate[0];
-                LastLoggedvalUpstreamSNR = valUpstreamSNR[0];
+                LastLoggedTimeRecorded = rc.RouterStats.TimeRecorded[0];
+                LastLoggedvalDownstreamRate = rc.RouterStats.Download[0];
+                LastLoggedvalDownstreamSNR = rc.RouterStats.downstreamsnr[0];
+                LastLoggedvalUpstreamRate = rc.RouterStats.Upload[0];
+                LastLoggedvalUpstreamSNR = rc.RouterStats.upstreamsnr[0];
                 //test++;
             }
         }
@@ -1047,24 +945,24 @@ namespace RouterMonitor
             // Check for sync rate changes
             if (IniParams.EmailOnSyncChange)
             {
-                if (valDownstreamRate[0] != valDownstreamRate[1]) changed = true;
-                if (valUpstreamRate[0] != valUpstreamRate[1]) changed = true;
+                if (rc.RouterStats.Download[0] != rc.RouterStats.Download[1]) changed = true;
+                if (rc.RouterStats.Upload[0] != rc.RouterStats.Upload[1]) changed = true;
             }
 
 
             // Check for downwards SNR changes
             if (IniParams.EmailOnDownwards)
             {
-                if (valDownstreamSNR[0] < LastXmitvalDownstreamSNR) changed = true;
-                if (valUpstreamSNR[0] < LastXmitvalUpstreamSNR) changed = true;
+                if (rc.RouterStats.downstreamsnr[0] < LastXmitvalDownstreamSNR) changed = true;
+                if (rc.RouterStats.upstreamsnr[0] < LastXmitvalUpstreamSNR) changed = true;
             }
 
 
             // Check for upwards SNR changes
             if (IniParams.EmailOnUpwards)
             {
-                if (valDownstreamSNR[0] > LastXmitvalDownstreamSNR) changed = true;
-                if (valUpstreamSNR[0] > LastXmitvalUpstreamSNR) changed = true;
+                if (rc.RouterStats.downstreamsnr[0] > LastXmitvalDownstreamSNR) changed = true;
+                if (rc.RouterStats.upstreamsnr[0] > LastXmitvalUpstreamSNR) changed = true;
             }
 
 
@@ -1076,8 +974,8 @@ namespace RouterMonitor
 
                 for (int c = 0; c < IniParams.EmailOnIncreasingPollCount; c++)
                 {
-                    if (valDownstreamSNR[c] > 0) Mindwnsnr = Min(Mindwnsnr, valDownstreamSNR[c]);
-                    if (valUpstreamSNR[c] > 0) Minupsnr = Min(Minupsnr, valUpstreamSNR[c]);
+                    if (rc.RouterStats.downstreamsnr[c] > 0) Mindwnsnr = Min(Mindwnsnr, rc.RouterStats.downstreamsnr[c]);
+                    if (rc.RouterStats.upstreamsnr[c] > 0) Minupsnr = Min(Minupsnr, rc.RouterStats.upstreamsnr[c]);
                 }
 
                 if (Mindwnsnr > LastXmitvalDownstreamSNR) changed = true;
@@ -1097,10 +995,10 @@ namespace RouterMonitor
                 // Find the minimum and maximum out of the last 'n' readings
                 for (int c = 0; c < IniParams.EmailOnVarLinePollCount; c++)
                 {
-                    Maxdwnsnr = Max(Maxdwnsnr, valDownstreamSNR[c]);
-                    Maxupsnr = Max(Maxupsnr, valUpstreamSNR[c]);
-                    if (valDownstreamSNR[c] > 0) Mindwnsnr = Min(Mindwnsnr, valDownstreamSNR[c]);
-                    if (valUpstreamSNR[c] > 0) Minupsnr = Min(Minupsnr, valUpstreamSNR[c]);
+                    Maxdwnsnr = Max(Maxdwnsnr, rc.RouterStats.downstreamsnr[c]);
+                    Maxupsnr = Max(Maxupsnr, rc.RouterStats.upstreamsnr[c]);
+                    if (rc.RouterStats.downstreamsnr[c] > 0) Mindwnsnr = Min(Mindwnsnr, rc.RouterStats.downstreamsnr[c]);
+                    if (rc.RouterStats.upstreamsnr[c] > 0) Minupsnr = Min(Minupsnr, rc.RouterStats.upstreamsnr[c]);
                 }
 
                 // Check if the last 'n' readings for noise
@@ -1119,75 +1017,69 @@ namespace RouterMonitor
 
                 sb.Insert(0, "Changed properties marked with *\r\n\r\n");
 
-                if (valDownstreamRate[0] != LastXmitvalDownstreamRate) sb.Append("*"); 
-                sb.Append("Downstream Rate " + valDownstreamRate[0].ToString() + " kbps.\r\n");
+                if (rc.RouterStats.Download[0] != LastXmitvalDownstreamRate) sb.Append("*"); 
+                sb.Append("Downstream Rate " + rc.RouterStats.Download[0].ToString() + " kbps.\r\n");
 
-                if (valDownstreamSNR[0] != LastXmitvalDownstreamSNR) sb.Append("*");
-                sb.Append("Downstream SNR " + valDownstreamSNR[0].ToString() + " db.\r\n");
+                if (rc.RouterStats.downstreamsnr[0] != LastXmitvalDownstreamSNR) sb.Append("*");
+                sb.Append("Downstream SNR " + rc.RouterStats.downstreamsnr[0].ToString() + " db.\r\n");
 
-                if (valUpstreamRate[0] != LastXmitvalUpstreamRate) sb.Append("*");
-                sb.Append("Upstream Rate " + valUpstreamRate[0].ToString() + " kbps.\r\n");
+                if (rc.RouterStats.Upload[0] != LastXmitvalUpstreamRate) sb.Append("*");
+                sb.Append("Upstream Rate " + rc.RouterStats.Upload[0].ToString() + " kbps.\r\n");
 
-                if (valUpstreamSNR[0] != LastXmitvalUpstreamSNR) sb.Append("*");
-                sb.Append("Uptream SNR " + valUpstreamSNR[0].ToString() + " db.\r\n");
+                if (rc.RouterStats.upstreamsnr[0] != LastXmitvalUpstreamSNR) sb.Append("*");
+                sb.Append("Uptream SNR " + rc.RouterStats.upstreamsnr[0].ToString() + " db.\r\n");
 
 
                 // Display the stats history
                 sb.Append("\r\nDownstream Rate History - ");
                 for (int i = 0; i < HistoryQtyDispRate; i++)
                 {
-                    sb.Append(valDownstreamRate[i].ToString());
+                    sb.Append(rc.RouterStats.Download[i].ToString());
                     if (i < HistoryQtyDispRate - 1) { sb.Append(", "); } else { sb.Append(".\r\n\r\n"); }
                 } 
 
                 sb.Append("Downstream SNR History - ");
                 for (int i = 0; i < HistoryQty; i++)
                 {
-                    sb.Append(valDownstreamSNR[i].ToString());
+                    sb.Append(rc.RouterStats.downstreamsnr[i].ToString());
                     if (i < HistoryQty - 1) { sb.Append(", "); } else { sb.Append(".\r\n\r\n"); }
                 }
 
                 sb.Append("Upload Rate History - ");
                 for (int i = 0; i < HistoryQtyDispRate; i++)
                 {
-                    sb.Append(valUpstreamRate[i].ToString());
+                    sb.Append(rc.RouterStats.Upload[i].ToString());
                     if (i < HistoryQtyDispRate - 1) { sb.Append(", "); } else { sb.Append(".\r\n\r\n"); }
                 } 
 
                 sb.Append("Upload SNR History - ");
                 for (int i = 0; i < HistoryQty; i++)
                 {
-                    sb.Append(valUpstreamSNR[i].ToString());
+                    sb.Append(rc.RouterStats.upstreamsnr[i].ToString());
                     if (i < HistoryQty - 1) { sb.Append(", "); } else { sb.Append(".\r\n\r\n"); }
                 }
 
                 SendMail(sb);
 
                 // Set last transmitted values
-                LastXmitvalDownstreamRate = valDownstreamRate[0];
-                LastXmitvalDownstreamSNR = valDownstreamSNR[0];
-                LastXmitvalDownstreamAttenuation = valDownstreamAttenuation[0];
-                LastXmitvalDownstreamPower = valDownstreamPower[0];
-                LastXmitvalDownstreamCRCErrors = valDownstreamCRCErrors[0];
-                LastXmitvalDownstreamHeaderErrors = valDownstreamHeaderErrors[0];
-                LastXmitvalDownstreamFECs = valDownstreamFECs[0];
+                LastXmitvalDownstreamRate = rc.RouterStats.Download[0];
+                LastXmitvalDownstreamSNR = rc.RouterStats.downstreamsnr[0];
+                LastXmitvalDownstreamAttenuation = rc.RouterStats.downstreamatt[0];
+                LastXmitvalDownstreamPower = rc.RouterStats.downstreampower[0];
+                LastXmitdownCRCerrors = rc.RouterStats.downCRCerrors[0];
+                LastXmitdownHECerrors = rc.RouterStats.downHECerrors[0];
+                LastXmitdownFECerrors = rc.RouterStats.downFECerrors[0];
 
-                LastXmitvalUpstreamRate = valUpstreamRate[0];
-                LastXmitvalUpstreamSNR = valUpstreamSNR[0];
-                LastXmitvalUpstreamAttenuation = valUpstreamAttenuation[0];
-                LastXmitvalUpstreamPower = valUpstreamPower[0];
-                LastXmitvalUpstreamCRCErrors = valUpstreamCRCErrors[0];
-                LastXmitvalUpstreamHeaderErrors = valUpstreamHeaderErrors[0];
-                LastXmitvalUpstreamFECs = valUpstreamFECs[0];
+                LastXmitvalUpstreamRate = rc.RouterStats.Upload[0];
+                LastXmitvalUpstreamSNR = rc.RouterStats.upstreamsnr[0];
+                LastXmitvalUpstreamAttenuation = rc.RouterStats.upstreamatt[0];
+                LastXmitvalUpstreamPower = rc.RouterStats.upstreampower[0];
+                LastXmitupCRCerrors = rc.RouterStats.upCRCerrors[0];
+                LastXmitupHECerrors = rc.RouterStats.upHECerrors[0];
+                LastXmitupFECerrors = rc.RouterStats.upFECerrors[0];
 
                 MessageCount = 0;
             }
-
-
-
-
-
-
         }
 
 

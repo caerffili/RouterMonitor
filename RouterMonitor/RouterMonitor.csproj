@@ -173,6 +173,7 @@
     <Compile Include="RouterInfo.Designer.cs">
       <DependentUpon>RouterInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="RouterStatsClass.cs" />
     <Compile Include="SpeedTest.cs">
       <SubType>Form</SubType>
     </Compile>
