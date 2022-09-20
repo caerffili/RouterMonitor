@@ -321,20 +321,20 @@ namespace RouterMonitor
 
             if (IniParams.ModemType == "5G")
             {
-                label2_1.Text = "4G Frequency";
-                label2_2.Text = "Primary Band";
-                label2_3.Text = "Secondary Band";
-                label2_4.Text = "4G Signal";
-                label2_5.Text = "4G SINR";
-                label2_6.Text = "4G PCI";
-                label2_7.Text = "4G Cell ID";
+                label2_1.Text = "Cell ID";
+                label2_2.Text = "Band";
+                label2_3.Text = "RSRP";
+                label2_4.Text = "SINR";
+                label2_5.Text = "PCI";
+                label2_6.Text = "EARFN";
+                label2_7.Text = "";
                 label2_8.Text = "";
-                label3_1.Text = "5G Frequency";
-                label3_2.Text = "5G Band";
-                label3_3.Text = "5G Sig";
-                label3_4.Text = "5G SINR";
-                label3_5.Text = "5G PCI";
-                label3_6.Text = "5G Cell ID";
+                label3_1.Text = "Band";
+                label3_2.Text = "RSRP";
+                label3_3.Text = "SINR";
+                label3_4.Text = "PCI";
+                label3_5.Text = "NRARFCN";
+                label3_6.Text = "";
                 label3_7.Text = "";
                 label3_8.Text = "";
             }
@@ -366,27 +366,55 @@ namespace RouterMonitor
             CultureInfo cultureInfo = Thread.CurrentThread.CurrentCulture;
             TextInfo textInfo = cultureInfo.TextInfo;
 
-            // Display the results on screen
-            // -----------------------------
-            text2_1.Text = rc.RouterStats.Download[0].ToString() + " kbps";
-            text3_1.Text = rc.RouterStats.Upload[0].ToString() + " kbps";
+            if (IniParams.ModemType == "ADSL")
+            {
+                // Display the results on screen
+                // -----------------------------
+                text2_1.Text = rc.RouterStats.Download[0].ToString() + " kbps";
+                text3_1.Text = rc.RouterStats.Upload[0].ToString() + " kbps";
 
-            text2_2.Text = rc.RouterStats.downstreamsnr[0].ToString() + " db";
-            text3_2.Text = rc.RouterStats.upstreamsnr[0].ToString() + " db";
+                text2_2.Text = rc.RouterStats.downstreamsnr[0].ToString() + " db";
+                text3_2.Text = rc.RouterStats.upstreamsnr[0].ToString() + " db";
 
-            text2_3.Text = rc.RouterStats.downstreampower[0].ToString() + " db";
-            text3_3.Text = rc.RouterStats.upstreampower[0].ToString() + " db";
+                text2_3.Text = rc.RouterStats.downstreampower[0].ToString() + " db";
+                text3_3.Text = rc.RouterStats.upstreampower[0].ToString() + " db";
 
-            text2_4.Text = rc.RouterStats.downstreamatt[0].ToString() + " db";
-            text3_4.Text = rc.RouterStats.upstreamatt[0].ToString() + " db";
+                text2_4.Text = rc.RouterStats.downstreamatt[0].ToString() + " db";
+                text3_4.Text = rc.RouterStats.upstreamatt[0].ToString() + " db";
 
-            text2_5.Text = rc.RouterStats.downCRCerrors[0].ToString();
-            text2_6.Text = rc.RouterStats.downHECerrors[0].ToString();
-            text2_7.Text = rc.RouterStats.downFECerrors[0].ToString();
+                text2_5.Text = rc.RouterStats.downCRCerrors[0].ToString();
+                text2_6.Text = rc.RouterStats.downHECerrors[0].ToString();
+                text2_7.Text = rc.RouterStats.downFECerrors[0].ToString();
 
-            text3_5.Text = rc.RouterStats.upCRCerrors[0].ToString();
-            text3_6.Text = rc.RouterStats.upHECerrors[0].ToString();
-            text3_7.Text = rc.RouterStats.upFECerrors[0].ToString();
+                text3_5.Text = rc.RouterStats.upCRCerrors[0].ToString();
+                text3_6.Text = rc.RouterStats.upHECerrors[0].ToString();
+                text3_7.Text = rc.RouterStats.upFECerrors[0].ToString();
+
+                text2_8.Text = rc.RouterStats.RxPckts.ToString();
+                text3_8.Text = rc.RouterStats.TxPckts.ToString();
+            }
+
+            if (IniParams.ModemType == "5G")
+            {
+                text2_1.Text = rc.RouterStats.mLTE_CellId[0].ToString();
+                text2_2.Text = "B" + rc.RouterStats.mLTE_PrimaryBand[0].ToString() + " (" + rc.RouterStats.mLTE_PrimaryBandwidth[0].ToString() + "MHz) + B"+ 
+                    rc.RouterStats.mLTE_CA1Band[0].ToString() + " (" + rc.RouterStats.mLTE_CA1Bandwidth[0].ToString() + "MHz)";
+                text2_3.Text = rc.RouterStats.mLTE_RSRP[0].ToString() + " dBm";
+                text2_4.Text = rc.RouterStats.mLTE_SINR[0].ToString() + " dB";
+                text2_5.Text = rc.RouterStats.mLTE_PCI[0].ToString();
+                text2_6.Text = rc.RouterStats.mLTE_EARFCN[0].ToString();
+                text2_7.Text = "";
+                text2_8.Text = "";
+
+                text3_1.Text = rc.RouterStats.m5G_Band[0].ToString();
+                text3_2.Text = rc.RouterStats.m5G_RSRP[0].ToString() + " dBm";
+                text3_3.Text = rc.RouterStats.m5G_SINR[0].ToString() + " dB";
+                text3_4.Text = rc.RouterStats.m5G_PCI[0].ToString();
+                text3_5.Text = rc.RouterStats.m5G_NRARFCN[0].ToString();
+                text3_6.Text = "";
+                text3_7.Text = "";
+                text3_8.Text = "";
+            }
 
             DSLMode.Text = "DSL Mode : " + rc.RouterStats.dslmode;
             if (rc.RouterStats.dslstatus != null) DSLStatus.Text = "DSL Status : " + textInfo.ToTitleCase(rc.RouterStats.dslstatus);
@@ -411,23 +439,24 @@ namespace RouterMonitor
             WanMAC.Text = "WAN MAC : " + rc.RouterStats.WanMAC;
 
             DSLUpTime.Text = "DSL Up time : " + rc.RouterStats.DSLUpTime;
-            text2_8.Text = rc.RouterStats.RxPckts.ToString();
-            text3_8.Text = rc.RouterStats.TxPckts.ToString();
+
 
             Ping1.Text = PingStatus[0].Results;
             Ping2.Text = PingStatus[1].Results;
 
-            this.Text = "DSL Monitor - " + rc.RouterStats.Model + " [Up time : " + rc.RouterStats.SysUpTime +"]";
+            this.Text = "DSL Monitor - " + rc.RouterStats.Model + " [Up time : " + rc.RouterStats.SysUpTime + "]";
 
             if (rc.RouterStats.dslfastint != "")
             {
                 DSLFastInt.Text = "DSL Conn : " + rc.RouterStats.dslfastint;
-            } else {
+            }
+            else
+            {
                 if (rc.RouterStats.DownloadInt[0] > rc.RouterStats.DownloadFast[0])
                 {
                     DSLFastInt.Text = "DSL Conn : Interleaved";
-                } 
-                else 
+                }
+                else
                 {
                     if (rc.RouterStats.DownloadInt[0] < rc.RouterStats.DownloadFast[0])
                     {

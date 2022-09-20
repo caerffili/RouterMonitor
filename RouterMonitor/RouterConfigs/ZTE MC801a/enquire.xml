@@ -115,33 +115,33 @@
       </url>
     </action>
     <results>
-      <htmlparser>"cell_id":"74947"</htmlparser>
+      <htmlparser>"cell_id":"{lte_cellid}"</htmlparser>
       <!--htmlparser>"ecio":""</htmlparser-->
       <!--htmlparser>"lte_ca_pcell_arfcn":""</htmlparser-->
-      <htmlparser>"lte_ca_pcell_band":"1"</htmlparser>
-      <htmlparser>"lte_ca_pcell_bandwidth":"10.0"</htmlparser>
-      <htmlparser>"lte_ca_scell_band":"3"</htmlparser>
-      <htmlparser>"lte_ca_scell_bandwidth":"15.0"</htmlparser>
+      <htmlparser>"lte_ca_pcell_band":"{lte_primaryband}"</htmlparser>
+      <htmlparser>"lte_ca_pcell_bandwidth":"{lte_primarybandwidth}"</htmlparser>
+      <htmlparser>"lte_ca_scell_band":"{lte_ca1band}"</htmlparser>
+      <htmlparser>"lte_ca_scell_bandwidth":"{lte_ca11candwidth}"</htmlparser>
       <!--htmlparser>"lte_ca_scell_info":""</htmlparser-->
       <!--htmlparser>"lte_ca_scell_arfcn":""  </htmlparser-->
       <htmlparser>"lte_multi_ca_scell_info":"1,256,1,3,1392,15.0"</htmlparser>
-      <htmlparser>"lte_rsrp":"{downstreampower}"</htmlparser>
-      <htmlparser>"lte_pci":"5"   </htmlparser>
-      <htmlparser>"lte_snr":"{downstreamsnr}"</htmlparser>
-      <htmlparser>"network_type":"ENDC"</htmlparser>
-      <htmlparser>"nr5g_action_band":"n78"</htmlparser>
-      <htmlparser>"nr5g_action_channel":"640548"</htmlparser>
+      <htmlparser>"lte_rsrp":"{lte_rsrp}"</htmlparser>
+      <htmlparser>"lte_pci":"{lte_pci}"</htmlparser>
+      <htmlparser>"lte_snr":"{lte_sinr}"</htmlparser>
+      <htmlparser>"network_type":"{lte_networktype}"</htmlparser>
+      <htmlparser>"nr5g_action_band":"{nr_band}"</htmlparser>
+      <htmlparser>"nr5g_action_channel":"{nr_nrarfcn}"</htmlparser>
       <!--htmlparser>"nr5g_cell_id":""</htmlparser-->
-      <htmlparser>"nr5g_pci":"d4"</htmlparser>
+      <htmlparser>"nr5g_pci":"{nr_pci}"</htmlparser>
       <!--htmlparser>"rscp":""</htmlparser-->
       <!--htmlparser>"rssi":""</htmlparser-->
       <htmlparser>"wan_active_band":"LTE BAND 1"</htmlparser>
-      <htmlparser>"wan_active_channel":"99"</htmlparser>
+      <htmlparser>"wan_active_channel":"{lte_earfcn}"</htmlparser>
       <htmlparser>"wan_lte_ca":"ca_deactivated"</htmlparser>
-      <htmlparser>"Z5g_rsrp":"-77"</htmlparser>
+      <htmlparser>"Z5g_rsrp":"{nr_rsrp}"</htmlparser>
       <!--htmlparser>"Z5g_CELL_ID":""</htmlparser-->
       <!--htmlparser>"Z5g_dlEarfcn":""</htmlparser-->
-      <htmlparser>"Z5g_SINR":"27.0"</htmlparser>
+      <htmlparser>"Z5g_SINR":"{nr_sinr}"</htmlparser>
       <!--htmlparser>"Z5g_snr":""</htmlparser-->
       <!--htmlparser>"ZCELLINFO_band":""</htmlparser-->
     </results>

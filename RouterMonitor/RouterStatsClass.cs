@@ -83,6 +83,26 @@ namespace RouterMonitor
         public int[] upFECerrorFast;
         public int[] upFECerrorInt;
 
+
+        public string[] mLTE_NetworkType;
+        public int[] mLTE_CellId;
+        public int[] mLTE_PrimaryBand;
+        public int[] mLTE_PrimaryBandwidth;
+        public int[] mLTE_CA1Band;
+        public int[] mLTE_CA1Bandwidth;
+        public int[] mLTE_RSRP;
+        public decimal[] mLTE_SINR;
+        public int[] mLTE_PCI;
+        public int[] mLTE_EARFCN;
+        public string[] m5G_Band;
+        public int[] m5G_NRARFCN;
+        public int[] m5G_PCI;
+        public int[] m5G_RSRP;
+        public decimal[] m5G_SINR;
+        
+
+
+
         //public string[] Ping;
 
         public bool receivedtones;
@@ -135,6 +155,24 @@ namespace RouterMonitor
             upFECerrors = new int[HistoryQty];
             upFECerrorFast = new int[HistoryQty];
             upFECerrorInt = new int[HistoryQty];
+
+
+            mLTE_NetworkType = new string[HistoryQty];
+            mLTE_CellId = new int[HistoryQty];
+            mLTE_PrimaryBand = new int[HistoryQty];
+            mLTE_PrimaryBandwidth = new int[HistoryQty];
+            mLTE_CA1Band = new int[HistoryQty];
+            mLTE_CA1Bandwidth = new int[HistoryQty];
+            mLTE_RSRP = new int[HistoryQty];
+            mLTE_SINR = new decimal[HistoryQty];
+            mLTE_PCI = new int[HistoryQty];
+            mLTE_EARFCN = new int[HistoryQty];
+
+            m5G_Band = new string[HistoryQty];
+            m5G_RSRP = new int[HistoryQty];
+            m5G_SINR = new decimal[HistoryQty];
+            m5G_NRARFCN = new int[HistoryQty];
+            m5G_PCI = new int[HistoryQty];
         }
 
         public void RollHistory()
@@ -283,6 +321,23 @@ namespace RouterMonitor
                 upFECerrors[i] = 0;
                 upFECerrorFast[i] = 0;
                 upFECerrorInt[i] = 0;
+
+                mLTE_NetworkType[i] = "";
+                mLTE_CellId[i] = 0;
+                mLTE_PrimaryBand[i] = 0;
+                mLTE_PrimaryBandwidth[i] = 0;
+                mLTE_CA1Band[i] = 0;
+                mLTE_CA1Bandwidth[i] = 0;
+                mLTE_RSRP[i] = 0;
+                mLTE_SINR[i] = 0;
+                mLTE_PCI[i] = 0;
+                mLTE_EARFCN[i] = 0;
+
+                m5G_Band[i] = "";
+                m5G_RSRP[i] = 0;
+                m5G_SINR[i] = 0;
+                m5G_NRARFCN[i] = 0;
+                m5G_PCI[i] = 0;
             }
 
             receivedtones = false;

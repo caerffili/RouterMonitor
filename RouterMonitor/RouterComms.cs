@@ -736,19 +736,30 @@ namespace RouterMonitor
                     case "upcrcerrorint": RouterStats.upCRCerrorInt[0] = Convert.ToInt32(value); break;
                     case "uphecerrorfast": RouterStats.upHECerrorFast[0] = Convert.ToInt32(value); break;
                     case "uphecerrorint": RouterStats.upHECerrorInt[0] = Convert.ToInt32(value); break;
+
+                    case "lte_cellid": RouterStats.mLTE_CellId[0] = Convert.ToInt32(value, 16); break;
+                    case "lte_primaryband": RouterStats.mLTE_PrimaryBand[0] = Convert.ToInt32(value); break;
+                    case "lte_primarybandwidth": RouterStats.mLTE_PrimaryBandwidth[0] = (int)Convert.ToDecimal(value); break;
+                    case "lte_ca1band": RouterStats.mLTE_CA1Band[0] = Convert.ToInt32(value); break;
+                    case "lte_ca11candwidth": RouterStats.mLTE_CA1Bandwidth[0] = (int)Convert.ToDecimal(value); break;
+                    case "lte_rsrp": RouterStats.mLTE_RSRP[0] = Convert.ToInt32(value); break;
+                    case "lte_pci": RouterStats.mLTE_PCI[0] = Convert.ToInt32(value); break;
+                    case "lte_sinr": RouterStats.mLTE_SINR[0] = Convert.ToDecimal(value); break;
+                    case "lte_networktype": RouterStats.mLTE_NetworkType[0] = value; break;
+                    case "nr_band": RouterStats.m5G_Band[0] = value; break;
+                    case "nr_nrarfcn": RouterStats.m5G_NRARFCN[0] = Convert.ToInt32(value); break;
+                    case "nr_pci": RouterStats.m5G_PCI[0] = Convert.ToInt32(value, 16); break;
+                    case "lte_earfcn": RouterStats.mLTE_EARFCN[0] = Convert.ToInt32(value); break;
+                    case "nr_rsrp": RouterStats.m5G_RSRP[0] = Convert.ToInt32(value); break;
+                    case "nr_sinr": RouterStats.m5G_SINR[0] = Convert.ToDecimal(value); break;
+                    //case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
+                    //case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
+
                 }
             }
         }
-
-
-
-
-
-
-
-
-    } // class
-} // namespace
+    }
+}
 
 
 
