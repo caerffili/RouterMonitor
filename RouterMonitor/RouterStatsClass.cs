@@ -8,6 +8,9 @@ namespace RouterMonitor
 {
     public class RouterStatsClass
     {
+        public string Model;
+        public string Hostname;
+        public string Firmware;
         public string BootLoaderVer;
         public string WirelessVer;
         public string DSLVer;
@@ -27,17 +30,12 @@ namespace RouterMonitor
         public string WifiSSID;
         public string WifiMAC;
 
-        public int TxPckts;
-        public int RxPckts;
-
-        public string Model;
-        public string Hostname;
-        public string Firmware;
-
-        public string dslmode; // G.dmt etc
-        public string dslstatus; // Up, down, showtime etc.
-        public string dslfastint; // Fast or interleaved
-        public string wanip;
+        public int[] TxPckts;
+        public int[] RxPckts;
+        public string[] dslmode; // G.dmt etc
+        public string[] dslstatus; // Up, down, showtime etc.
+        public string[] dslfastint; // Fast or interleaved
+        public string[] wanip;
 
 
         public DateTime[] TimeRecorded;
@@ -86,8 +84,10 @@ namespace RouterMonitor
 
         public string[] mLTE_NetworkType;
         public int[] mLTE_CellId;
-        public int[] mLTE_PrimaryBand;
-        public int[] mLTE_PrimaryBandwidth;
+        public String[] mLTE_ActiveBand;
+        public int[] mLTE_ActiveBandwidth;
+        public int[] mLTE_CAPrimaryBand;
+        public int[] mLTE_CAPrimaryBandwidth;
         public int[] mLTE_CA1Band;
         public int[] mLTE_CA1Bandwidth;
         public int[] mLTE_RSRP;
@@ -114,6 +114,13 @@ namespace RouterMonitor
 
             // Declare array for SNR and Attenuation storage
             TimeRecorded = new DateTime[HistoryQty];
+
+            TxPckts = new int[HistoryQty];
+            RxPckts = new int[HistoryQty];
+            dslmode = new string[HistoryQty];
+            dslstatus = new string[HistoryQty];
+            dslfastint = new string[HistoryQty];
+            wanip = new string[HistoryQty];
 
             Download = new int[HistoryQty];
             DownloadFast = new int[HistoryQty];
@@ -156,11 +163,12 @@ namespace RouterMonitor
             upFECerrorFast = new int[HistoryQty];
             upFECerrorInt = new int[HistoryQty];
 
-
             mLTE_NetworkType = new string[HistoryQty];
             mLTE_CellId = new int[HistoryQty];
-            mLTE_PrimaryBand = new int[HistoryQty];
-            mLTE_PrimaryBandwidth = new int[HistoryQty];
+            mLTE_ActiveBand = new String[HistoryQty];
+            mLTE_ActiveBandwidth = new int[HistoryQty];
+            mLTE_CAPrimaryBand = new int[HistoryQty];
+            mLTE_CAPrimaryBandwidth = new int[HistoryQty];
             mLTE_CA1Band = new int[HistoryQty];
             mLTE_CA1Bandwidth = new int[HistoryQty];
             mLTE_RSRP = new int[HistoryQty];
@@ -180,6 +188,13 @@ namespace RouterMonitor
             // Move the stats history
             for (int i = HistoryQty - 2; i >= 0; i--)
             {
+                TxPckts[i + 1] = TxPckts[i];
+                RxPckts[i + 1] = RxPckts[i];
+                dslmode[i + 1] = dslmode[i];
+                dslstatus[i + 1] = dslstatus[i];
+                dslfastint[i + 1] = dslfastint[i];
+                wanip[i + 1] = wanip[i];
+
                 Download[i + 1] = Download[i];
                 DownloadFast[i + 1] = DownloadFast[i];
                 DownloadInt[i + 1] = DownloadInt[i];
@@ -221,6 +236,25 @@ namespace RouterMonitor
                 upFECerrorFast[i + 1] = upFECerrorFast[i];
                 upFECerrorInt[i + 1] = upFECerrorInt[i];
 
+                mLTE_NetworkType[i + 1] = mLTE_NetworkType[i];
+                mLTE_CellId[i + 1] = mLTE_CellId[i];
+                mLTE_ActiveBand[i + 1] = mLTE_ActiveBand[i];
+                mLTE_ActiveBandwidth[i + 1] = mLTE_ActiveBandwidth[i];
+                mLTE_CAPrimaryBand[i + 1] = mLTE_CAPrimaryBand[i];
+                mLTE_CAPrimaryBandwidth[i + 1] = mLTE_CAPrimaryBandwidth[i];
+                mLTE_CA1Band[i + 1] = mLTE_CA1Band[i];
+                mLTE_CA1Bandwidth[i + 1] = mLTE_CA1Bandwidth[i];
+                mLTE_RSRP[i + 1] = mLTE_RSRP[i];
+                mLTE_SINR[i + 1] = mLTE_SINR[i];
+                mLTE_PCI[i + 1] = mLTE_PCI[i];
+                mLTE_EARFCN[i + 1] = mLTE_EARFCN[i];
+                m5G_Band[i + 1] = m5G_Band[i];
+                m5G_RSRP[i + 1] = m5G_RSRP[i];
+                m5G_SINR[i + 1] = m5G_SINR[i];
+                m5G_NRARFCN[i + 1] = m5G_NRARFCN[i];
+                m5G_PCI[i + 1] = m5G_PCI[i];
+
+
                 TimeRecorded[i + 1] = TimeRecorded[i];
             }
 
@@ -258,16 +292,16 @@ namespace RouterMonitor
             DSPVer = "";
 
             // WAN Stuff
-            dslmode = "";
-            dslstatus = "";
-            dslfastint = "";
+            dslmode[0] = "";
+            dslstatus[0] = "";
+            dslfastint[0] = "";
             //  RouterStats.ConnectionMode = "";
             PPPMode = "";
             WanPriDns = "";
             WanSecDns = "";
-            wanip = "";
-            TxPckts = 0;
-            RxPckts = 0;
+            wanip[0] = "";
+            TxPckts[0] = 0;
+            RxPckts[0] = 0;
 
             // MAC Addresses
             WanMAC = "";
@@ -324,8 +358,10 @@ namespace RouterMonitor
 
                 mLTE_NetworkType[i] = "";
                 mLTE_CellId[i] = 0;
-                mLTE_PrimaryBand[i] = 0;
-                mLTE_PrimaryBandwidth[i] = 0;
+                mLTE_ActiveBand[i] = "";
+                mLTE_ActiveBandwidth[i] = 0;
+                mLTE_CAPrimaryBand[i] = 0;
+                mLTE_CAPrimaryBandwidth[i] = 0;
                 mLTE_CA1Band[i] = 0;
                 mLTE_CA1Bandwidth[i] = 0;
                 mLTE_RSRP[i] = 0;

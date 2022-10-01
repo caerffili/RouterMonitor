@@ -52,7 +52,7 @@ namespace Reboot
                 
             }
 
-            rc = new RouterComms();
+            rc = new RouterComms(HistoryQty);
 
             ConnectRouter();
 
