@@ -39,6 +39,11 @@ namespace RouterMonitor
 
         public int PollInterval;
 
+        public bool MQTTEnabled;
+        public String MQTTHost;
+        public String MQTTBaseTopic;
+        
+
         public bool LogEnabled;
         public bool LogChangesOnly;
         public string LogFilename;
@@ -160,6 +165,7 @@ namespace RouterMonitor
                     IniParams.ShowTNDonStartup = false;
                     IniParams.EmailEnabled = false;
                     IniParams.LogEnabled = false;
+                    IniParams.MQTTEnabled = false;
                 }
             }
             else
@@ -212,8 +218,6 @@ namespace RouterMonitor
 
             PollingEnabled = false;
             PollingTimer.Enabled = true;
-
-            mqtt = new MQTT("routermonitor/5g", "10.20.0.40");
         }
         #endregion
 
@@ -280,6 +284,10 @@ namespace RouterMonitor
             IniParams.EmailOnIncreasingPollCount = Convert.ToInt32(ini.GetIniFileString("Email", "EmailOnIncreasingPollCount", "10"));
             IniParams.EmailOnVarLine = ini.GetIniFileBool("Email", "EmailOnVarLine", false); ;
             IniParams.EmailOnVarLinePollCount = Convert.ToInt32(ini.GetIniFileString("Email", "EmailOnVarLinePollCount", "15"));
+
+            IniParams.MQTTEnabled = ini.GetIniFileBool("MQTT", "Enabled", false);
+            IniParams.MQTTHost = ini.GetIniFileString("MQTT", "Host", "");
+            IniParams.MQTTBaseTopic = ini.GetIniFileString("MQTT", "BaseTopic", "");
 
             IniParams.LogEnabled = ini.GetIniFileBool("Logging", "Enabled", false);
             IniParams.LogChangesOnly = ini.GetIniFileBool("Logging", "LogChangesOnly", true);
@@ -574,6 +582,12 @@ namespace RouterMonitor
                 return false;
             }
 
+            if (IniParams.MQTTEnabled)
+            {
+                mqtt = new MQTT(IniParams.MQTTHost, IniParams.MQTTBaseTopic);
+                MQTTHomeAssistantAutoDiscover();
+            }
+
             Disconnect.Enabled = true;
             Telnet.Enabled = IniParams.RouterTelnetAllowed;
             Pause.Visible = true;
@@ -619,6 +633,11 @@ namespace RouterMonitor
             Connect.Visible = true;
             Pause.Visible = false;
             Telnet.Enabled = false;
+
+            if (IniParams.MQTTEnabled)
+            {
+                mqtt = null;
+            }
 
             UpdateStatus("Not Connected");
         }
@@ -867,7 +886,7 @@ namespace RouterMonitor
 
             UpdateRouterStatus();
 
-            MQTTPublish();
+            if (IniParams.MQTTEnabled) MQTTPublish();
 
             // Write the stats to a file
             if (IniParams.LogEnabled) LogEntry();
@@ -888,24 +907,70 @@ namespace RouterMonitor
             }
         }
 
+        private void MQTT_HomeAssistant_Send_AutoDiscover(String Entity, String DeviceClass, String UnitOfMeasure)
+        {
+            String deviceClass;
+            String unitOfMeasure;
+
+            if (DeviceClass != "")
+                deviceClass = "\"device_class\": \"" + DeviceClass + "\", ";
+            else
+                deviceClass = "";
+
+            if (UnitOfMeasure != "")
+                unitOfMeasure = "\"unit_of_measurement\": \"" + UnitOfMeasure + "\", ";
+            else
+                unitOfMeasure = "";
+
+            mqtt.Publish_Application_Message(false, "homeassistant/sensor/mc801/" + Entity + "/config", "{ " + deviceClass + "\"name\": \"" + Entity + "\", \"state_topic\": \"routermonitor/mc801a\", " + unitOfMeasure + "\"value_template\": \"{{ value_json." + Entity + " }}\", \"unique_id\": \"" + Entity + "\", \"device\": { \"identifiers\": [\"routermonitor_mc801\" ],\"manufacturer\": \"ZTE\", \"model\": \"mc801a\",\"name\": \"mc801a\"} }");
+
+        }
+        private void MQTTHomeAssistantAutoDiscover()
+        {
+            MQTT_HomeAssistant_Send_AutoDiscover("Wan_IP", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_NetworkType", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_CellId", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_CAPrimaryBand", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_CAPrimaryBandwidth", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_CA1Band", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_CA1Bandwidth", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_RSRP", "signal_strength", "dBm");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_SINR", "signal_strength", "dB");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_PCI", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_EARFCN", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("NR_Band", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("NR_NRARFCN", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("NR_PCI", "", "");
+            MQTT_HomeAssistant_Send_AutoDiscover("NR_RSRP", "signal_strength", "dBm");
+            MQTT_HomeAssistant_Send_AutoDiscover("NR_SINR", "signal_strength", "dB");
+        }
+
         private void MQTTPublish()
         {
-            if (rc.RouterStats.wanip[0] != rc.RouterStats.wanip[1]) mqtt.Publish_Application_Message("wanip", rc.RouterStats.wanip[0]);
-            if (rc.RouterStats.mLTE_NetworkType[0] != rc.RouterStats.mLTE_NetworkType[1]) mqtt.Publish_Application_Message("LTE_NetworkType", rc.RouterStats.mLTE_NetworkType[0]);
-            if (rc.RouterStats.mLTE_CellId[0] != rc.RouterStats.mLTE_CellId[1]) mqtt.Publish_Application_Message("LTE_CellId", rc.RouterStats.mLTE_CellId[0]);
-            if (rc.RouterStats.mLTE_CAPrimaryBand[0] != rc.RouterStats.mLTE_CAPrimaryBand[1]) mqtt.Publish_Application_Message("LTE_CAPrimaryBand", rc.RouterStats.mLTE_CAPrimaryBand[0]);
-            if (rc.RouterStats.mLTE_CAPrimaryBandwidth[0] != rc.RouterStats.mLTE_CAPrimaryBandwidth[1]) mqtt.Publish_Application_Message("LTE_CAPrimaryBandwidth", rc.RouterStats.mLTE_CAPrimaryBandwidth[0]);
-            if (rc.RouterStats.mLTE_CA1Band[0] != rc.RouterStats.mLTE_CA1Band[1]) mqtt.Publish_Application_Message("LTE_CA1Band", rc.RouterStats.mLTE_CA1Band[0]);
-            if (rc.RouterStats.mLTE_CA1Bandwidth[0] != rc.RouterStats.mLTE_CA1Bandwidth[1]) mqtt.Publish_Application_Message("LTE_CA1Bandwidth", rc.RouterStats.mLTE_CA1Bandwidth[0]);
-            if (rc.RouterStats.mLTE_RSRP[0] != rc.RouterStats.mLTE_RSRP[1]) mqtt.Publish_Application_Message("LTE_RSRP", rc.RouterStats.mLTE_RSRP[0]);
-            if (rc.RouterStats.mLTE_SINR[0] != rc.RouterStats.mLTE_SINR[1]) mqtt.Publish_Application_Message("LTE_SINR", rc.RouterStats.mLTE_SINR[0]);
-            if (rc.RouterStats.mLTE_PCI[0] != rc.RouterStats.mLTE_PCI[1]) mqtt.Publish_Application_Message("LTE_PCI", rc.RouterStats.mLTE_PCI[0]);
-            if (rc.RouterStats.mLTE_EARFCN[0] != rc.RouterStats.mLTE_EARFCN[1]) mqtt.Publish_Application_Message("LTE_EARFCN", rc.RouterStats.mLTE_EARFCN[0]);
-            if (rc.RouterStats.m5G_Band[0] != rc.RouterStats.m5G_Band[1]) mqtt.Publish_Application_Message("5G_Band", rc.RouterStats.m5G_Band[0]);
-            if (rc.RouterStats.m5G_NRARFCN[0] != rc.RouterStats.m5G_NRARFCN[1]) mqtt.Publish_Application_Message("5G_NRARFCN", rc.RouterStats.m5G_NRARFCN[0]);
-            if (rc.RouterStats.m5G_PCI[0] != rc.RouterStats.m5G_PCI[1]) mqtt.Publish_Application_Message("5G_PCI", rc.RouterStats.m5G_PCI[0]);
-            if (rc.RouterStats.m5G_RSRP[0] != rc.RouterStats.m5G_RSRP[1]) mqtt.Publish_Application_Message("5G_RSRP", rc.RouterStats.m5G_RSRP[0]);
-            if (rc.RouterStats.m5G_SINR[0] != rc.RouterStats.m5G_SINR[1]) mqtt.Publish_Application_Message("5G_SINR", rc.RouterStats.m5G_SINR[0]);
+            List<String> Payload = new List<string>();
+
+            if (rc.RouterStats.wanip[0] != rc.RouterStats.wanip[1]) Payload.Add("\"Wan_IP\":\"" + rc.RouterStats.wanip[0] + "\"");
+            if (rc.RouterStats.mLTE_NetworkType[0] != rc.RouterStats.mLTE_NetworkType[1]) Payload.Add("\"LTE_NetworkType\":\"" + rc.RouterStats.mLTE_NetworkType[0] + "\"");
+            if (rc.RouterStats.mLTE_CellId[0] != rc.RouterStats.mLTE_CellId[1]) Payload.Add("\"LTE_CellId\":" + rc.RouterStats.mLTE_CellId[0]);
+            if (rc.RouterStats.mLTE_CAPrimaryBand[0] != rc.RouterStats.mLTE_CAPrimaryBand[1]) Payload.Add("\"LTE_CAPrimaryBand\":" + rc.RouterStats.mLTE_CAPrimaryBand[0]);
+            if (rc.RouterStats.mLTE_CAPrimaryBandwidth[0] != rc.RouterStats.mLTE_CAPrimaryBandwidth[1]) Payload.Add("\"LTE_CAPrimaryBandwidth\":" + rc.RouterStats.mLTE_CAPrimaryBandwidth[0]);
+            if (rc.RouterStats.mLTE_CA1Band[0] != rc.RouterStats.mLTE_CA1Band[1]) Payload.Add("\"LTE_CA1Band\":" + rc.RouterStats.mLTE_CA1Band[0]);
+            if (rc.RouterStats.mLTE_CA1Bandwidth[0] != rc.RouterStats.mLTE_CA1Bandwidth[1]) Payload.Add("\"LTE_CA1Bandwidth\":" + rc.RouterStats.mLTE_CA1Bandwidth[0]);
+            if (rc.RouterStats.mLTE_RSRP[0] != rc.RouterStats.mLTE_RSRP[1]) Payload.Add("\"LTE_RSRP\":" + rc.RouterStats.mLTE_RSRP[0]);
+            if (rc.RouterStats.mLTE_SINR[0] != rc.RouterStats.mLTE_SINR[1]) Payload.Add("\"LTE_SINR\":" + rc.RouterStats.mLTE_SINR[0]);
+            if (rc.RouterStats.mLTE_PCI[0] != rc.RouterStats.mLTE_PCI[1]) Payload.Add("\"LTE_PCI\":" + rc.RouterStats.mLTE_PCI[0]);
+            if (rc.RouterStats.mLTE_EARFCN[0] != rc.RouterStats.mLTE_EARFCN[1]) Payload.Add("\"LTE_EARFCN\":" + rc.RouterStats.mLTE_EARFCN[0]);
+            if (rc.RouterStats.m5G_Band[0] != rc.RouterStats.m5G_Band[1]) Payload.Add("\"NR_Band\":\"" + rc.RouterStats.m5G_Band[0] + "\"");
+            if (rc.RouterStats.m5G_NRARFCN[0] != rc.RouterStats.m5G_NRARFCN[1]) Payload.Add("\"NR_NRARFCN\":" + rc.RouterStats.m5G_NRARFCN[0]);
+            if (rc.RouterStats.m5G_PCI[0] != rc.RouterStats.m5G_PCI[1]) Payload.Add("\"NR_PCI\":" + rc.RouterStats.m5G_PCI[0]);
+            if (rc.RouterStats.m5G_RSRP[0] != rc.RouterStats.m5G_RSRP[1]) Payload.Add("\"NR_RSRP\":" + rc.RouterStats.m5G_RSRP[0]);
+            if (rc.RouterStats.m5G_SINR[0] != rc.RouterStats.m5G_SINR[1]) Payload.Add("\"NR_SINR\":" + rc.RouterStats.m5G_SINR[0]);
+
+            if (Payload.Count > 0)
+            {
+                String p = "{" + String.Join(",", Payload.ToArray()) + "}";
+                mqtt.Publish_Application_Message(true, "", p);
+            }
         }
 
 

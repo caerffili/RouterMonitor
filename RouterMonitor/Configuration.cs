@@ -62,6 +62,10 @@ namespace RouterMonitor
             EmailOnVarLine.Checked = ini.GetIniFileBool("Email", "EmailOnVarLine", false); ;
             EmailOnVarLinePollCount.Text = ini.GetIniFileString("Email", "EmailOnVarLinePollCount", "15");
 
+            checkBoxMQTTEnable.Checked = ini.GetIniFileBool("MQTT", "Enabled", false);
+            textBoxMQTTHost.Text = ini.GetIniFileString("MQTT", "Host", "");
+            textBoxMQTTBaseTopic.Text = ini.GetIniFileString("MQTT", "BaseTopic", "");
+
             LogEnabled.Checked = ini.GetIniFileBool("Logging", "Enabled", false);
             LogChangesOnly.Checked = ini.GetIniFileBool("Logging", "LogChangesOnly", true);
             LogFilename.Text = ini.GetIniFileString("Logging", "Filename", Application.StartupPath + @"\log.csv");
@@ -103,7 +107,9 @@ namespace RouterMonitor
             ini.WriteIniFileBool("Email", "EmailOnVarLine", EmailOnVarLine.Checked);
             ini.WriteIniFileString("Email", "EmailOnVarLinePollCount", EmailOnVarLinePollCount.Text);
 
-
+            ini.WriteIniFileBool("MQTT", "Enabled", checkBoxMQTTEnable.Checked);
+            ini.WriteIniFileString("MQTT", "Host", textBoxMQTTHost.Text);
+            ini.WriteIniFileString("MQTT", "BaseTopic", textBoxMQTTBaseTopic.Text);
 
             ini.WriteIniFileBool("Logging", "Enabled", LogEnabled.Checked);
             ini.WriteIniFileBool("Logging", "LogChangesOnly", LogChangesOnly.Checked);

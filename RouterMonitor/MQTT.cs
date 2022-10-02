@@ -16,25 +16,34 @@ namespace RouterMonitor
         String BaseTopic;
         String Host;
 
-        public MQTT(String BaseTopic, String Host)
+        public MQTT(String Host,String BaseTopic)
         {
-            this.BaseTopic = BaseTopic;
             this.Host = Host;
+            this.BaseTopic = BaseTopic;
         }
 
 
-        public void Publish_Application_Message(String Topic, int Payload)
+        public void Publish_Application_Message(bool IncludeBasePath, String Topic, int Payload)
         {
-            Publish_Application_Message(Topic, Payload.ToString());
+            Publish_Application_Message(IncludeBasePath, Topic, Payload.ToString());
         }
 
-        public void Publish_Application_Message(String Topic, decimal Payload)
+        public void Publish_Application_Message(bool IncludeBasePath, String Topic, decimal Payload)
         {
-            Publish_Application_Message(Topic, Payload.ToString());
+            Publish_Application_Message(IncludeBasePath, Topic, Payload.ToString());
         }
 
-        public async Task Publish_Application_Message(String Topic, String Payload)
+        public async Task Publish_Application_Message(bool IncludeBasePath, String Topic, String Payload)
         {
+            String a;
+
+            if (IncludeBasePath)
+                a = BaseTopic.TrimEnd('/').TrimStart('/');
+            else
+                a = "";
+
+            String b = Topic.TrimEnd('/').TrimStart('/');
+            String t = (a + "/" + b).TrimEnd('/').TrimStart('/');
             /*
              * This sample pushes a simple application message including a topic and a payload.
              *
@@ -55,7 +64,7 @@ namespace RouterMonitor
                 await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
                 var applicationMessage = new MqttApplicationMessageBuilder()
-                    .WithTopic(BaseTopic + "/" + Topic)
+                    .WithTopic(t)
                     .WithPayload(Payload)
                     .Build();
 

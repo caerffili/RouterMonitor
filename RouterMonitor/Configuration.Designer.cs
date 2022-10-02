@@ -37,6 +37,8 @@ namespace RouterMonitor
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Router = new System.Windows.Forms.TabPage();
+            this.label18 = new System.Windows.Forms.Label();
+            this.ModemType = new System.Windows.Forms.Label();
             this.RouterTelnetAllowed = new System.Windows.Forms.CheckBox();
             this.RouterRaiseTelnet = new System.Windows.Forms.CheckBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -81,14 +83,19 @@ namespace RouterMonitor
             this.label16 = new System.Windows.Forms.Label();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
-            this.ModemType = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.tabPageMQTT = new System.Windows.Forms.TabPage();
+            this.checkBoxMQTTEnable = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBoxMQTTHost = new System.Windows.Forms.TextBox();
+            this.textBoxMQTTBaseTopic = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.Router.SuspendLayout();
             this.Email.SuspendLayout();
             this.LogFile.SuspendLayout();
             this.ProgramConfig.SuspendLayout();
             this.Ping.SuspendLayout();
+            this.tabPageMQTT.SuspendLayout();
             this.SuspendLayout();
             // 
             // EmailEnabled
@@ -156,6 +163,7 @@ namespace RouterMonitor
             this.tabControl1.Controls.Add(this.LogFile);
             this.tabControl1.Controls.Add(this.ProgramConfig);
             this.tabControl1.Controls.Add(this.Ping);
+            this.tabControl1.Controls.Add(this.tabPageMQTT);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -186,6 +194,23 @@ namespace RouterMonitor
             this.Router.TabIndex = 0;
             this.Router.Text = "Router";
             this.Router.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(82, 44);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(31, 13);
+            this.label18.TabIndex = 15;
+            this.label18.Text = "Type";
+            // 
+            // ModemType
+            // 
+            this.ModemType.Location = new System.Drawing.Point(119, 45);
+            this.ModemType.Name = "ModemType";
+            this.ModemType.Size = new System.Drawing.Size(100, 23);
+            this.ModemType.TabIndex = 14;
+            this.ModemType.Text = "ModemType";
             // 
             // RouterTelnetAllowed
             // 
@@ -623,22 +648,62 @@ namespace RouterMonitor
             this.Cancel.Text = "Cancel";
             this.Cancel.UseVisualStyleBackColor = true;
             // 
-            // ModemType
+            // tabPageMQTT
             // 
-            this.ModemType.Location = new System.Drawing.Point(119, 45);
-            this.ModemType.Name = "ModemType";
-            this.ModemType.Size = new System.Drawing.Size(100, 23);
-            this.ModemType.TabIndex = 14;
-            this.ModemType.Text = "ModemType";
+            this.tabPageMQTT.Controls.Add(this.textBoxMQTTBaseTopic);
+            this.tabPageMQTT.Controls.Add(this.textBoxMQTTHost);
+            this.tabPageMQTT.Controls.Add(this.label21);
+            this.tabPageMQTT.Controls.Add(this.label20);
+            this.tabPageMQTT.Controls.Add(this.checkBoxMQTTEnable);
+            this.tabPageMQTT.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMQTT.Name = "tabPageMQTT";
+            this.tabPageMQTT.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMQTT.Size = new System.Drawing.Size(464, 312);
+            this.tabPageMQTT.TabIndex = 6;
+            this.tabPageMQTT.Text = "MQTT";
+            this.tabPageMQTT.UseVisualStyleBackColor = true;
             // 
-            // label18
+            // checkBoxMQTTEnable
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(82, 44);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(31, 13);
-            this.label18.TabIndex = 15;
-            this.label18.Text = "Type";
+            this.checkBoxMQTTEnable.AutoSize = true;
+            this.checkBoxMQTTEnable.Location = new System.Drawing.Point(12, 18);
+            this.checkBoxMQTTEnable.Name = "checkBoxMQTTEnable";
+            this.checkBoxMQTTEnable.Size = new System.Drawing.Size(93, 17);
+            this.checkBoxMQTTEnable.TabIndex = 0;
+            this.checkBoxMQTTEnable.Text = "Enable MQTT";
+            this.checkBoxMQTTEnable.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(51, 46);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(29, 13);
+            this.label20.TabIndex = 2;
+            this.label20.Text = "Host";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(19, 72);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(61, 13);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Base Topic";
+            // 
+            // textBoxMQTTHost
+            // 
+            this.textBoxMQTTHost.Location = new System.Drawing.Point(86, 43);
+            this.textBoxMQTTHost.Name = "textBoxMQTTHost";
+            this.textBoxMQTTHost.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMQTTHost.TabIndex = 4;
+            // 
+            // textBoxMQTTBaseTopic
+            // 
+            this.textBoxMQTTBaseTopic.Location = new System.Drawing.Point(86, 69);
+            this.textBoxMQTTBaseTopic.Name = "textBoxMQTTBaseTopic";
+            this.textBoxMQTTBaseTopic.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMQTTBaseTopic.TabIndex = 5;
             // 
             // Configuration
             // 
@@ -666,6 +731,8 @@ namespace RouterMonitor
             this.ProgramConfig.PerformLayout();
             this.Ping.ResumeLayout(false);
             this.Ping.PerformLayout();
+            this.tabPageMQTT.ResumeLayout(false);
+            this.tabPageMQTT.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -727,5 +794,11 @@ namespace RouterMonitor
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label ModemType;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TabPage tabPageMQTT;
+        private System.Windows.Forms.TextBox textBoxMQTTBaseTopic;
+        private System.Windows.Forms.TextBox textBoxMQTTHost;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.CheckBox checkBoxMQTTEnable;
     }
 }
