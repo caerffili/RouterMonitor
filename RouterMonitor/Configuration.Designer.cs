@@ -89,6 +89,13 @@ namespace RouterMonitor
             this.label21 = new System.Windows.Forms.Label();
             this.textBoxMQTTHost = new System.Windows.Forms.TextBox();
             this.textBoxMQTTBaseTopic = new System.Windows.Forms.TextBox();
+            this.checkBoxMQTTHomeAssistantEnabled = new System.Windows.Forms.CheckBox();
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.textBoxMQTTHomeAssistantUniqueID = new System.Windows.Forms.TextBox();
+            this.textBoxMQTTHomeAssistantDeviceName = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.Router.SuspendLayout();
             this.Email.SuspendLayout();
@@ -650,6 +657,13 @@ namespace RouterMonitor
             // 
             // tabPageMQTT
             // 
+            this.tabPageMQTT.Controls.Add(this.label23);
+            this.tabPageMQTT.Controls.Add(this.textBoxMQTTHomeAssistantDeviceName);
+            this.tabPageMQTT.Controls.Add(this.textBoxMQTTHomeAssistantUniqueID);
+            this.tabPageMQTT.Controls.Add(this.label22);
+            this.tabPageMQTT.Controls.Add(this.label19);
+            this.tabPageMQTT.Controls.Add(this.textBoxMQTTHomeAssistantDiscoveryBaseTopic);
+            this.tabPageMQTT.Controls.Add(this.checkBoxMQTTHomeAssistantEnabled);
             this.tabPageMQTT.Controls.Add(this.textBoxMQTTBaseTopic);
             this.tabPageMQTT.Controls.Add(this.textBoxMQTTHost);
             this.tabPageMQTT.Controls.Add(this.label21);
@@ -676,7 +690,7 @@ namespace RouterMonitor
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(51, 46);
+            this.label20.Location = new System.Drawing.Point(74, 46);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(29, 13);
             this.label20.TabIndex = 2;
@@ -685,7 +699,7 @@ namespace RouterMonitor
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(19, 72);
+            this.label21.Location = new System.Drawing.Point(42, 72);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(61, 13);
             this.label21.TabIndex = 3;
@@ -693,17 +707,75 @@ namespace RouterMonitor
             // 
             // textBoxMQTTHost
             // 
-            this.textBoxMQTTHost.Location = new System.Drawing.Point(86, 43);
+            this.textBoxMQTTHost.Location = new System.Drawing.Point(109, 43);
             this.textBoxMQTTHost.Name = "textBoxMQTTHost";
-            this.textBoxMQTTHost.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMQTTHost.Size = new System.Drawing.Size(178, 20);
             this.textBoxMQTTHost.TabIndex = 4;
             // 
             // textBoxMQTTBaseTopic
             // 
-            this.textBoxMQTTBaseTopic.Location = new System.Drawing.Point(86, 69);
+            this.textBoxMQTTBaseTopic.Location = new System.Drawing.Point(109, 69);
             this.textBoxMQTTBaseTopic.Name = "textBoxMQTTBaseTopic";
-            this.textBoxMQTTBaseTopic.Size = new System.Drawing.Size(100, 20);
+            this.textBoxMQTTBaseTopic.Size = new System.Drawing.Size(178, 20);
             this.textBoxMQTTBaseTopic.TabIndex = 5;
+            // 
+            // checkBoxMQTTHomeAssistantEnabled
+            // 
+            this.checkBoxMQTTHomeAssistantEnabled.AutoSize = true;
+            this.checkBoxMQTTHomeAssistantEnabled.Location = new System.Drawing.Point(12, 117);
+            this.checkBoxMQTTHomeAssistantEnabled.Name = "checkBoxMQTTHomeAssistantEnabled";
+            this.checkBoxMQTTHomeAssistantEnabled.Size = new System.Drawing.Size(154, 17);
+            this.checkBoxMQTTHomeAssistantEnabled.TabIndex = 6;
+            this.checkBoxMQTTHomeAssistantEnabled.Text = "Enable Home Assistant link";
+            this.checkBoxMQTTHomeAssistantEnabled.UseVisualStyleBackColor = true;
+            // 
+            // textBoxMQTTHomeAssistantDiscoveryBaseTopic
+            // 
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Location = new System.Drawing.Point(109, 167);
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Name = "textBoxMQTTHomeAssistantDiscoveryBaseTopic";
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.TabIndex = 7;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(19, 170);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(84, 13);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "Discovery Topic";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(48, 196);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(55, 13);
+            this.label22.TabIndex = 9;
+            this.label22.Text = "Unique ID";
+            // 
+            // textBoxMQTTHomeAssistantUniqueID
+            // 
+            this.textBoxMQTTHomeAssistantUniqueID.Location = new System.Drawing.Point(109, 193);
+            this.textBoxMQTTHomeAssistantUniqueID.Name = "textBoxMQTTHomeAssistantUniqueID";
+            this.textBoxMQTTHomeAssistantUniqueID.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTHomeAssistantUniqueID.TabIndex = 10;
+            // 
+            // textBoxMQTTHomeAssistantDeviceName
+            // 
+            this.textBoxMQTTHomeAssistantDeviceName.Location = new System.Drawing.Point(109, 141);
+            this.textBoxMQTTHomeAssistantDeviceName.Name = "textBoxMQTTHomeAssistantDeviceName";
+            this.textBoxMQTTHomeAssistantDeviceName.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTHomeAssistantDeviceName.TabIndex = 11;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(31, 144);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(72, 13);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "Device Name";
             // 
             // Configuration
             // 
@@ -800,5 +872,12 @@ namespace RouterMonitor
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.CheckBox checkBoxMQTTEnable;
+        private System.Windows.Forms.CheckBox checkBoxMQTTHomeAssistantEnabled;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBoxMQTTHomeAssistantDiscoveryBaseTopic;
+        private System.Windows.Forms.TextBox textBoxMQTTHomeAssistantUniqueID;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox textBoxMQTTHomeAssistantDeviceName;
     }
 }

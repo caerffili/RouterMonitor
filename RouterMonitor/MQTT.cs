@@ -35,15 +35,13 @@ namespace RouterMonitor
 
         public async Task Publish_Application_Message(bool IncludeBasePath, String Topic, String Payload)
         {
-            String a;
+            String t;
 
             if (IncludeBasePath)
-                a = BaseTopic.TrimEnd('/').TrimStart('/');
+                t = (BaseTopic + "/" + Topic).TrimStart('/').TrimEnd('/');
             else
-                a = "";
+                t = Topic.TrimStart('/').TrimEnd('/'); ;
 
-            String b = Topic.TrimEnd('/').TrimStart('/');
-            String t = (a + "/" + b).TrimEnd('/').TrimStart('/');
             /*
              * This sample pushes a simple application message including a topic and a payload.
              *

@@ -65,6 +65,10 @@ namespace RouterMonitor
             checkBoxMQTTEnable.Checked = ini.GetIniFileBool("MQTT", "Enabled", false);
             textBoxMQTTHost.Text = ini.GetIniFileString("MQTT", "Host", "");
             textBoxMQTTBaseTopic.Text = ini.GetIniFileString("MQTT", "BaseTopic", "");
+            checkBoxMQTTHomeAssistantEnabled.Checked = ini.GetIniFileBool("MQTT", "HomeAssistantEnabled", false);
+            textBoxMQTTHomeAssistantDeviceName.Text = ini.GetIniFileString("MQTT", "HomeAssistantDeviceName", "");
+            textBoxMQTTHomeAssistantDiscoveryBaseTopic.Text = ini.GetIniFileString("MQTT", "HomeAssistantDiscoveryBaseTopic", "");
+            textBoxMQTTHomeAssistantUniqueID.Text = ini.GetIniFileString("MQTT", "HomeAssistantUniqueID", "");
 
             LogEnabled.Checked = ini.GetIniFileBool("Logging", "Enabled", false);
             LogChangesOnly.Checked = ini.GetIniFileBool("Logging", "LogChangesOnly", true);
@@ -110,6 +114,10 @@ namespace RouterMonitor
             ini.WriteIniFileBool("MQTT", "Enabled", checkBoxMQTTEnable.Checked);
             ini.WriteIniFileString("MQTT", "Host", textBoxMQTTHost.Text);
             ini.WriteIniFileString("MQTT", "BaseTopic", textBoxMQTTBaseTopic.Text);
+            ini.WriteIniFileBool("MQTT", "HomeAssistantEnabled", checkBoxMQTTHomeAssistantEnabled.Checked);
+            ini.WriteIniFileString("MQTT", "HomeAssistantDeviceName", textBoxMQTTHomeAssistantDeviceName.Text);
+            ini.WriteIniFileString("MQTT", "HomeAssistantDiscoveryBaseTopic", textBoxMQTTHomeAssistantDiscoveryBaseTopic.Text);
+            ini.WriteIniFileString("MQTT", "HomeAssistantUniqueID", textBoxMQTTHomeAssistantUniqueID.Text);
 
             ini.WriteIniFileBool("Logging", "Enabled", LogEnabled.Checked);
             ini.WriteIniFileBool("Logging", "LogChangesOnly", LogChangesOnly.Checked);

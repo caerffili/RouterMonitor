@@ -42,7 +42,11 @@ namespace RouterMonitor
         public bool MQTTEnabled;
         public String MQTTHost;
         public String MQTTBaseTopic;
-        
+        public bool MQTTHomeAssistantEnabled;
+        public String MQTTHomeAssistantDeviceName;
+        public String MQTTHomeAssistantDiscoveryBaseTopic;
+        public String MQTTHomeAssistantUniqueID;
+
 
         public bool LogEnabled;
         public bool LogChangesOnly;
@@ -166,6 +170,7 @@ namespace RouterMonitor
                     IniParams.EmailEnabled = false;
                     IniParams.LogEnabled = false;
                     IniParams.MQTTEnabled = false;
+                    IniParams.MQTTHomeAssistantEnabled = false;
                 }
             }
             else
@@ -286,8 +291,12 @@ namespace RouterMonitor
             IniParams.EmailOnVarLinePollCount = Convert.ToInt32(ini.GetIniFileString("Email", "EmailOnVarLinePollCount", "15"));
 
             IniParams.MQTTEnabled = ini.GetIniFileBool("MQTT", "Enabled", false);
-            IniParams.MQTTHost = ini.GetIniFileString("MQTT", "Host", "");
-            IniParams.MQTTBaseTopic = ini.GetIniFileString("MQTT", "BaseTopic", "");
+            IniParams.MQTTHost = ini.GetIniFileString("MQTT", "Host", "").TrimStart('/').TrimEnd('/');
+            IniParams.MQTTBaseTopic = ini.GetIniFileString("MQTT", "BaseTopic", "").TrimStart('/').TrimEnd('/');
+            IniParams.MQTTHomeAssistantEnabled = ini.GetIniFileBool("MQTT", "HomeAssistantEnabled", false);
+            IniParams.MQTTHomeAssistantDeviceName = ini.GetIniFileString("MQTT", "HomeAssistantDeviceName", "");
+            IniParams.MQTTHomeAssistantDiscoveryBaseTopic = ini.GetIniFileString("MQTT", "HomeAssistantDiscoveryBaseTopic", "").TrimStart('/').TrimEnd('/');
+            IniParams.MQTTHomeAssistantUniqueID = ini.GetIniFileString("MQTT", "HomeAssistantUniqueID", "").TrimStart('/').TrimEnd('/');
 
             IniParams.LogEnabled = ini.GetIniFileBool("Logging", "Enabled", false);
             IniParams.LogChangesOnly = ini.GetIniFileBool("Logging", "LogChangesOnly", true);
@@ -585,7 +594,10 @@ namespace RouterMonitor
             if (IniParams.MQTTEnabled)
             {
                 mqtt = new MQTT(IniParams.MQTTHost, IniParams.MQTTBaseTopic);
-                MQTTHomeAssistantAutoDiscover();
+                if (IniParams.MQTTHomeAssistantEnabled)
+                {
+                    MQTTHomeAssistantAutoDiscover();
+                }
             }
 
             Disconnect.Enabled = true;
@@ -922,7 +934,7 @@ namespace RouterMonitor
             else
                 unitOfMeasure = "";
 
-            mqtt.Publish_Application_Message(false, "homeassistant/sensor/mc801/" + Entity + "/config", "{ " + deviceClass + "\"name\": \"" + Entity + "\", \"state_topic\": \"routermonitor/mc801a\", " + unitOfMeasure + "\"value_template\": \"{{ value_json." + Entity + " }}\", \"unique_id\": \"" + Entity + "\", \"device\": { \"identifiers\": [\"routermonitor_mc801\" ],\"manufacturer\": \"ZTE\", \"model\": \"mc801a\",\"name\": \"mc801a\"} }");
+            mqtt.Publish_Application_Message(false, IniParams.MQTTHomeAssistantDiscoveryBaseTopic + "/sensor/" + IniParams.MQTTHomeAssistantUniqueID + "/" + Entity + "/config", "{ " + deviceClass + "\"name\": \"" + Entity + "\", \"state_topic\": \"" + IniParams .MQTTBaseTopic + "\", " + unitOfMeasure + "\"value_template\": \"{{ value_json." + Entity + " }}\", \"unique_id\": \"" + IniParams.MQTTHomeAssistantUniqueID + "_" + Entity + "\", \"device\": { \"identifiers\": [\"routermonitor_" + IniParams.MQTTHomeAssistantUniqueID + "\" ],\"manufacturer\": \"ZTE\", \"model\": \"mc801a\",\"name\": \"" + IniParams.MQTTHomeAssistantDeviceName + "\"} }");
 
         }
         private void MQTTHomeAssistantAutoDiscover()
