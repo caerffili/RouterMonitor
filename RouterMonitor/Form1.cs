@@ -17,10 +17,12 @@ namespace RouterMonitor
 {
     struct iniparamsstruct
     {
-        public string RouterIPAddress;       // IPAddress of the router
         public bool RouterRaiseTelnet;
         public bool RouterTelnetAllowed;
         public string ModemType;
+        public bool PersistentLogin;
+
+        public string RouterIPAddress;       // IPAddress of the router
         public string RouterModel;
         public string RouterUsername;
         public string RouterPassword;
@@ -266,10 +268,13 @@ namespace RouterMonitor
             string inifile = Application.StartupPath + @"\config.ini";
             iniaccess ini = new iniaccess(inifile);
 
-            IniParams.RouterModel = ini.GetIniFileString("Router", "RouterModel", "");
+
             IniParams.RouterRaiseTelnet = ini.GetIniFileBool("Router", "RaiseTelnet", true);
             IniParams.RouterTelnetAllowed = ini.GetIniFileBool("Router", "TelnetAllowed", true);
             IniParams.ModemType = ini.GetIniFileString("Router", "ModemType", "ADSL");
+            IniParams.PersistentLogin = ini.GetIniFileBool("Router", "PersistentLogin", true);
+
+            IniParams.RouterModel = ini.GetIniFileString("Router", "RouterModel", "");
             IniParams.RouterIPAddress = ini.GetIniFileString("Router", "IP", "192.168.1.1");
             IniParams.RouterUsername = ini.GetIniFileString("Router", "RouterUsername", "");
 
@@ -418,22 +423,7 @@ namespace RouterMonitor
             if (IniParams.ModemType == "5G")
             {
                 text2_1.Text = rc.RouterStats.mLTE_CellId[0].ToString();
-
-                StringBuilder sb = new StringBuilder();
-                if (rc.RouterStats.mLTE_CAPrimaryBand[0] > 1)
-                {
-                    sb.Append("B" + rc.RouterStats.mLTE_CAPrimaryBand[0].ToString() + " (" + rc.RouterStats.mLTE_CAPrimaryBandwidth[0].ToString() + "MHz)");
-                    if (rc.RouterStats.mLTE_CA1Band[0] > 1)
-                    {
-                        sb.Append(" + B" + rc.RouterStats.mLTE_CA1Band[0].ToString() + " (" + rc.RouterStats.mLTE_CA1Bandwidth[0].ToString() + "MHz)");
-                    }
-                    text2_2.Text = sb.ToString();
-                }
-                else
-                {
-                    text2_2.Text = rc.RouterStats.mLTE_ActiveBand[0];
-                }
-
+                text2_2.Text = rc.RouterStats.LTE_Bands[0];
                 text2_3.Text = rc.RouterStats.mLTE_RSRP[0].ToString() + " dBm";
                 text2_4.Text = rc.RouterStats.mLTE_SINR[0].ToString() + " dB";
                 text2_5.Text = rc.RouterStats.mLTE_PCI[0].ToString();
@@ -451,8 +441,8 @@ namespace RouterMonitor
                 text3_8.Text = "";
             }
 
-            DSLMode.Text = "DSL Mode : " + rc.RouterStats.dslmode[0];
-            if (rc.RouterStats.dslstatus != null) DSLStatus.Text = "DSL Status : " + textInfo.ToTitleCase(rc.RouterStats.dslstatus[0]);
+            DSLMode.Text = "Mode : " + rc.RouterStats.dslmode[0];
+            if (rc.RouterStats.dslstatus != null) DSLStatus.Text = "Modem Status : " + textInfo.ToTitleCase(rc.RouterStats.dslstatus[0]);
             WanIP.Text = "WAN IP : " + rc.RouterStats.wanip[0];
 
             Firmware.Text = "Firmware : " + rc.RouterStats.Firmware;
@@ -885,6 +875,11 @@ namespace RouterMonitor
                 PollInProgress = true;
             }
 
+            if (!IniParams.PersistentLogin)
+            {
+                rc.Login();
+            }
+
             UpdateStatus("Polling...");
 
             rc.RouterStats.RollHistory();
@@ -911,6 +906,10 @@ namespace RouterMonitor
             // Enable the Tone button
             Tones.Enabled = rc.RouterStats.receivedtones;
 
+            if (IniParams.PersistentLogin)
+            {
+                DisconnectRouter();
+            }
 
             // Wait for lock and update on the PollingInProgress variable
             lock (PollingLock)
@@ -937,6 +936,7 @@ namespace RouterMonitor
             mqtt.Publish_Application_Message(false, IniParams.MQTTHomeAssistantDiscoveryBaseTopic + "/sensor/" + IniParams.MQTTHomeAssistantUniqueID + "/" + Entity + "/config", "{ " + deviceClass + "\"name\": \"" + Entity + "\", \"state_topic\": \"" + IniParams .MQTTBaseTopic + "\", " + unitOfMeasure + "\"value_template\": \"{{ value_json." + Entity + " }}\", \"unique_id\": \"" + IniParams.MQTTHomeAssistantUniqueID + "_" + Entity + "\", \"device\": { \"identifiers\": [\"routermonitor_" + IniParams.MQTTHomeAssistantUniqueID + "\" ],\"manufacturer\": \"ZTE\", \"model\": \"mc801a\",\"name\": \"" + IniParams.MQTTHomeAssistantDeviceName + "\"} }");
 
         }
+
         private void MQTTHomeAssistantAutoDiscover()
         {
             MQTT_HomeAssistant_Send_AutoDiscover("Wan_IP", "", "");
@@ -955,30 +955,90 @@ namespace RouterMonitor
             MQTT_HomeAssistant_Send_AutoDiscover("NR_PCI", "", "");
             MQTT_HomeAssistant_Send_AutoDiscover("NR_RSRP", "signal_strength", "dBm");
             MQTT_HomeAssistant_Send_AutoDiscover("NR_SINR", "signal_strength", "dB");
+            MQTT_HomeAssistant_Send_AutoDiscover("LTE_Bands", "", "");
         }
 
         private void MQTTPublish()
         {
             List<String> Payload = new List<string>();
 
-            if (rc.RouterStats.wanip[0] != rc.RouterStats.wanip[1]) Payload.Add("\"Wan_IP\":\"" + rc.RouterStats.wanip[0] + "\"");
-            if (rc.RouterStats.mLTE_NetworkType[0] != rc.RouterStats.mLTE_NetworkType[1]) Payload.Add("\"LTE_NetworkType\":\"" + rc.RouterStats.mLTE_NetworkType[0] + "\"");
-            if (rc.RouterStats.mLTE_CellId[0] != rc.RouterStats.mLTE_CellId[1]) Payload.Add("\"LTE_CellId\":" + rc.RouterStats.mLTE_CellId[0]);
-            if (rc.RouterStats.mLTE_CAPrimaryBand[0] != rc.RouterStats.mLTE_CAPrimaryBand[1]) Payload.Add("\"LTE_CAPrimaryBand\":" + rc.RouterStats.mLTE_CAPrimaryBand[0]);
-            if (rc.RouterStats.mLTE_CAPrimaryBandwidth[0] != rc.RouterStats.mLTE_CAPrimaryBandwidth[1]) Payload.Add("\"LTE_CAPrimaryBandwidth\":" + rc.RouterStats.mLTE_CAPrimaryBandwidth[0]);
-            if (rc.RouterStats.mLTE_CA1Band[0] != rc.RouterStats.mLTE_CA1Band[1]) Payload.Add("\"LTE_CA1Band\":" + rc.RouterStats.mLTE_CA1Band[0]);
-            if (rc.RouterStats.mLTE_CA1Bandwidth[0] != rc.RouterStats.mLTE_CA1Bandwidth[1]) Payload.Add("\"LTE_CA1Bandwidth\":" + rc.RouterStats.mLTE_CA1Bandwidth[0]);
-            if (rc.RouterStats.mLTE_RSRP[0] != rc.RouterStats.mLTE_RSRP[1]) Payload.Add("\"LTE_RSRP\":" + rc.RouterStats.mLTE_RSRP[0]);
-            if (rc.RouterStats.mLTE_SINR[0] != rc.RouterStats.mLTE_SINR[1]) Payload.Add("\"LTE_SINR\":" + rc.RouterStats.mLTE_SINR[0]);
-            if (rc.RouterStats.mLTE_PCI[0] != rc.RouterStats.mLTE_PCI[1]) Payload.Add("\"LTE_PCI\":" + rc.RouterStats.mLTE_PCI[0]);
-            if (rc.RouterStats.mLTE_EARFCN[0] != rc.RouterStats.mLTE_EARFCN[1]) Payload.Add("\"LTE_EARFCN\":" + rc.RouterStats.mLTE_EARFCN[0]);
-            if (rc.RouterStats.m5G_Band[0] != rc.RouterStats.m5G_Band[1]) Payload.Add("\"NR_Band\":\"" + rc.RouterStats.m5G_Band[0] + "\"");
-            if (rc.RouterStats.m5G_NRARFCN[0] != rc.RouterStats.m5G_NRARFCN[1]) Payload.Add("\"NR_NRARFCN\":" + rc.RouterStats.m5G_NRARFCN[0]);
-            if (rc.RouterStats.m5G_PCI[0] != rc.RouterStats.m5G_PCI[1]) Payload.Add("\"NR_PCI\":" + rc.RouterStats.m5G_PCI[0]);
-            if (rc.RouterStats.m5G_RSRP[0] != rc.RouterStats.m5G_RSRP[1]) Payload.Add("\"NR_RSRP\":" + rc.RouterStats.m5G_RSRP[0]);
-            if (rc.RouterStats.m5G_SINR[0] != rc.RouterStats.m5G_SINR[1]) Payload.Add("\"NR_SINR\":" + rc.RouterStats.m5G_SINR[0]);
+            List<String> PublishedEntities = new List<string>();
+            PublishedEntities.Add("wanip");
+            PublishedEntities.Add("mLTE_NetworkType");
+            PublishedEntities.Add("mLTE_CellId");
+            PublishedEntities.Add("mLTE_CAPrimaryBand");
+            PublishedEntities.Add("mLTE_CAPrimaryBandwidth");
+            PublishedEntities.Add("mLTE_CA1Band");
+            PublishedEntities.Add("mLTE_CA1Bandwidth");
+            PublishedEntities.Add("mLTE_RSRP");
+            PublishedEntities.Add("mLTE_SINR");
+            PublishedEntities.Add("mLTE_PCI");
+            PublishedEntities.Add("mLTE_EARFCN");
+            PublishedEntities.Add("m5G_Band");
+            PublishedEntities.Add("m5G_NRARFCN");
+            PublishedEntities.Add("m5G_PCI");
+            PublishedEntities.Add("m5G_RSRP");
+            PublishedEntities.Add("m5G_SINR");
+            PublishedEntities.Add("LTE_Bands");
+            
 
-            if (Payload.Count > 0)
+            bool Send = false;
+
+            foreach (String Entity in PublishedEntities)
+            {
+                if (Entity== "wanip") Payload.Add("\"Wan_IP\":\"" + rc.RouterStats.wanip[0] + "\"");
+                if (rc.RouterStats.wanip[0] != rc.RouterStats.wanip[1]) Send = true;
+
+                if (Entity == "mLTE_NetworkType") Payload.Add("\"LTE_NetworkType\":\"" + rc.RouterStats.mLTE_NetworkType[0] + "\"");
+                if (rc.RouterStats.mLTE_NetworkType[0] != rc.RouterStats.mLTE_NetworkType[1]) Send = true;
+
+                if (Entity == "mLTE_CellId") Payload.Add("\"LTE_CellId\":" + rc.RouterStats.mLTE_CellId[0]);
+                if (rc.RouterStats.mLTE_CellId[0] != rc.RouterStats.mLTE_CellId[1]) Send = true;
+
+                if (Entity == "mLTE_CAPrimaryBand")  Payload.Add("\"LTE_CAPrimaryBand\":" + rc.RouterStats.mLTE_CAPrimaryBand[0]);
+                if (rc.RouterStats.mLTE_CAPrimaryBand[0] != rc.RouterStats.mLTE_CAPrimaryBand[1]) Send = true;
+
+                if (Entity == "mLTE_CAPrimaryBandwidth") Payload.Add("\"LTE_CAPrimaryBandwidth\":" + rc.RouterStats.mLTE_CAPrimaryBandwidth[0]);
+                if (rc.RouterStats.mLTE_CAPrimaryBandwidth[0] != rc.RouterStats.mLTE_CAPrimaryBandwidth[1]) Send = true;
+
+                if (Entity == "mLTE_CA1Band") Payload.Add("\"LTE_CA1Band\":" + rc.RouterStats.mLTE_CA1Band[0]);
+                if (rc.RouterStats.mLTE_CA1Band[0] != rc.RouterStats.mLTE_CA1Band[1]) Send = true;
+
+                if (Entity == "mLTE_CA1Bandwidth") Payload.Add("\"LTE_CA1Bandwidth\":" + rc.RouterStats.mLTE_CA1Bandwidth[0]);
+                if (rc.RouterStats.mLTE_CA1Bandwidth[0] != rc.RouterStats.mLTE_CA1Bandwidth[1]) Send = true;
+
+                if (Entity == "mLTE_RSRP") Payload.Add("\"LTE_RSRP\":" + rc.RouterStats.mLTE_RSRP[0]);
+                if (rc.RouterStats.mLTE_RSRP[0] != rc.RouterStats.mLTE_RSRP[1]) Send = true;
+
+                if (Entity == "mLTE_SINR") Payload.Add("\"LTE_SINR\":" + rc.RouterStats.mLTE_SINR[0]);
+                if (rc.RouterStats.mLTE_SINR[0] != rc.RouterStats.mLTE_SINR[1]) Send = true;
+
+                if (Entity == "mLTE_PCI") Payload.Add("\"LTE_PCI\":" + rc.RouterStats.mLTE_PCI[0]);
+                if (rc.RouterStats.mLTE_PCI[0] != rc.RouterStats.mLTE_PCI[1]) Send = true;
+
+                if (Entity == "mLTE_EARFCN") Payload.Add("\"LTE_EARFCN\":" + rc.RouterStats.mLTE_EARFCN[0]);
+                if (rc.RouterStats.mLTE_EARFCN[0] != rc.RouterStats.mLTE_EARFCN[1]) Send = true;
+
+                if (Entity == "m5G_Band") Payload.Add("\"NR_Band\":\"" + rc.RouterStats.m5G_Band[0] + "\"");
+                if (rc.RouterStats.m5G_Band[0] != rc.RouterStats.m5G_Band[1]) Send = true;
+
+                if (Entity == "m5G_NRARFCN") Payload.Add("\"NR_NRARFCN\":" + rc.RouterStats.m5G_NRARFCN[0]);
+                if (rc.RouterStats.m5G_NRARFCN[0] != rc.RouterStats.m5G_NRARFCN[1]) Send = true;
+
+                if (Entity == "m5G_PCI") Payload.Add("\"NR_PCI\":" + rc.RouterStats.m5G_PCI[0]);
+                if (rc.RouterStats.m5G_PCI[0] != rc.RouterStats.m5G_PCI[1]) Send = true;
+
+                if (Entity == "m5G_RSRP") Payload.Add("\"NR_RSRP\":" + rc.RouterStats.m5G_RSRP[0]);
+                if (rc.RouterStats.m5G_RSRP[0] != rc.RouterStats.m5G_RSRP[1]) Send = true;
+
+                if (Entity == "m5G_SINR") Payload.Add("\"NR_SINR\":" + rc.RouterStats.m5G_SINR[0]);
+                if (rc.RouterStats.m5G_SINR[0] != rc.RouterStats.m5G_SINR[1]) Send = true;
+
+                if (Entity == "LTE_Bands") Payload.Add("\"LTE_Bands\":\"" + rc.RouterStats.LTE_Bands[0] + "\"");
+                if (rc.RouterStats.LTE_Bands[0] != rc.RouterStats.LTE_Bands[1]) Send = true;
+            }
+
+            if (Send)
             {
                 String p = "{" + String.Join(",", Payload.ToArray()) + "}";
                 mqtt.Publish_Application_Message(true, "", p);

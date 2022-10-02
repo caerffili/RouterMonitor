@@ -84,6 +84,8 @@ namespace RouterMonitor
 
         public string[] mLTE_NetworkType;
         public int[] mLTE_CellId;
+
+        public String[] LTE_Bands;
         public String[] mLTE_ActiveBand;
         public int[] mLTE_ActiveBandwidth;
         public int[] mLTE_CAPrimaryBand;
@@ -165,6 +167,7 @@ namespace RouterMonitor
 
             mLTE_NetworkType = new string[HistoryQty];
             mLTE_CellId = new int[HistoryQty];
+            LTE_Bands = new String[HistoryQty];
             mLTE_ActiveBand = new String[HistoryQty];
             mLTE_ActiveBandwidth = new int[HistoryQty];
             mLTE_CAPrimaryBand = new int[HistoryQty];
@@ -238,6 +241,7 @@ namespace RouterMonitor
 
                 mLTE_NetworkType[i + 1] = mLTE_NetworkType[i];
                 mLTE_CellId[i + 1] = mLTE_CellId[i];
+                LTE_Bands[i + 1] = LTE_Bands[i];
                 mLTE_ActiveBand[i + 1] = mLTE_ActiveBand[i];
                 mLTE_ActiveBandwidth[i + 1] = mLTE_ActiveBandwidth[i];
                 mLTE_CAPrimaryBand[i + 1] = mLTE_CAPrimaryBand[i];
@@ -272,6 +276,22 @@ namespace RouterMonitor
             upCRCerrors[0] = Math.Max(Math.Max(upCRCerrorInt[0], upCRCerrorFast[0]), upCRCerrors[0]);
             upHECerrors[0] = Math.Max(Math.Max(upHECerrorInt[0], upHECerrorFast[0]), upHECerrors[0]);
             upFECerrors[0] = Math.Max(Math.Max(upFECerrorInt[0], upFECerrorFast[0]), upFECerrors[0]);
+
+
+            StringBuilder sb = new StringBuilder();
+            if (mLTE_CAPrimaryBand[0] > 1)
+            {
+                sb.Append("B" + mLTE_CAPrimaryBand[0].ToString() + " (" + mLTE_CAPrimaryBandwidth[0].ToString() + "MHz)");
+                if (mLTE_CA1Band[0] > 1)
+                {
+                    sb.Append(" + B" + mLTE_CA1Band[0].ToString() + " (" + mLTE_CA1Bandwidth[0].ToString() + "MHz)");
+                }
+                LTE_Bands[0] = sb.ToString();
+            }
+            else
+            {
+                LTE_Bands[0] = mLTE_ActiveBand[0];
+            }
         }
 
         public void Clear()
@@ -358,6 +378,7 @@ namespace RouterMonitor
 
                 mLTE_NetworkType[i] = "";
                 mLTE_CellId[i] = 0;
+                LTE_Bands[i] = "";
                 mLTE_ActiveBand[i] = "";
                 mLTE_ActiveBandwidth[i] = 0;
                 mLTE_CAPrimaryBand[i] = 0;

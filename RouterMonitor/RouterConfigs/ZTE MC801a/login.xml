@@ -3,14 +3,14 @@
 <tests>
 
 
-  <test>
+  <!--test>
     <action>
       <commandtype>html</commandtype>
       <method>get</method>
       <authentication>Cookie</authentication>
       <url><![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?multi_data=1&isTest=false&cmd=modem_main_state%2Copms_wan_mode%2Copms_wan_auto_mode%2Cloginfo%2Cnew_version_state%2Ccurrent_upgrade_state%2Cis_mandatory%2Cwifi_dfs_status%2Cbattery_value%2Cppp_dial_conn_fail_counter&_=1663582698446]]></url>
     </action>
-  </test>
+  </test-->
 
   <!-- Get challenge -->
   <test>

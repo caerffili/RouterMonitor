@@ -54,6 +54,9 @@ namespace RouterMonitor
 
         public bool Login()
         {
+            RouterAuthChallenge = "";
+            hn.cookies = null;
+
             return GetStats(RouterConfigPath + @"\" + RouterModel + @"\login.xml");
         }
 

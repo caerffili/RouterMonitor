@@ -567,9 +567,9 @@ namespace RouterMonitor
             this.DSLMode.AutoSize = true;
             this.DSLMode.Location = new System.Drawing.Point(220, 24);
             this.DSLMode.Name = "DSLMode";
-            this.DSLMode.Size = new System.Drawing.Size(113, 13);
+            this.DSLMode.Size = new System.Drawing.Size(89, 13);
             this.DSLMode.TabIndex = 14;
-            this.DSLMode.Text = "DSL Mode : Unknown";
+            this.DSLMode.Text = "Mode : Unknown";
             // 
             // DSLStatus
             // 
@@ -577,7 +577,7 @@ namespace RouterMonitor
             this.DSLStatus.Name = "DSLStatus";
             this.DSLStatus.Size = new System.Drawing.Size(197, 14);
             this.DSLStatus.TabIndex = 15;
-            this.DSLStatus.Text = "DSL Status : Unknown";
+            this.DSLStatus.Text = "Modem Status : Unknown";
             // 
             // WanIP
             // 
@@ -808,7 +808,7 @@ namespace RouterMonitor
             this.groupBox3.Size = new System.Drawing.Size(393, 91);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "DSL Info";
+            this.groupBox3.Text = "Modem Info";
             // 
             // groupBox1
             // 
@@ -866,7 +866,7 @@ namespace RouterMonitor
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Padding = new System.Windows.Forms.Padding(2);
-            this.Text = "DSL Monitor";
+            this.Text = "Router Monitor";
             this.Downstream.ResumeLayout(false);
             this.Downstream.PerformLayout();
             this.Upstream.ResumeLayout(false);

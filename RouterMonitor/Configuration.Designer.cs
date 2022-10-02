@@ -96,6 +96,7 @@ namespace RouterMonitor
             this.textBoxMQTTHomeAssistantUniqueID = new System.Windows.Forms.TextBox();
             this.textBoxMQTTHomeAssistantDeviceName = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.PersistentLogin = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.Router.SuspendLayout();
             this.Email.SuspendLayout();
@@ -179,6 +180,7 @@ namespace RouterMonitor
             // 
             // Router
             // 
+            this.Router.Controls.Add(this.PersistentLogin);
             this.Router.Controls.Add(this.label18);
             this.Router.Controls.Add(this.ModemType);
             this.Router.Controls.Add(this.RouterTelnetAllowed);
@@ -244,7 +246,7 @@ namespace RouterMonitor
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(61, 137);
+            this.label14.Location = new System.Drawing.Point(61, 158);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(55, 13);
             this.label14.TabIndex = 11;
@@ -252,7 +254,7 @@ namespace RouterMonitor
             // 
             // RouterUsername
             // 
-            this.RouterUsername.Location = new System.Drawing.Point(119, 134);
+            this.RouterUsername.Location = new System.Drawing.Point(119, 155);
             this.RouterUsername.Name = "RouterUsername";
             this.RouterUsername.Size = new System.Drawing.Size(161, 20);
             this.RouterUsername.TabIndex = 2;
@@ -290,7 +292,7 @@ namespace RouterMonitor
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 189);
+            this.label6.Location = new System.Drawing.Point(11, 210);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(102, 13);
             this.label6.TabIndex = 7;
@@ -298,7 +300,7 @@ namespace RouterMonitor
             // 
             // PolingInt
             // 
-            this.PolingInt.Location = new System.Drawing.Point(119, 186);
+            this.PolingInt.Location = new System.Drawing.Point(119, 207);
             this.PolingInt.Name = "PolingInt";
             this.PolingInt.Size = new System.Drawing.Size(161, 20);
             this.PolingInt.TabIndex = 4;
@@ -307,7 +309,7 @@ namespace RouterMonitor
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(60, 163);
+            this.label5.Location = new System.Drawing.Point(60, 184);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 5;
@@ -316,7 +318,7 @@ namespace RouterMonitor
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(61, 111);
+            this.label4.Location = new System.Drawing.Point(61, 132);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 13);
             this.label4.TabIndex = 4;
@@ -324,14 +326,14 @@ namespace RouterMonitor
             // 
             // RouterIP
             // 
-            this.RouterIP.Location = new System.Drawing.Point(119, 108);
+            this.RouterIP.Location = new System.Drawing.Point(119, 129);
             this.RouterIP.Name = "RouterIP";
             this.RouterIP.Size = new System.Drawing.Size(161, 20);
             this.RouterIP.TabIndex = 1;
             // 
             // RouterPassword
             // 
-            this.RouterPassword.Location = new System.Drawing.Point(119, 160);
+            this.RouterPassword.Location = new System.Drawing.Point(119, 181);
             this.RouterPassword.Name = "RouterPassword";
             this.RouterPassword.PasswordChar = '*';
             this.RouterPassword.Size = new System.Drawing.Size(161, 20);
@@ -777,6 +779,17 @@ namespace RouterMonitor
             this.label23.TabIndex = 12;
             this.label23.Text = "Device Name";
             // 
+            // PersistentLogin
+            // 
+            this.PersistentLogin.AutoSize = true;
+            this.PersistentLogin.Enabled = false;
+            this.PersistentLogin.Location = new System.Drawing.Point(239, 91);
+            this.PersistentLogin.Name = "PersistentLogin";
+            this.PersistentLogin.Size = new System.Drawing.Size(101, 17);
+            this.PersistentLogin.TabIndex = 16;
+            this.PersistentLogin.Text = "Persistent Login";
+            this.PersistentLogin.UseVisualStyleBackColor = true;
+            // 
             // Configuration
             // 
             this.AcceptButton = this.OK;
@@ -879,5 +892,6 @@ namespace RouterMonitor
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBoxMQTTHomeAssistantDeviceName;
+        private System.Windows.Forms.CheckBox PersistentLogin;
     }
 }
