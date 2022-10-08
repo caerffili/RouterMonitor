@@ -163,9 +163,39 @@
     <None Include="RouterConfigs\Draytek 2800\router.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="RouterConfigs\Lede 5g\enquire.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede 5g\initialisation.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede 5g\login.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede 5g\routerinfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede ADSL\enquire.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede ADSL\initialisation.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede ADSL\router.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede 5g\router.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="RouterConfigs\PheeNet WAP-654G\router.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="RouterConfigs\Lede ADSL\login.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RouterConfigs\Lede ADSL\routerinfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="RouterConfigs\ZTE MC801a\router.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

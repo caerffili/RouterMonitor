@@ -11,7 +11,8 @@ namespace RouterMonitor
     {
         None,
         Basic,
-        Cookie
+        Cookie,
+        Token
     }
 
     public class HTMLEngine

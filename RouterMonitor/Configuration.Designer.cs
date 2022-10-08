@@ -37,6 +37,7 @@ namespace RouterMonitor
             this.label3 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Router = new System.Windows.Forms.TabPage();
+            this.PersistentLogin = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
             this.ModemType = new System.Windows.Forms.Label();
             this.RouterTelnetAllowed = new System.Windows.Forms.CheckBox();
@@ -81,22 +82,23 @@ namespace RouterMonitor
             this.PingHost1 = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.tabPageMQTT = new System.Windows.Forms.TabPage();
+            this.label23 = new System.Windows.Forms.Label();
+            this.textBoxMQTTHomeAssistantDeviceName = new System.Windows.Forms.TextBox();
+            this.textBoxMQTTHomeAssistantUniqueID = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic = new System.Windows.Forms.TextBox();
+            this.checkBoxMQTTHomeAssistantEnabled = new System.Windows.Forms.CheckBox();
+            this.textBoxMQTTBaseTopic = new System.Windows.Forms.TextBox();
+            this.textBoxMQTTHost = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.checkBoxMQTTEnable = new System.Windows.Forms.CheckBox();
             this.OK = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
-            this.tabPageMQTT = new System.Windows.Forms.TabPage();
-            this.checkBoxMQTTEnable = new System.Windows.Forms.CheckBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBoxMQTTHost = new System.Windows.Forms.TextBox();
-            this.textBoxMQTTBaseTopic = new System.Windows.Forms.TextBox();
-            this.checkBoxMQTTHomeAssistantEnabled = new System.Windows.Forms.CheckBox();
-            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.textBoxMQTTHomeAssistantUniqueID = new System.Windows.Forms.TextBox();
-            this.textBoxMQTTHomeAssistantDeviceName = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.PersistentLogin = new System.Windows.Forms.CheckBox();
+            this.checkBoxHTTPS = new System.Windows.Forms.CheckBox();
+            this.checkBoxIgnoreSSLCert = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.Router.SuspendLayout();
             this.Email.SuspendLayout();
@@ -180,6 +182,8 @@ namespace RouterMonitor
             // 
             // Router
             // 
+            this.Router.Controls.Add(this.checkBoxIgnoreSSLCert);
+            this.Router.Controls.Add(this.checkBoxHTTPS);
             this.Router.Controls.Add(this.PersistentLogin);
             this.Router.Controls.Add(this.label18);
             this.Router.Controls.Add(this.ModemType);
@@ -203,6 +207,17 @@ namespace RouterMonitor
             this.Router.TabIndex = 0;
             this.Router.Text = "Router";
             this.Router.UseVisualStyleBackColor = true;
+            // 
+            // PersistentLogin
+            // 
+            this.PersistentLogin.AutoSize = true;
+            this.PersistentLogin.Enabled = false;
+            this.PersistentLogin.Location = new System.Drawing.Point(239, 91);
+            this.PersistentLogin.Name = "PersistentLogin";
+            this.PersistentLogin.Size = new System.Drawing.Size(101, 17);
+            this.PersistentLogin.TabIndex = 16;
+            this.PersistentLogin.Text = "Persistent Login";
+            this.PersistentLogin.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
@@ -636,27 +651,6 @@ namespace RouterMonitor
             this.label16.TabIndex = 0;
             this.label16.Text = "Host 1";
             // 
-            // OK
-            // 
-            this.OK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.OK.Location = new System.Drawing.Point(165, 356);
-            this.OK.Name = "OK";
-            this.OK.Size = new System.Drawing.Size(75, 23);
-            this.OK.TabIndex = 9;
-            this.OK.Text = "OK";
-            this.OK.UseVisualStyleBackColor = true;
-            this.OK.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // Cancel
-            // 
-            this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancel.Location = new System.Drawing.Point(255, 356);
-            this.Cancel.Name = "Cancel";
-            this.Cancel.Size = new System.Drawing.Size(75, 23);
-            this.Cancel.TabIndex = 10;
-            this.Cancel.Text = "Cancel";
-            this.Cancel.UseVisualStyleBackColor = true;
-            // 
             // tabPageMQTT
             // 
             this.tabPageMQTT.Controls.Add(this.label23);
@@ -679,47 +673,53 @@ namespace RouterMonitor
             this.tabPageMQTT.Text = "MQTT";
             this.tabPageMQTT.UseVisualStyleBackColor = true;
             // 
-            // checkBoxMQTTEnable
+            // label23
             // 
-            this.checkBoxMQTTEnable.AutoSize = true;
-            this.checkBoxMQTTEnable.Location = new System.Drawing.Point(12, 18);
-            this.checkBoxMQTTEnable.Name = "checkBoxMQTTEnable";
-            this.checkBoxMQTTEnable.Size = new System.Drawing.Size(93, 17);
-            this.checkBoxMQTTEnable.TabIndex = 0;
-            this.checkBoxMQTTEnable.Text = "Enable MQTT";
-            this.checkBoxMQTTEnable.UseVisualStyleBackColor = true;
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(31, 144);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(72, 13);
+            this.label23.TabIndex = 12;
+            this.label23.Text = "Device Name";
             // 
-            // label20
+            // textBoxMQTTHomeAssistantDeviceName
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(74, 46);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(29, 13);
-            this.label20.TabIndex = 2;
-            this.label20.Text = "Host";
+            this.textBoxMQTTHomeAssistantDeviceName.Location = new System.Drawing.Point(109, 141);
+            this.textBoxMQTTHomeAssistantDeviceName.Name = "textBoxMQTTHomeAssistantDeviceName";
+            this.textBoxMQTTHomeAssistantDeviceName.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTHomeAssistantDeviceName.TabIndex = 11;
             // 
-            // label21
+            // textBoxMQTTHomeAssistantUniqueID
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(42, 72);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(61, 13);
-            this.label21.TabIndex = 3;
-            this.label21.Text = "Base Topic";
+            this.textBoxMQTTHomeAssistantUniqueID.Location = new System.Drawing.Point(109, 193);
+            this.textBoxMQTTHomeAssistantUniqueID.Name = "textBoxMQTTHomeAssistantUniqueID";
+            this.textBoxMQTTHomeAssistantUniqueID.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTHomeAssistantUniqueID.TabIndex = 10;
             // 
-            // textBoxMQTTHost
+            // label22
             // 
-            this.textBoxMQTTHost.Location = new System.Drawing.Point(109, 43);
-            this.textBoxMQTTHost.Name = "textBoxMQTTHost";
-            this.textBoxMQTTHost.Size = new System.Drawing.Size(178, 20);
-            this.textBoxMQTTHost.TabIndex = 4;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(48, 196);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(55, 13);
+            this.label22.TabIndex = 9;
+            this.label22.Text = "Unique ID";
             // 
-            // textBoxMQTTBaseTopic
+            // label19
             // 
-            this.textBoxMQTTBaseTopic.Location = new System.Drawing.Point(109, 69);
-            this.textBoxMQTTBaseTopic.Name = "textBoxMQTTBaseTopic";
-            this.textBoxMQTTBaseTopic.Size = new System.Drawing.Size(178, 20);
-            this.textBoxMQTTBaseTopic.TabIndex = 5;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(19, 170);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(84, 13);
+            this.label19.TabIndex = 8;
+            this.label19.Text = "Discovery Topic";
+            // 
+            // textBoxMQTTHomeAssistantDiscoveryBaseTopic
+            // 
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Location = new System.Drawing.Point(109, 167);
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Name = "textBoxMQTTHomeAssistantDiscoveryBaseTopic";
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.TabIndex = 7;
             // 
             // checkBoxMQTTHomeAssistantEnabled
             // 
@@ -731,64 +731,88 @@ namespace RouterMonitor
             this.checkBoxMQTTHomeAssistantEnabled.Text = "Enable Home Assistant link";
             this.checkBoxMQTTHomeAssistantEnabled.UseVisualStyleBackColor = true;
             // 
-            // textBoxMQTTHomeAssistantDiscoveryBaseTopic
+            // textBoxMQTTBaseTopic
             // 
-            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Location = new System.Drawing.Point(109, 167);
-            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Name = "textBoxMQTTHomeAssistantDiscoveryBaseTopic";
-            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.Size = new System.Drawing.Size(178, 20);
-            this.textBoxMQTTHomeAssistantDiscoveryBaseTopic.TabIndex = 7;
+            this.textBoxMQTTBaseTopic.Location = new System.Drawing.Point(109, 69);
+            this.textBoxMQTTBaseTopic.Name = "textBoxMQTTBaseTopic";
+            this.textBoxMQTTBaseTopic.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTBaseTopic.TabIndex = 5;
             // 
-            // label19
+            // textBoxMQTTHost
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(19, 170);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(84, 13);
-            this.label19.TabIndex = 8;
-            this.label19.Text = "Discovery Topic";
+            this.textBoxMQTTHost.Location = new System.Drawing.Point(109, 43);
+            this.textBoxMQTTHost.Name = "textBoxMQTTHost";
+            this.textBoxMQTTHost.Size = new System.Drawing.Size(178, 20);
+            this.textBoxMQTTHost.TabIndex = 4;
             // 
-            // label22
+            // label21
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(48, 196);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(55, 13);
-            this.label22.TabIndex = 9;
-            this.label22.Text = "Unique ID";
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(42, 72);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(61, 13);
+            this.label21.TabIndex = 3;
+            this.label21.Text = "Base Topic";
             // 
-            // textBoxMQTTHomeAssistantUniqueID
+            // label20
             // 
-            this.textBoxMQTTHomeAssistantUniqueID.Location = new System.Drawing.Point(109, 193);
-            this.textBoxMQTTHomeAssistantUniqueID.Name = "textBoxMQTTHomeAssistantUniqueID";
-            this.textBoxMQTTHomeAssistantUniqueID.Size = new System.Drawing.Size(178, 20);
-            this.textBoxMQTTHomeAssistantUniqueID.TabIndex = 10;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(74, 46);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(29, 13);
+            this.label20.TabIndex = 2;
+            this.label20.Text = "Host";
             // 
-            // textBoxMQTTHomeAssistantDeviceName
+            // checkBoxMQTTEnable
             // 
-            this.textBoxMQTTHomeAssistantDeviceName.Location = new System.Drawing.Point(109, 141);
-            this.textBoxMQTTHomeAssistantDeviceName.Name = "textBoxMQTTHomeAssistantDeviceName";
-            this.textBoxMQTTHomeAssistantDeviceName.Size = new System.Drawing.Size(178, 20);
-            this.textBoxMQTTHomeAssistantDeviceName.TabIndex = 11;
+            this.checkBoxMQTTEnable.AutoSize = true;
+            this.checkBoxMQTTEnable.Location = new System.Drawing.Point(12, 18);
+            this.checkBoxMQTTEnable.Name = "checkBoxMQTTEnable";
+            this.checkBoxMQTTEnable.Size = new System.Drawing.Size(93, 17);
+            this.checkBoxMQTTEnable.TabIndex = 0;
+            this.checkBoxMQTTEnable.Text = "Enable MQTT";
+            this.checkBoxMQTTEnable.UseVisualStyleBackColor = true;
             // 
-            // label23
+            // OK
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(31, 144);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(72, 13);
-            this.label23.TabIndex = 12;
-            this.label23.Text = "Device Name";
+            this.OK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.OK.Location = new System.Drawing.Point(165, 356);
+            this.OK.Name = "OK";
+            this.OK.Size = new System.Drawing.Size(75, 23);
+            this.OK.TabIndex = 9;
+            this.OK.Text = "OK";
+            this.OK.UseVisualStyleBackColor = true;
+            this.OK.Click += new System.EventHandler(this.button1_Click);
             // 
-            // PersistentLogin
+            // Cancel
             // 
-            this.PersistentLogin.AutoSize = true;
-            this.PersistentLogin.Enabled = false;
-            this.PersistentLogin.Location = new System.Drawing.Point(239, 91);
-            this.PersistentLogin.Name = "PersistentLogin";
-            this.PersistentLogin.Size = new System.Drawing.Size(101, 17);
-            this.PersistentLogin.TabIndex = 16;
-            this.PersistentLogin.Text = "Persistent Login";
-            this.PersistentLogin.UseVisualStyleBackColor = true;
+            this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Cancel.Location = new System.Drawing.Point(255, 356);
+            this.Cancel.Name = "Cancel";
+            this.Cancel.Size = new System.Drawing.Size(75, 23);
+            this.Cancel.TabIndex = 10;
+            this.Cancel.Text = "Cancel";
+            this.Cancel.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxHTTPS
+            // 
+            this.checkBoxHTTPS.AutoSize = true;
+            this.checkBoxHTTPS.Location = new System.Drawing.Point(119, 248);
+            this.checkBoxHTTPS.Name = "checkBoxHTTPS";
+            this.checkBoxHTTPS.Size = new System.Drawing.Size(105, 17);
+            this.checkBoxHTTPS.TabIndex = 17;
+            this.checkBoxHTTPS.Text = "Secure (HTTPS)";
+            this.checkBoxHTTPS.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxIgnoreSSLCert
+            // 
+            this.checkBoxIgnoreSSLCert.AutoSize = true;
+            this.checkBoxIgnoreSSLCert.Location = new System.Drawing.Point(119, 272);
+            this.checkBoxIgnoreSSLCert.Name = "checkBoxIgnoreSSLCert";
+            this.checkBoxIgnoreSSLCert.Size = new System.Drawing.Size(131, 17);
+            this.checkBoxIgnoreSSLCert.TabIndex = 18;
+            this.checkBoxIgnoreSSLCert.Text = "Ignore Certificate Error";
+            this.checkBoxIgnoreSSLCert.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
@@ -893,5 +917,7 @@ namespace RouterMonitor
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBoxMQTTHomeAssistantDeviceName;
         private System.Windows.Forms.CheckBox PersistentLogin;
+        private System.Windows.Forms.CheckBox checkBoxIgnoreSSLCert;
+        private System.Windows.Forms.CheckBox checkBoxHTTPS;
     }
 }

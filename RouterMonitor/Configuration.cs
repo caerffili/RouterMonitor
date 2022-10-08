@@ -47,6 +47,8 @@ namespace RouterMonitor
             RouterIP.Text = ini.GetIniFileString("Router", "IP", "192.168.1.1");
             RouterUsername.Text = ini.GetIniFileString("Router", "RouterUsername", "");
             RouterPassword.Text = Decrypt(ini.GetIniFileString("Router", "Password", ""));
+            checkBoxHTTPS.Checked = ini.GetIniFileBool("Router", "HTTPS", true);
+            checkBoxIgnoreSSLCert.Checked = ini.GetIniFileBool("Router", "IgnoreSSLCert", true);
 
             PolingInt.Text = ini.GetIniFileString("Router", "PollInterval", "60");
 
@@ -97,8 +99,8 @@ namespace RouterMonitor
             ini.WriteIniFileString("Router", "RouterUsername", RouterUsername.Text);
             ini.WriteIniFileString("Router", "Password", Encrypt(RouterPassword.Text));
             ini.WriteIniFileString("Router", "PollInterval", PolingInt.Text);
-
-
+            ini.WriteIniFileBool("Router", "HTTPS", checkBoxHTTPS.Checked);
+            ini.WriteIniFileBool("Router", "IgnoreSSLCert", checkBoxIgnoreSSLCert.Checked);
 
             ini.WriteIniFileBool("Email", "Enabled", EmailEnabled.Checked);
             ini.WriteIniFileString("Email", "SMTPServer", EmailSMTPServer.Text);

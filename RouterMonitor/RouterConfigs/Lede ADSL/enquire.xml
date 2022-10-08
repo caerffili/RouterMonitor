@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>post</method>
+      <authentication>Token</authentication>
+      <url>http://{ipaddress}/ubus</url>
+      <data><![CDATA[  {"jsonrpc":"2.0","id":62,"method":"call","params":["{routerauthtoken}","dsl","metrics",{}]}] ]]></data>
+    </action>
+
+    <results>
+      <htmlparser>"model":"{model}"</htmlparser>
+      <htmlparser>"version":"{firmware}"</htmlparser>
+      <jsonparser>result.mode:dslmode</jsonparser>
+      <jsonparser>result.state:dslstatus</jsonparser>
+      <jsonparser>result.state:dslstatus</jsonparser>
+      
+      <jsonparser>result.upstream.data_rate:uploadint</jsonparser>
+      <jsonparser>result.upstream.snr:upstreamsnr</jsonparser>
+      <jsonparser>result.upstream.actatp:upstreampower</jsonparser>
+      <jsonparser>result.upstream.latn:upstreamatt</jsonparser>
+
+      <jsonparser>result.downstream.data_rate:downloadint</jsonparser>
+      <jsonparser>result.downstream.snr:downstreamsnr</jsonparser>
+      <jsonparser>result.downstream.actatp:downstreampower</jsonparser>
+      <jsonparser>result.downstream.latn:downstreamatt</jsonparser>
+
+      
+    </results>
+  </test>
+
+<!--
+  {"jsonrpc":"2.0","id":62,"result":[0,{
+  "api_version":"4.17.18.6",
+  "firmware_version":"5.7.9.9.0.6",
+  "chipset":"Lantiq-VRX200",
+  "driver_version":"1.5.17.6",
+  "state":"Showtime with TC-Layer sync",
+  "state_num":7,
+  "up":true,
+  "uptime":2188211,
+  "atu_c":{"vendor_id":[181,0,66,68,67,77,193,144],
+  "vendor":"Broadcom 193.144",
+  "system_vendor_id":[181,0,66,68,67,77,0,0],
+  "system_vendor":"Broadcom",
+  "version":[118,49,49,46,48,48,46,48,57,0,0,0,0,0,0,0],
+  "serial":[81,68,48,75,51,48,48,48,57,48,52,95,49,57,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]},
+  "power_state":"L0 - Synchronized",
+  "power_state_num":0,
+  "xtse":[0,0,0,0,0,0,0,2],
+  "annex":"B",
+  "standard":"G.993.2",
+  "profile":"17a",
+  "mode":"G.993.2 (VDSL2, Profile 17a)",
+  "upstream":{"vector":false,"trellis":true,"bitswap":false,"retx":false,"virtual_noise":false,"interleave_delay":0,"data_rate":800000,"latn":15.000000,"satn":15.000000,"snr":13.900000,"actps":-90.100000,"actatp":10.300000,"attndr":1075000},
+  "downstream":{"vector":false,"trellis":true,"bitswap":true,"retx":true,"virtual_noise":false,"interleave_delay":210,"data_rate":9999000,"latn":38.400000,"satn":31.600000,"snr":11.900000,"actps":-90.100000,"actatp":12.900000,"attndr":9970524},
+  "errors":{"near":{"es":15,"ses":1,"loss":0,"uas":167,"lofs":0,"fecs":0,"hec":0,"ibe":0,"crc_p":0,"crcp_p":0,"cv_p":0,"cvp_p":0,"rx_corrupted":70641,"rx_uncorrected_protected":5509,"rx_retransmitted":0,"rx_corrected":65132,"tx_retransmitted":0},
+  "far":{"es":80,"ses":0,"loss":0,"uas":167,"lofs":0,"fecs":0,"hec":0,"ibe":0,"crc_p":0,"crcp_p":0,"cv_p":0,"cvp_p":0}}}]},
+
+-->
+
+
+
+  <!--test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>get</method>
+      <authentication>Cookie</authentication>
+      <url>
+        <![CDATA[http://{ipaddress}/goform/goform_get_cmd_process?multi_data=1&isTest=false&sms_received_flag_flag=0&sts_received_flag_flag=0&cmd=modem_main_state%2Copms_wan_mode%2Copms_wan_auto_mode%2Cloginfo%2Cnew_version_state%2Ccurrent_upgrade_state%2Cis_mandatory%2Cwifi_dfs_status%2Cbattery_value%2Cppp_dial_conn_fail_counter%2Cwan_ipaddr%2csignalbar%2Cnetwork_type%2Cpin_status%2Cnetwork_provider%2Copms_wan_auto_mode%2Cdhcp_wan_status%2Cwifi_lbd_enable%2Cppp_status%2CEX_SSID1%2Csta_ip_status%2CEX_wifi_profile%2Cm_ssid_enable%2CRadioOff%2Cwifi_onoff_state%2Cwifi_chip1_ssid1_ssid%2Cwifi_chip2_ssid1_ssid%2Cwifi_chip1_ssid1_access_sta_num%2Cwifi_chip2_ssid1_access_sta_num%2Csimcard_roam%2Clan_ipaddr%2Cstation_mac%2Cwifi_access_sta_num%2Cbattery_charging%2Cbattery_vol_percent%2Cbattery_pers%2Cspn_name_data%2Cspn_b1_flag%2Cspn_b2_flag%2Crealtime_tx_bytes%2Crealtime_rx_bytes%2Crealtime_time%2Crealtime_tx_thrpt%2Crealtime_rx_thrpt%2Cmonthly_rx_bytes%2Cmonthly_tx_bytes%2Cmonthly_time%2Cdate_month%2Cdata_volume_limit_switch%2Cdata_volume_limit_size%2Cdata_volume_alert_percent%2Cdata_volume_limit_unit%2Croam_setting_option%2Cupg_roam_switch%2Cssid%2Cwifi_enable%2Cwifi_5g_enable%2Ccheck_web_conflict%2Cdial_mode%2Cppp_dial_conn_fail_counter%2Cwan_lte_ca%2Cprivacy_read_flag%2Cis_night_mode%2Cpppoe_status%2Cdhcp_wan_status%2Cstatic_wan_status%2Cvpn_conn_status%2Crmcc%2Crmnc%2Cwan_connect_status%2Csms_received_flag%2Csts_received_flag%2Csms_unread_num%2Cwifi_chip1_ssid2_access_sta_num%2Cwifi_chip2_ssid2_access_sta_num&_=1663601967579]]></url>
+    </action>
+    <results>
+      <htmlparser>"modem_main_state":"{dslstatus}"</htmlparser>
+      <htmlparser>"opms_wan_mode":"PPP"</htmlparser>
+      <htmlparser>"opms_wan_auto_mode":"AUTO_LTE_GATEWAY"</htmlparser>
+      <htmlparser>"loginfo":"ok"</htmlparser>
+      <htmlparser>"new_version_state":"version_idle"</htmlparser>
+      <htmlparser>"current_upgrade_state":"fota_idle"</htmlparser>
+      <htmlparser>"is_mandatory":""</htmlparser>
+      <htmlparser>"wifi_dfs_status":"0"</htmlparser>
+      <htmlparser>"battery_value":"100"</htmlparser>
+      <htmlparser>"ppp_dial_conn_fail_counter":"0"</htmlparser>
+      <htmlparser>"signalbar":"5"</htmlparser>
+      <htmlparser>"network_type":"ENDC"</htmlparser>
+      <htmlparser>"pin_status":"0"</htmlparser>
+      <htmlparser>"network_provider":"3"</htmlparser>
+      <htmlparser>"opms_wan_auto_mode":"AUTO_LTE_GATEWAY"</htmlparser>
+      <htmlparser>"dhcp_wan_status":"0"</htmlparser>
+      <htmlparser>"wifi_lbd_enable":"1"</htmlparser>
+      <htmlparser>"ppp_status":"ppp_connected"</htmlparser>
+      <htmlparser>"EX_SSID1":""</htmlparser>
+      <htmlparser>"sta_ip_status":"disconnect"</htmlparser>
+      <htmlparser>"EX_wifi_profile":""</htmlparser>
+      <htmlparser>"m_ssid_enable":""</htmlparser>
+      <htmlparser>"RadioOff":"0"</htmlparser>
+      <htmlparser>"wifi_onoff_state":"0"</htmlparser>
+      <htmlparser>"wifi_chip1_ssid1_ssid":"Three_D388AD"</htmlparser>
+      <htmlparser>"wifi_chip2_ssid1_ssid":"Three_D388AD"</htmlparser>
+      <htmlparser>"wifi_chip1_ssid1_access_sta_num":"0"</htmlparser>
+      <htmlparser>"wifi_chip2_ssid1_access_sta_num":"0"</htmlparser>
+      <htmlparser>"simcard_roam":"Home"</htmlparser>
+      <htmlparser>"lan_ipaddr":"192.168.0.1"</htmlparser>
+      <htmlparser>"station_mac":""</htmlparser>
+      <htmlparser>"wifi_access_sta_num":"0"</htmlparser>
+      <htmlparser>"battery_charging":"0"</htmlparser>
+      <htmlparser>"battery_vol_percent":"100"</htmlparser>
+      <htmlparser>"battery_pers":"4"</htmlparser>
+      <htmlparser>"spn_name_data":""</htmlparser>
+      <htmlparser>"spn_b1_flag":"0"</htmlparser>
+      <htmlparser>"spn_b2_flag":"0"</htmlparser>
+      <htmlparser>"realtime_tx_bytes":"185515836"</htmlparser>
+      <htmlparser>"realtime_rx_bytes":"1176941350"</htmlparser>
+      <htmlparser>"realtime_time":"87231"</htmlparser>
+      <htmlparser>"realtime_tx_thrpt":"0"</htmlparser>
+      <htmlparser>"realtime_rx_thrpt":"0"</htmlparser>
+      <htmlparser>"monthly_rx_bytes":"1973687125"</htmlparser>
+      <htmlparser>"monthly_tx_bytes":"254611596"</htmlparser>
+      <htmlparser>"monthly_time":"90691"</htmlparser>
+      <htmlparser>"date_month":"20221001"</htmlparser>
+      <htmlparser>"data_volume_limit_switch":"0"</htmlparser>
+      <htmlparser>"data_volume_limit_size":""</htmlparser>
+      <htmlparser>"data_volume_alert_percent":""</htmlparser>
+      <htmlparser>"data_volume_limit_unit":""</htmlparser>
+      <htmlparser>"roam_setting_option":"off"</htmlparser>
+      <htmlparser>"upg_roam_switch":"0"</htmlparser>
+      <htmlparser>"ssid":""</htmlparser>
+      <htmlparser>"wifi_enable":""</htmlparser>
+      <htmlparser>"wifi_5g_enable":"0"</htmlparser>
+      <htmlparser>"check_web_conflict":"ok"</htmlparser>
+      <htmlparser>"dial_mode":"auto_dial"</htmlparser>
+      <htmlparser>"ppp_dial_conn_fail_counter":"0"</htmlparser>
+      <htmlparser>"wan_lte_ca":"ca_deactivated"</htmlparser>
+      <htmlparser>"privacy_read_flag":"1"</htmlparser>
+      <htmlparser>"is_night_mode":"0"</htmlparser>
+      <htmlparser>"pppoe_status":"ppp_disconnected"</htmlparser>
+      <htmlparser>"dhcp_wan_status":"0"</htmlparser>
+      <htmlparser>"static_wan_status":""</htmlparser>
+      <htmlparser>"vpn_conn_status":"disconnected"</htmlparser>
+      <htmlparser>"rmcc":"234","rmnc":"20"</htmlparser>
+      <htmlparser>"wan_connect_status":"pdp_connected"</htmlparser>
+      <htmlparser>"sms_received_flag":""</htmlparser>
+      <htmlparser>"sts_received_flag":""</htmlparser>
+      <htmlparser>"sms_unread_num":"0"</htmlparser>
+      <htmlparser>"sms_dev_unread_num":"0"</htmlparser>
+      <htmlparser>"sms_sim_unread_num":"0"</htmlparser>
+      <htmlparser>"wifi_chip1_ssid2_access_sta_num":"0"</htmlparser>
+      <htmlparser>"wifi_chip2_ssid2_access_sta_num":"0"</htmlparser>
+      <htmlparser>"wan_ipaddr":"{wanip}"</htmlparser>
+    </results>
+  </test-->
+
+
+</tests>
+
+
+
+

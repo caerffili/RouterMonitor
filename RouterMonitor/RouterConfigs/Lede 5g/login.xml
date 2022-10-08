@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>post</method>
+      <authentication>Token</authentication>
+      <url>http://{ipaddress}/ubus</url>
+      <data><![CDATA[{ "jsonrpc": "2.0", "id": 1, "method": "call", "params": [ "00000000000000000000000000000000", "session", "login", { "username": "{username}", "password": "{password}"  } ] }]]></data>
+    </action>
+    
+    <results>
+      <htmlparser>"ubus_rpc_session":"{routerauthtoken}"</htmlparser>
+    </results>
+  </test>
+</tests>
+
+
+

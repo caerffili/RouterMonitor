@@ -26,6 +26,8 @@ namespace RouterMonitor
         public string RouterModel;
         public string RouterUsername;
         public string RouterPassword;
+        public bool HTTPS;
+        public bool IgnoreSSLCert;
 
         public bool EmailEnabled;
         public string EmailSMTPServer;
@@ -277,6 +279,8 @@ namespace RouterMonitor
             IniParams.RouterModel = ini.GetIniFileString("Router", "RouterModel", "");
             IniParams.RouterIPAddress = ini.GetIniFileString("Router", "IP", "192.168.1.1");
             IniParams.RouterUsername = ini.GetIniFileString("Router", "RouterUsername", "");
+            IniParams.HTTPS = ini.GetIniFileBool("Router", "HTTPS", true);
+            IniParams.IgnoreSSLCert = ini.GetIniFileBool("Router", "IgnoreSSLCert", true);
 
             Configuration cnf = new Configuration();
             IniParams.RouterPassword = cnf.Decrypt(ini.GetIniFileString("Router", "Password", ""));
@@ -559,6 +563,9 @@ namespace RouterMonitor
             rc.ModemType = IniParams.ModemType;
             rc.ipaddress = IniParams.RouterIPAddress;
             rc.Debug = Showtelnetdisplay.Checked;
+            rc.HTTPS = IniParams.HTTPS;
+
+            if (IniParams.IgnoreSSLCert) System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
             Connect.Enabled = false;
 

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<tests>
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>post</method>
+      <authentication>Token</authentication>
+      <url>http://{ipaddress}/cgi-bin/cgi-exec </url>
+      <data>
+        <![CDATA[sessionid={routerauthtoken}&command=%2Fusr%2Fshare%2F3ginfo-lite%2F3ginfo.sh]]></data>
+    </action>
+
+    <results>
+     
+      <jsonparser>firmware:{dslver}</jsonparser>
+      <jsonparser>rsrp:lte_rsrp</jsonparser>
+      <jsonparser>sinr:lte_sinr</jsonparser>
+      <jsonparser>cid_hex:lte_cellid</jsonparser>
+      <jsonparser>mode:lte_activeband</jsonparser>
+      <jsonparser>pci:lte_pci</jsonparser>
+      <jsonparser>pci:lte_pci</jsonparser>
+      <jsonparser>pci:lte_pci</jsonparser>
+
+    </results>
+  </test>
+
+<!--
+ {
+"connt":"-",
+"conntx":"-",
+"connrx":"-",
+"modem":"ZTE MF286D",
+"mtemp":"",
+"firmware":"BD_MF286DMODULEV1.0.0B03",
+"cport":"/dev/ttyUSB1",
+"protocol":"qmi",
+"csq":"28",
+"signal":"90",
+"operator_name":"SMARTY",
+"operator_mcc":"234",
+"operator_mnc":"20",
+"mode":"LTE B1 (2100 MHz)",
+"registration":"1",
+"lac_dec":"65534",
+"lac_hex":"FFFE",
+"tac_dec":"",
+"tac_hex":"-",
+"tac_h":"866",
+"tac_d":"2150",
+"cid_dec":"477511",
+"cid_hex":"74947",
+"pci":"5",
+"earfcn":"99",
+"pband":"B1 (2100 MHz) @10.0 MHz",
+"s1band":"",
+"s1pci":"",
+"s1earfcn":"",
+"s2band":"",
+"s2pci":"",
+"s2earfcn":"",
+"s3band":"",
+"s3pci":"",
+"s3earfcn":"",
+"s4band":"",
+"s4pci":"",
+"s4earfcn":"",
+"rsrp":"-89",
+"rsrq":"-10",
+"rssi":"-58",
+"sinr":"15"
+}
+
+-->
+
+</tests>
+
+
+
+

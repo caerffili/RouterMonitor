@@ -23,6 +23,7 @@ namespace RouterMonitor
         public string WanMAC;
         public string LanMAC;
         // public string ConnectionMode;
+
         public string SysUpTime;
         public string DSLUpTime;
 

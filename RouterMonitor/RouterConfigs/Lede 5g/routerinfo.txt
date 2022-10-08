@@ -1,0 +1,9 @@
+﻿ZTE MC801a Modem
+
+Definition created by Michael Morgan
+
+
+Tested and confirmed to work with-
+
+ZTE MC801a
+
