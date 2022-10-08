@@ -12,22 +12,26 @@
     </action>
 
     <results>
-      <htmlparser>"model":"{model}"</htmlparser>
-      <htmlparser>"version":"{firmware}"</htmlparser>
-      <jsonparser>result.mode:dslmode</jsonparser>
+      <jsonparser>result.firmware_version:dslver</jsonparser>
       <jsonparser>result.state:dslstatus</jsonparser>
-      <jsonparser>result.state:dslstatus</jsonparser>
-      
-      <jsonparser>result.upstream.data_rate:uploadint</jsonparser>
+      <jsonparser>result.uptime:dsluptimedhms</jsonparser>
+
+      <jsonparser>result.upstream.data_rate:upload</jsonparser>
       <jsonparser>result.upstream.snr:upstreamsnr</jsonparser>
       <jsonparser>result.upstream.actatp:upstreampower</jsonparser>
       <jsonparser>result.upstream.latn:upstreamatt</jsonparser>
+      <jsonparser>result.errors.far.hec:uphecerrors</jsonparser>
+      <jsonparser>result.errors.far.crc_p:upcrcerrors</jsonparser>
 
-      <jsonparser>result.downstream.data_rate:downloadint</jsonparser>
+      <jsonparser>result.downstream.data_rate:download</jsonparser>
       <jsonparser>result.downstream.snr:downstreamsnr</jsonparser>
       <jsonparser>result.downstream.actatp:downstreampower</jsonparser>
       <jsonparser>result.downstream.latn:downstreamatt</jsonparser>
+      <jsonparser>result.errors.near.hec:downhecerrors</jsonparser>
+      <jsonparser>result.errors.near.crc_p:downcrcerrors</jsonparser>
 
+      <jsonparser>result.mode:dslmode</jsonparser>
+      <jsonparser>result.state:dslstatus</jsonparser>    
       
     </results>
   </test>
@@ -61,6 +65,25 @@
   "far":{"es":80,"ses":0,"loss":0,"uas":167,"lofs":0,"fecs":0,"hec":0,"ibe":0,"crc_p":0,"crcp_p":0,"cv_p":0,"cvp_p":0}}}]},
 
 -->
+
+
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>post</method>
+      <authentication>Token</authentication>
+      <url>http://{ipaddress}/ubus</url>
+      <data><![CDATA[  {"jsonrpc":"2.0","id":51,"method":"call","params":["{routerauthtoken}","luci-rpc","getNetworkDevices",{}]}] ]]></data>
+    </action>
+
+    <results>
+      <jsonparser>result.pppoe-wan.stats.rx_packets:rxpckts</jsonparser>
+      <jsonparser>result.pppoe-wan.stats.tx_packets:txpckts</jsonparser>
+      <jsonparser>result.pppoe-wan.ipaddrs.address:wanip</jsonparser>
+
+
+    </results>
+  </test>
 
 
 

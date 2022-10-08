@@ -237,7 +237,6 @@ namespace RouterMonitor
                             case "hostname": RouterStats.Hostname = RegExString(CommandType, newvalue); break;
                             case "serialno": RouterStats.SerialNo = RegExString(CommandType, newvalue); break;
                             case "sysuptime": RouterStats.SysUpTime = RegExString(CommandType, newvalue); break;
-                            case "dsluptime": RouterStats.DSLUpTime = RegExString(CommandType, newvalue); break;
 
                             // Versions
                             case "firmware": RouterStats.Firmware = RegExString(CommandType, newvalue); break;
@@ -247,15 +246,20 @@ namespace RouterMonitor
                             case "hardwarever": RouterStats.HardwareVer = RegExString(CommandType, newvalue); break;
                             case "dspver": RouterStats.DSPVer = RegExString(CommandType, newvalue); break;
 
-                            // WAN Stuff
+                            // DSL Stuff
                             case "dslmode": RouterStats.dslmode[0] = RegExString(CommandType, newvalue); break;
                             case "dslstatus": RouterStats.dslstatus[0] = RegExString(CommandType, newvalue); break;
                             case "dslfastint": RouterStats.dslfastint[0] = RegExString(CommandType, newvalue); break;
+                            case "dsluptime": RouterStats.DSLUpTime = RegExString(CommandType, newvalue); break;
                             //  case "connectionmode": RouterStats.ConnectionMode = RegExString(CommandType, newvalue); break;
+
+                            // WAN Stuff
                             case "wanconntype": RouterStats.PPPMode = RegExString(CommandType, newvalue); break;
                             case "wanpridns": RouterStats.WanPriDns = RegExString(CommandType, newvalue); break;
                             case "wansecdns": RouterStats.WanSecDns = RegExString(CommandType, newvalue); break;
                             case "wanip": RouterStats.wanip[0] = RegExWANIP(CommandType, newvalue); break;
+
+                            // Traffic Data
                             case "txpcktshex": RouterStats.TxPckts[0] = RegExHex(CommandType, newvalue); break;
                             case "rxpcktshex": RouterStats.RxPckts[0] = RegExHex(CommandType, newvalue); break;
                             case "txpckts": RouterStats.TxPckts[0] = RegExInt(CommandType, newvalue); break;
@@ -270,7 +274,7 @@ namespace RouterMonitor
                             case "wifissid": RouterStats.WifiSSID = RegExString(CommandType, newvalue); break;
                             case "wifimac": RouterStats.WifiMAC = RegExString(CommandType, newvalue); break;
 
-                            // Download rates
+                            // Data Rates
                             case "download": RouterStats.Download[0] = RegExInt(CommandType, newvalue) / 1000; break;
                             case "downloadk": RouterStats.Download[0] = RegExInt(CommandType, newvalue); break;
                             case "upload": RouterStats.Upload[0] = RegExInt(CommandType, newvalue) / 1000; break;
@@ -626,45 +630,49 @@ namespace RouterMonitor
 
             return returnval;
         }
-
+        #endregion
 
 
         private void SetStatsVariable(string token, string value)
         {
             switch (token)
             {
-                case "routerauthchallenge":
-                    RouterAuthChallenge = value;
-                    break;
+                case "routerauthchallenge": RouterAuthChallenge = value;  break;
+                case "routerauthtoken": RouterAuthToken = value; break;
 
-                case "routerauthtoken":
-                    RouterAuthToken = value;
-                    break;
                 // Basic router details
                 case "model": RouterStats.Model = value; break;
                 case "hostname": RouterStats.Hostname = value; break;
                 case "serialno": RouterStats.SerialNo = value; break;
                 case "sysuptime": RouterStats.SysUpTime = value; break;
+                case "targetplatform": RouterStats.TargetPlatform = value;  break;
 
                 // Versions
                 case "firmware": RouterStats.Firmware = value; break;
+                case "kernelver": RouterStats.KernelVer = value; break;
                 case "bootloaderver": RouterStats.BootLoaderVer = value; break;
                 case "wirelessver": RouterStats.WirelessVer = value; break;
                 case "dslver": RouterStats.DSLVer = value; break;
                 case "hardwarever": RouterStats.HardwareVer = value; break;
                 case "dspver": RouterStats.DSPVer = value; break;
 
-                // WAN Stuff
+                // DSL Stuff
                 case "dslmode": RouterStats.dslmode[0] = value; break;
                 case "dslstatus": RouterStats.dslstatus[0] = value; break;
                 case "dslfastint": RouterStats.dslfastint[0] = value; break;
                 case "dsluptime": RouterStats.DSLUpTime = value; break;
+                case "dsluptimedhms": TimeSpan Time = TimeSpan.FromSeconds(Convert.ToInt32(value));
+                    RouterStats.DSLUpTime = string.Format("Days: {0}, Hours: {1}, Minutes: {2}, Seconds: {3}", Time.Days, Time.Hours, Time.Minutes, Time.Seconds); 
+                    break;
 
                 //  case "connectionmode": RouterStats.ConnectionMode = value; break;
+                // WAN Stuff
                 case "wanconntype": RouterStats.PPPMode = value; break;
                 case "wanpridns": RouterStats.WanPriDns = value; break;
                 case "wansecdns": RouterStats.WanSecDns = value; break;
                 case "wanip": RouterStats.wanip[0] = value; break;
+
+                // Traffic Data
                 case "txpcktshex": RouterStats.TxPckts[0] = int.Parse(value, NumberStyles.AllowHexSpecifier); break;
                 case "rxpcktshex": RouterStats.RxPckts[0] = int.Parse(value, NumberStyles.AllowHexSpecifier); break;
                 case "txpckts": RouterStats.TxPckts[0] = Convert.ToInt32(value); break;
@@ -679,7 +687,11 @@ namespace RouterMonitor
                 case "wifissid": RouterStats.WifiSSID = value; break;
                 case "wifimac": RouterStats.WifiMAC = value; break;
 
-                // Download rates
+                // Data Rates
+                case "download": RouterStats.Download[0] = Convert.ToInt32(value) / 1000; break;
+                case "downloadk": RouterStats.Download[0] = Convert.ToInt32(value); break;
+                case "upload": RouterStats.Upload[0] = Convert.ToInt32(value) / 1000; break;
+                case "uploadk": RouterStats.Upload[0] = Convert.ToInt32(value); break;
                 case "downloadint": RouterStats.DownloadInt[0] = Convert.ToInt32(value) / 1000; break;
                 case "downloadintk": RouterStats.DownloadInt[0] = Convert.ToInt32(value); break;
                 case "uploadint": RouterStats.UploadInt[0] = Convert.ToInt32(value) / 1000; break;
@@ -702,46 +714,85 @@ namespace RouterMonitor
                 case "upstreamatt": RouterStats.upstreamatt[0] = Convert.ToDecimal(value); break;
 
                 // Errors
+                case "downfecrrors": RouterStats.downFECerrors[0] = Convert.ToInt32(value); break;
                 case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
                 case "downfecerrorint": RouterStats.downFECerrorInt[0] = Convert.ToInt32(value); break;
+
+                case "downcrcerrors": RouterStats.downCRCerrors[0] = Convert.ToInt32(value); break;
                 case "downcrcerrorfast": RouterStats.downCRCerrorFast[0] = Convert.ToInt32(value); break;
                 case "downcrcerrorint": RouterStats.downCRCerrorInt[0] = Convert.ToInt32(value); break;
+
+                case "downhecerrors": RouterStats.downHECerrors[0] = Convert.ToInt32(value); break;
                 case "downhecerrorfast": RouterStats.downHECerrorFast[0] = Convert.ToInt32(value); break;
                 case "downhecerrorint": RouterStats.downHECerrorInt[0] = Convert.ToInt32(value); break;
+
+                case "upfecerrors": RouterStats.upFECerrors[0] = Convert.ToInt32(value); break;
                 case "upfecerrorfast": RouterStats.upFECerrorFast[0] = Convert.ToInt32(value); break;
                 case "upfecerrorint": RouterStats.upFECerrorInt[0] = Convert.ToInt32(value); break;
+
+                case "upcrcerrors": RouterStats.upCRCerrors[0] = Convert.ToInt32(value); break;
                 case "upcrcerrorfast": RouterStats.upCRCerrorFast[0] = Convert.ToInt32(value); break;
                 case "upcrcerrorint": RouterStats.upCRCerrorInt[0] = Convert.ToInt32(value); break;
+
+                case "uphecerrors": RouterStats.upHECerrors[0] = Convert.ToInt32(value); break;
                 case "uphecerrorfast": RouterStats.upHECerrorFast[0] = Convert.ToInt32(value); break;
                 case "uphecerrorint": RouterStats.upHECerrorInt[0] = Convert.ToInt32(value); break;
 
                 case "lte_cellid": RouterStats.mLTE_CellId[0] = Convert.ToInt32(value, 16); break;
                 case "lte_activeband": RouterStats.mLTE_ActiveBand[0] = value; break;
-                //case "lte_primarybandwidth": RouterStats.mLTE_ActiveBandwidth[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_networktype": RouterStats.mLTE_NetworkType[0] = value; break;
+
+                case "lte_rsrp": RouterStats.mLTE_RSRP[0] = Convert.ToInt32(value); break;
+                case "lte_sinr": RouterStats.mLTE_SINR[0] = Convert.ToDecimal(value); break;
+                case "lte_rsrq": RouterStats.mLTE_RSRQ[0] = Convert.ToInt32(value); break;
+                case "lte_rssi": RouterStats.mLTE_RSSI[0] = Convert.ToDecimal(value); break;
+
+                case "signalstrength": RouterStats.mLTE_SignalStrength[0] = Convert.ToDecimal(value); break;
+                case "operator_name": RouterStats.mLTE_Operator_Name[0] = value; break;
+                case "operator_mcc": RouterStats.mLTE_Operator_MCC[0] = Convert.ToInt32(value); break;
+                case "operator_mnc": RouterStats.mLTE_Operator_NNC[0] = Convert.ToInt32(value); break;
+
+                case "lte_pci": RouterStats.mLTE_PCI[0] = Convert.ToInt32(value); break;
+                case "lte_earfcn": RouterStats.mLTE_EARFCN[0] = Convert.ToInt32(value); break;
 
                 case "lte_caprimaryband": RouterStats.mLTE_CAPrimaryBand[0] = Convert.ToInt32(value); break;
                 case "lte_caprimarybandwidth": RouterStats.mLTE_CAPrimaryBandwidth[0] = (int)Convert.ToDecimal(value); break;
-                case "lte_ca1band": RouterStats.mLTE_CA1Band[0] = Convert.ToInt32(value); break;
-                case "lte_ca1bandwidth": RouterStats.mLTE_CA1Bandwidth[0] = (int)Convert.ToDecimal(value); break;
-                case "lte_rsrp": RouterStats.mLTE_RSRP[0] = Convert.ToInt32(value); break;
-                case "lte_pci": RouterStats.mLTE_PCI[0] = Convert.ToInt32(value); break;
-                case "lte_sinr": RouterStats.mLTE_SINR[0] = Convert.ToDecimal(value); break;
-                case "lte_networktype": RouterStats.mLTE_NetworkType[0] = value; break;
+
+                case "lte_ca1band": RouterStats.mLTE_CA1_Band[0] = Convert.ToInt32(value); break;
+                case "lte_ca1bandwidth": RouterStats.mLTE_CA1_Bandwidth[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca1pci": RouterStats.mLTE_CA1_PCI[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca1earfcn": RouterStats.mLTE_CA1_EARFCN[0] = (int)Convert.ToDecimal(value); break;
+
+                case "lte_ca2band": RouterStats.mLTE_CA2_Band[0] = Convert.ToInt32(value); break;
+                case "lte_ca2bandwidth": RouterStats.mLTE_CA2_Bandwidth[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca2pci": RouterStats.mLTE_CA2_PCI[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca2earfcn": RouterStats.mLTE_CA2_EARFCN[0] = (int)Convert.ToDecimal(value); break;
+
+                case "lte_ca3band": RouterStats.mLTE_CA3_Band[0] = Convert.ToInt32(value); break;
+                case "lte_ca3bandwidth": RouterStats.mLTE_CA3_Bandwidth[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca3pci": RouterStats.mLTE_CA3_PCI[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca3earfcn": RouterStats.mLTE_CA3_EARFCN[0] = (int)Convert.ToDecimal(value); break;
+
+                case "lte_ca4band": RouterStats.mLTE_CA4_Band[0] = Convert.ToInt32(value); break;
+                case "lte_ca4bandwidth": RouterStats.mLTE_CA4_Bandwidth[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca4pci": RouterStats.mLTE_CA4_PCI[0] = (int)Convert.ToDecimal(value); break;
+                case "lte_ca4earfcn": RouterStats.mLTE_CA4_EARFCN[0] = (int)Convert.ToDecimal(value); break;
+
                 case "nr_band": RouterStats.m5G_Band[0] = value; break;
                 case "nr_nrarfcn": RouterStats.m5G_NRARFCN[0] = Convert.ToInt32(value); break;
                 case "nr_pci": RouterStats.m5G_PCI[0] = Convert.ToInt32(value, 16); break;
-                case "lte_earfcn": RouterStats.mLTE_EARFCN[0] = Convert.ToInt32(value); break;
+
                 case "nr_rsrp": RouterStats.m5G_RSRP[0] = Convert.ToInt32(value); break;
                 case "nr_sinr": RouterStats.m5G_SINR[0] = Convert.ToDecimal(value); break;
-                    //case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
-                    //case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
+                //case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
+                //case "downfecrrorfast": RouterStats.downFECerrorFast[0] = Convert.ToInt32(value); break;
+
+                default:
+                    break;
 
             }
         }
 
-
-
-        #endregion
         public void JSONParser(string response, string objects)
         {
             string[] p = objects.Split(':');

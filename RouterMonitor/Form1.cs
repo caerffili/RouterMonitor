@@ -420,8 +420,8 @@ namespace RouterMonitor
                 text3_6.Text = rc.RouterStats.upHECerrors[0].ToString();
                 text3_7.Text = rc.RouterStats.upFECerrors[0].ToString();
 
-                text2_8.Text = rc.RouterStats.RxPckts.ToString();
-                text3_8.Text = rc.RouterStats.TxPckts.ToString();
+                text2_8.Text = rc.RouterStats.RxPckts[0].ToString();
+                text3_8.Text = rc.RouterStats.TxPckts[0].ToString();
             }
 
             if (IniParams.ModemType == "5G")
@@ -1008,11 +1008,11 @@ namespace RouterMonitor
                 if (Entity == "mLTE_CAPrimaryBandwidth") Payload.Add("\"LTE_CAPrimaryBandwidth\":" + rc.RouterStats.mLTE_CAPrimaryBandwidth[0]);
                 if (rc.RouterStats.mLTE_CAPrimaryBandwidth[0] != rc.RouterStats.mLTE_CAPrimaryBandwidth[1]) Send = true;
 
-                if (Entity == "mLTE_CA1Band") Payload.Add("\"LTE_CA1Band\":" + rc.RouterStats.mLTE_CA1Band[0]);
-                if (rc.RouterStats.mLTE_CA1Band[0] != rc.RouterStats.mLTE_CA1Band[1]) Send = true;
+                if (Entity == "mLTE_CA1_Band") Payload.Add("\"LTE_CA1Band\":" + rc.RouterStats.mLTE_CA1_Band[0]);
+                if (rc.RouterStats.mLTE_CA1_Band[0] != rc.RouterStats.mLTE_CA1_Band[1]) Send = true;
 
-                if (Entity == "mLTE_CA1Bandwidth") Payload.Add("\"LTE_CA1Bandwidth\":" + rc.RouterStats.mLTE_CA1Bandwidth[0]);
-                if (rc.RouterStats.mLTE_CA1Bandwidth[0] != rc.RouterStats.mLTE_CA1Bandwidth[1]) Send = true;
+                if (Entity == "mLTE_CA1_Bandwidth") Payload.Add("\"LTE_CA1_Bandwidth\":" + rc.RouterStats.mLTE_CA1_Bandwidth[0]);
+                if (rc.RouterStats.mLTE_CA1_Bandwidth[0] != rc.RouterStats.mLTE_CA1_Bandwidth[1]) Send = true;
 
                 if (Entity == "mLTE_RSRP") Payload.Add("\"LTE_RSRP\":" + rc.RouterStats.mLTE_RSRP[0]);
                 if (rc.RouterStats.mLTE_RSRP[0] != rc.RouterStats.mLTE_RSRP[1]) Send = true;

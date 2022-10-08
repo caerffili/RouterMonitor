@@ -12,11 +12,13 @@
     </action>
 
     <results>
+      <jsonparser>result.kernel:kernelver</jsonparser>
       <jsonparser>result.hostname:hostname</jsonparser>
       <jsonparser>result.system:hardwarever</jsonparser>
-      <htmlparser>result.release.model:model</htmlparser>
-      <jsonparser>result.release.description:bootloaderver</jsonparser>
-      <jsonparser>result.release.version:firmware</jsonparser>
+      <jsonparser>result.model:model</jsonparser>
+      <jsonparser>result.release.target:targetplatform</jsonparser>
+      <jsonparser>result.release.version:bootloaderver</jsonparser>
+      <jsonparser>result.release.description:firmware</jsonparser>
     </results>
   </test>
 

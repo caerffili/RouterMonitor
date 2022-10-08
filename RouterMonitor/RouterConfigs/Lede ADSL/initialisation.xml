@@ -12,11 +12,13 @@
     </action>
 
     <results>
+      <jsonparser>result.kernel:kernelver</jsonparser>
       <jsonparser>result.hostname:hostname</jsonparser>
       <jsonparser>result.system:hardwarever</jsonparser>
-      <htmlparser>result.release.model:model</htmlparser>
-      <jsonparser>result.release.description:bootloaderver</jsonparser>
-      <jsonparser>result.release.version:firmware</jsonparser>
+      <jsonparser>result.model:model</jsonparser>
+      <jsonparser>result.release.target:targetplatform</jsonparser>
+      <jsonparser>result.release.version:bootloaderver</jsonparser>
+      <jsonparser>result.release.description:firmware</jsonparser>
     </results>
   </test>
 
@@ -27,17 +29,17 @@
   "result": [
   0,
   {
-  "kernel": "5.4.188",
-  "hostname": "LEDE",
-  "system": "xRX200 rev 1.2",
-  "model": "BT Home Hub 5A",
+  done "kernel": "5.4.188",
+  done "hostname": "LEDE",
+  done "system": "xRX200 rev 1.2",
+  done "model": "BT Home Hub 5A",
   "board_name": "bt,homehub-v5a",
   "release": {
   "distribution": "OpenWrt",
-  "version": "21.02.3",
+  done "version": "21.02.3",
   "revision": "r16554-1d4dea6d4f",
-  "target": "lantiq/xrx200",
-  "description": "OpenWrt 21.02.3 r16554-1d4dea6d4f"
+  done "target": "lantiq/xrx200",
+  done "description": "OpenWrt 21.02.3 r16554-1d4dea6d4f"
   }
   }-->
 

@@ -13,16 +13,54 @@
     </action>
 
     <results>
-     
-      <jsonparser>firmware:{dslver}</jsonparser>
-      <jsonparser>rsrp:lte_rsrp</jsonparser>
-      <jsonparser>sinr:lte_sinr</jsonparser>
-      <jsonparser>cid_hex:lte_cellid</jsonparser>
-      <jsonparser>mode:lte_activeband</jsonparser>
-      <jsonparser>pci:lte_pci</jsonparser>
-      <jsonparser>pci:lte_pci</jsonparser>
-      <jsonparser>pci:lte_pci</jsonparser>
 
+      <!--"connt":"-",
+      "conntx":"-",
+      "connrx":"-",
+      "modem":"ZTE MF286D",
+      "mtemp":"",-->
+      <jsonparser>firmware:dslver</jsonparser>
+      <!--"cport":"/dev/ttyUSB1",
+      "protocol":"qmi",
+      "csq":"28",-->
+      <jsonparser>signal:signalstrength</jsonparser>
+      <jsonparser>operator_name:operator_name</jsonparser>
+      <jsonparser>operator_mcc:operator_mcc</jsonparser>
+      <jsonparser>operator_mnc:operator_mnc</jsonparser>
+      <jsonparser>mode:lte_activeband</jsonparser>
+      <!--"registration":"1",
+      "lac_dec":"65534",
+      "lac_hex":"FFFE",
+      "tac_dec":"",
+      "tac_hex":"-",
+      "tac_h":"866",
+      "tac_d":"2150",
+      "cid_dec":"477511",-->
+      <jsonparser>cid_hex:lte_cellid</jsonparser>
+      <jsonparser>pci:lte_pci</jsonparser>
+      <jsonparser>earfcn:lte_earfcn</jsonparser>
+      <!--"pband":"B1 (2100 MHz) @10.0 MHz",-->
+      <jsonparser>s1band:lte_ca1band</jsonparser>
+      <jsonparser>s1pci:lte_ca1pci</jsonparser>
+      <jsonparser>s1earfcn:lte_ca1earfcn</jsonparser>
+      
+      <jsonparser>s2band:lte_ca2band</jsonparser>
+      <jsonparser>s2pci:lte_ca2pci</jsonparser>
+      <jsonparser>s2earfcn:lte_ca2earfcn</jsonparser>
+      
+      <jsonparser>s3band:lte_ca3band</jsonparser>
+      <jsonparser>s3pci:lte_ca3pci</jsonparser>
+      <jsonparser>s3earfcn:lte_ca3earfcn</jsonparser>
+      
+      <jsonparser>s4band:lte_ca4band</jsonparser>
+      <jsonparser>s4pci:lte_ca4pci</jsonparser>
+      <jsonparser>s4earfcn:lte_ca4earfcn</jsonparser>
+
+      <jsonparser>rsrp:lte_rsrp</jsonparser>
+      <jsonparser>rsrq:lte_rsrq</jsonparser>
+      <jsonparser>rssi:lte_rssi</jsonparser>
+      <jsonparser>sinr:lte_sinr</jsonparser>
+ 
     </results>
   </test>
 
@@ -51,21 +89,27 @@
 "tac_d":"2150",
 "cid_dec":"477511",
 "cid_hex":"74947",
+
 "pci":"5",
 "earfcn":"99",
 "pband":"B1 (2100 MHz) @10.0 MHz",
+
 "s1band":"",
 "s1pci":"",
 "s1earfcn":"",
+
 "s2band":"",
 "s2pci":"",
 "s2earfcn":"",
+
 "s3band":"",
 "s3pci":"",
 "s3earfcn":"",
+
 "s4band":"",
 "s4pci":"",
 "s4earfcn":"",
+
 "rsrp":"-89",
 "rsrq":"-10",
 "rssi":"-58",
@@ -73,6 +117,25 @@
 }
 
 -->
+  
+  <test>
+    <action>
+      <commandtype>html</commandtype>
+      <method>post</method>
+      <authentication>Token</authentication>
+      <url>http://{ipaddress}/ubus</url>
+      <data><![CDATA[  {"jsonrpc":"2.0","id":51,"method":"call","params":["{routerauthtoken}","luci-rpc","getNetworkDevices",{}]}] ]]></data>
+    </action>
+
+    <results>
+      <jsonparser>result.wwan0.stats.rx_packets:rxpckts</jsonparser>
+      <jsonparser>result.wwan0.stats.tx_packets:txpckts</jsonparser>
+      <jsonparser>result.wwan0.ipaddrs.address:wanip</jsonparser>
+
+
+    </results>
+  </test>
+
 
 </tests>
 
